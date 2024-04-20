@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--服务启动器，用于启动单体服务，或者本地开发-->
+    <artifactId>app-modeler-starter</artifactId>
+
+    <name>应用建模器 [app-modeler] (Starter)</name>
+
+    <parent>
+        <groupId>io.crazydan.duzhou.platform</groupId>
+        <artifactId>app-modeler</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+
+        <!--该模块为独立服务包，不会被其他项目所依赖，故，不发布至仓库-->
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.install.skip>true</maven.install.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.crazydan.duzhou.platform</groupId>
+            <artifactId>app-modeler-delta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.crazydan.duzhou.platform</groupId>
+            <artifactId>app-modeler-biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.crazydan.duzhou.platform</groupId>
+            <artifactId>app-modeler-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.crazydan.duzhou.framework</groupId>
+            <artifactId>starter-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles/>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

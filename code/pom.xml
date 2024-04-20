@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>parent</artifactId>
+
+    <version>0.1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>渡舟平台 [duzhou-platform] (Parent)</name>
+
+    <description>
+            以先进的软件构造理论「[可逆计算](https://zhuanlan.zhihu.com/p/64004026)」为核心思想，
+并基于及其理论实现 [Nop](https://github.com/entropy-cloud/nop-entropy)
+而搭建的自运维、自监控、可演化的**全功能型应用平台**。
+        </description>
+
+    <parent>
+        <groupId>io.crazydan.duzhou.platform</groupId>
+        <artifactId>base</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+        <relativePath>./00.base/pom.xml</relativePath>
+    </parent>
+
+    <modules>
+
+        <!--
+            Note：
+            - 当前 pom 仅引入 base 模块，其余模块在代码生成时自动引入到 base 中
+            - x:id 属性需保留，其为自动合并的基础
+        -->
+        <module x:id="base">00.base</module>
+    </modules>
+
+    <dependencies>
+
+        <!--Note: x:id 属性需保留，其为自动合并的基础-->
+        <dependency x:id="io.crazydan.duzhou.framework:autotest">
+            <groupId>io.crazydan.duzhou.framework</groupId>
+            <artifactId>autotest</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

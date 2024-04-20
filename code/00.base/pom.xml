@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--注意：该 pom 为自动生成，不能直接修改该文件-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.crazydan.duzhou.platform</groupId>
+
+    <artifactId>base</artifactId>
+
+    <version>0.1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>渡舟平台 [duzhou-platform] (Base)</name>
+
+    <parent>
+        <groupId>io.crazydan.duzhou.framework</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+
+        <!--消除 "parent.relativePath of POM xxxx, please verify your project structure" 提示: https://stackoverflow.com/a/6006098-->
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.compilerVersion>${java.version}</maven.compiler.compilerVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <duzhou-platform.version>0.1.0-SNAPSHOT</duzhou-platform.version>
+    </properties>
+
+    <modules>
+        <module x:id="app-modeler">../app-modeler</module>
+    </modules>
+
+    <dependencies>
+
+        <!--Nop Idea 插件在调试 xlang 时需要该依赖-->
+        <dependency x:id="io.github.entropy-cloud:nop-xlang-debugger">
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-xlang-debugger</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository x:id="nop-repo">
+            <id>nop-repo</id>
+            <url>https://nop.repo.crazydan.io/</url>
+        </repository>
+        <repository x:id="duzhou-repo">
+            <id>duzhou-repo</id>
+            <url>https://duzhou.repo.crazydan.io/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository x:id="nop-repo">
+            <id>nop-repo</id>
+            <url>https://nop.repo.crazydan.io/</url>
+        </pluginRepository>
+        <pluginRepository x:id="duzhou-repo">
+            <id>duzhou-repo</id>
+            <url>https://duzhou.repo.crazydan.io/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler-api">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler-api</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler-biz">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler-biz</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler-orm">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler-orm</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler-web">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler-web</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+            <dependency x:id="io.crazydan.duzhou.platform:app-modeler-delta">
+                <groupId>io.crazydan.duzhou.platform</groupId>
+                <artifactId>app-modeler-delta</artifactId>
+                <version>${duzhou-platform.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource x:id="main-includes">
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.yaml</include>
+                    <include>*.yml</include>
+                </includes>
+            </resource>
+            <resource x:id="main-excludes">
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>*.yaml</exclude>
+                    <exclude>*.yml</exclude>
+                    <exclude>*.txt</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+</project>

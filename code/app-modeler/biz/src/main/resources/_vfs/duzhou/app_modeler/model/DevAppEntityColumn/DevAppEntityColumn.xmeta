@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevAppEntityColumn.xmeta">
+
+    <props>
+        <!-- Note：由后端填充该值 -->
+        <prop name="propId" mandatory="false" />
+    </props>
+</meta>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>app-modeler</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>应用建模器 [app-modeler] (Parent)</name>
+
+    <description>在线设计和维护应用的数据模型</description>
+
+    <parent>
+        <groupId>io.crazydan.duzhou.platform</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modules>
+
+        <!--Note: x:id 属性需保留，其为自动合并的基础-->
+        <module x:id="api">api</module>
+        <module x:id="biz">biz</module>
+        <module x:id="orm">orm</module>
+        <module x:id="web">web</module>
+        <module x:id="delta">delta</module>
+        <module x:id="starter">starter</module>
+    </modules>
+</project>

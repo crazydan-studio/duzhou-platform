@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:x="/nop/schema/xdsl.xdef" xmlns:ioc="ioc" xmlns:c="c" xmlns:xpl="xpl" x:schema="/nop/schema/beans.xdef">
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppDictBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppDomainBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppEntityBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppEntityColumnBizModel" ioc:type="@bean:id"
+          ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppEntityRelationBizModel" ioc:type="@bean:id"
+          ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel" ioc:type="@bean:id" ioc:default="true"/>
+</beans>
