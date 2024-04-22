@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<c:unit xmlns:c="c">
+
+    <c:script><![CDATA[
+        $scope.setLocalValue('app', {
+            ...app,
+            modules: [module],
+        });
+
+        codeGenerator
+            .withTplDir('/duzhou/templates/app')
+            .execute('/', $scope);
+    ]]></c:script>
+</c:unit>
