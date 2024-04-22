@@ -55,21 +55,21 @@
                         'ext:moduleId': moduleId,
                         'ext:moduleName': appCode1 + '-' + moduleCode,
                         'ext:moduleTitle': devAppModule.displayName,
-                        'ext:moduleDescription': devAppModule.description,
+                        //'ext:moduleDescription': devAppModule.description,
                         'ext:moduleBeansName': moduleMavenArtifactId,
                         'ext:moduleClassPrefix': moduleId.replace('/','_').$camelCase(true),
                         'ext:moduleClassShortPrefix': moduleCode.$camelCase(true),
-                        'ext:webStarterType': devAppModule.webStarterType || 'spring',
+                        //'ext:webStarterType': devAppModule.webStarterType || 'spring',
                         'ext:basePackageName': moduleBasePackageName,
                         'ext:entityPackageName': moduleEntityPackageName,
                     };
 
                     function getDictName(name) {
-                        return moduleCode + '/' + name;
+                        return name ? moduleCode + '/' + name : null;
                     }
                 ]]></c:script>
                 <thisLib:_DoGenOrmModel xdefPath="/nop/schema/orm/orm.xdef">
-                    <orm xpl:attrs="${moduleExtAttrs}">
+                    <orm xpl:attrs="moduleExtAttrs">
                         <domains>
                             <c:for var="domain" items="${devApp.domains}">
                                 <c:script><![CDATA[
@@ -82,7 +82,7 @@
                                         scale: domain.scale,
                                     };
                                 ]]></c:script>
-                                <domain xpl:attrs="${domainAttrs}" />
+                                <domain xpl:attrs="domainAttrs" />
                             </c:for>
                         </domains>
                         <dicts>
@@ -94,8 +94,8 @@
                                         valueType: dict.optionType,
                                     };
                                 ]]></c:script>
-                                <dict xpl:attrs="${dictAttrs}">
-                                    <description>${dict.description}</description>
+                                <dict xpl:attrs="dictAttrs">
+                                    <!--<description>${dict.description}</description>-->
                                     <c:for var="option" items="${dict.options}">
                                         <c:script><![CDATA[
                                             const optionAttrs = {
@@ -104,7 +104,7 @@
                                                 value: option.value,
                                             };
                                         ]]></c:script>
-                                        <option xpl:attrs="${optionAttrs}" />
+                                        <option xpl:attrs="optionAttrs" />
                                     </c:for>
                                 </dict>
                             </c:for>
@@ -112,17 +112,16 @@
                         <entities>
                             <c:for var="entity" items="${devAppModule.entities}">
                                 <c:script><![CDATA[
+                                    const name = entity.name || entity.tableName.$camelCase(true);
+                                    const className = entity.name;//entity.className || entity.name;
                                     const entityAttrs = {
                                         registerShortName: registerShortName,
                                         tagSet: entity.tagSet,
                                         displayName: entity.displayName,
                                         tableName: entity.tableName,
-                                        name: (entity.name || entity.tableName.$camelCase(true))
-                                                    .$fullClassName(moduleEntityPackageName),
-                                        className: (entity.className || entity.name)
-                                                        .$fullClassName(moduleEntityPackageName),
-                                        'ext:baseClass': entity.baseClassName?
-                                                            .$fullClassName(moduleEntityPackageName),
+                                        name: name.$fullClassName(moduleEntityPackageName),
+                                        className: className.$fullClassName(moduleEntityPackageName),
+                                        //'ext:baseClass': entity.baseClassName?.$fullClassName(moduleEntityPackageName),
                                         useGlobalCache: entity.tagSet?.contains('cache'),
                                         kvTable: entity.tagSet?.contains('kv-table'),
                                         notGenCode: entity.tagSet?.contains('not-gen')
@@ -130,30 +129,32 @@
                                     };
 
                                     entity.columns?.forEach((col) => {
-                                        const domain = col.domain;
+                                        const domain = col.domainName;
+                                        const propName = col.name.$colCodeToPropName();
+
                                         if (domain == 'version') {
-                                            entityAttrs.versionProp = col.name;
+                                            entityAttrs.versionProp = propName;
                                         } else if (domain == 'createTime') {
-                                            entityAttrs.createTimeProp = col.name;
+                                            entityAttrs.createTimeProp = propName;
                                         } else if (domain == 'createdBy') {
-                                            entityAttrs.createrProp = col.name;
+                                            entityAttrs.createrProp = propName;
                                         } else if (domain == 'updateTime') {
-                                            entityAttrs.updateTimeProp = col.name;
+                                            entityAttrs.updateTimeProp = propName;
                                         } else if (domain == 'updatedBy') {
-                                            entityAttrs.updaterProp = col.name;
+                                            entityAttrs.updaterProp = propName;
                                         } else if (domain == 'delFlag') {
-                                            entityAttrs.deleteFlagProp = col.name;
+                                            entityAttrs.deleteFlagProp = propName;
                                             entityAttrs.useLogicalDelete = true;
                                         } else if (domain == 'tenant') {
-                                            entityAttrs.tenantProp = col.name;
+                                            entityAttrs.tenantProp = propName;
                                             entityAttrs.useTenant = true;
                                         } else if (domain == 'shard') {
-                                            entityAttrs.shardProp = col.name;
+                                            entityAttrs.shardProp = propName;
                                             entityAttrs.useShard = true;
                                         }
                                     });
                                 ]]></c:script>
-                                <entity xpl:attrs="${entityAttrs}">
+                                <entity xpl:attrs="entityAttrs">
                                     <columns>
                                         <c:for var="column" items="${entity.columns}">
                                             <c:script><![CDATA[
@@ -171,32 +172,29 @@
                                                     scale: column.scale,
                                                     defaultValue: column.defaultValue,
                                                     'ext:dict': getDictName(column.dictName),
-                                                    'ui:control': column.uiControl,
+                                                    //'ui:control': column.uiControl,
                                                     notGenCode: column.tagSet?.contains('not-gen')
                                                                     || column.tagSet?.contains('del'),
                                                 };
                                             ]]></c:script>
-                                            <column xpl:attrs="${columnAttrs}" />
+                                            <column xpl:attrs="columnAttrs" />
                                         </c:for>
                                     </columns>
                                     <relations>
                                         <c:for var="relation" items="${entity.relations}">
                                             <c:script><![CDATA[
                                                 const target = relation.target;
+                                                const refEntityName = target.name;//target.className || target.name;
                                                 const relationAttrs = {
-                                                    displayName: relation.displayName,
+                                                    //displayName: relation.displayName,
                                                     name: relation.sourcePropName,
                                                     tagSet: relation.tagSet,
-                                                    refEntityName: (target.className || target.name)
-                                                                        .$fullClassName(moduleEntityPackageName),
+                                                    refEntityName: refEntityName.$fullClassName(moduleEntityPackageName),
                                                     refPropName: relation.targetPropName,
-                                                    'ui:control': relation.uiControl,
-                                                    cascadeDelete: relation.tagSet?.contains('cascade-delete'),
-                                                    notGenCode: relation.tagSet?.contains('not-gen')
-                                                                    || relation.tagSet?.contains('del'),
+                                                    //'ui:control': relation.uiControl,
                                                 };
                                             ]]></c:script>
-                                            <relation xpl:is="${relation.type}" xpl:attrs="${aliasAttrs}">
+                                            <relation xpl:is="${relation.type}" xpl:attrs="relationAttrs">
                                                 <join>
                                                     <c:for var="cond" items="${relation.joinOnConds}">
                                                         <c:script><![CDATA[
@@ -218,21 +216,25 @@
                                                                     || alias.tagSet?.contains('del'),
                                                 };
                                             ]]></c:script>
-                                            <alias xpl:attrs="${aliasAttrs}" />
+                                            <alias xpl:attrs="aliasAttrs" />
                                         </c:for>
                                     </aliases>
                                     <unique-keys>
                                         <c:for var="uk" items="${entity.uniqueKeys}">
                                             <c:script><![CDATA[
+                                                import java.util.Comparator;
+
                                                 const columns = uk.$toCsvSet().map(col => col.$colCodeToPropName());
+                                                columns.sort(Comparator.naturalOrder());
+
                                                 const ukName = columns.join('_');
                                                 const ukAttrs = {
-                                                    name: ukName,
+                                                    name: 'key_' + ukName,
                                                     columns: columns.join(','),
                                                     constraint: 'UK_' + ukName.toUpperCase(),
                                                 };
                                             ]]></c:script>
-                                            <unique-key xpl:attrs="${ukAttrs}" />
+                                            <unique-key xpl:attrs="ukAttrs" />
                                         </c:for>
                                     </unique-keys>
                                 </entity>
@@ -256,6 +258,8 @@
                     const ormNode = eval_node(slot_default).child(0);
                     // Note: DslNodeLoader#loadFromNode 要求节点上必须指定 schema 元模型
                     ormNode.setAttr('x:schema', xdefPath);
+
+                    logInfo('gen.orm-model.xml={}', ormNode.xml());
 
                     return DslModelHelper.parseDslModelNode(xdefPath, ormNode);
                 ]]></c:script>

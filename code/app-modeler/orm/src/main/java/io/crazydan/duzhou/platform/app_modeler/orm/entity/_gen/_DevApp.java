@@ -69,6 +69,12 @@ public class _DevApp extends DynamicOrmEntity{
 
     
     /* relation:  */
+    public static final String PROP_NAME_domains = "domains";
+    
+    /* relation:  */
+    public static final String PROP_NAME_dicts = "dicts";
+    
+    /* relation:  */
     public static final String PROP_NAME_modules = "modules";
     
     /* component:  */
@@ -677,6 +683,26 @@ public class _DevApp extends DynamicOrmEntity{
         }
     }
     
+    private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> _domains = new OrmEntitySet<>(this, PROP_NAME_domains,
+        io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.class);
+
+    /**
+     * 。 refPropName: app, keyProp: {rel.keyProp}
+     */
+    public IOrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> getDomains(){
+       return _domains;
+    }
+       
+    private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict> _dicts = new OrmEntitySet<>(this, PROP_NAME_dicts,
+        io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.class);
+
+    /**
+     * 。 refPropName: app, keyProp: {rel.keyProp}
+     */
+    public IOrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict> getDicts(){
+       return _dicts;
+    }
+       
     private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule> _modules = new OrmEntitySet<>(this, PROP_NAME_modules,
         io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule.class);
 

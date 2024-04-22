@@ -1,0 +1,3 @@
+ID,SOURCE_ID,TARGET_ID,SOURCE_PROP_NAME,TARGET_PROP_NAME,TYPE,TAG_SET,TABLE_NAME,JOIN_ON_CONDS
+8f54c43f6891445da05e5e50768da030,097eb4fe565340209c8aa37f425c169b,24536a54d7294c19a811c16e9e6e1487,app,domains,to-one,"ref-cascade-delete,pub,ref-pub",,"{""data"":[{""leftProp"":""APP_ID"",""rightProp"":""ID""}]}"
+a9bfdf292bd04f84ab1692488bed35a5,8b7ff2d0d9714ba88e0966344065f0a5,24536a54d7294c19a811c16e9e6e1487,app,dicts,to-one,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""APP_ID"",""rightProp"":""ID""}]}"

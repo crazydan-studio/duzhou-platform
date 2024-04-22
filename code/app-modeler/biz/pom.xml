@@ -21,6 +21,10 @@
             <groupId>io.crazydan.duzhou.platform</groupId>
             <artifactId>app-modeler-orm</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.crazydan.duzhou.framework</groupId>
+            <artifactId>codegen</artifactId>
+        </dependency>
 
         <!--Nop Biz-->
         <dependency>

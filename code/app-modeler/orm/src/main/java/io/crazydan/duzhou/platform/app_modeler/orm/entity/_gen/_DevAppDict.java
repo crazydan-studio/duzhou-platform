@@ -48,6 +48,9 @@ public class _DevAppDict extends DynamicOrmEntity{
     private static int _PROP_ID_BOUND = 7;
 
     
+    /* relation:  */
+    public static final String PROP_NAME_app = "app";
+    
     /* alias: optionsJsonTextComponent.data 字典项列表 */
     public static final String PROP_NAME_options = "options";
     
@@ -432,6 +435,29 @@ public class _DevAppDict extends DynamicOrmEntity{
         }
     }
     
+    /**
+     * 
+     */
+    public io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp getApp(){
+       return (io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp)internalGetRefEntity(PROP_NAME_app);
+    }
+
+    public void setApp(io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp refEntity){
+   
+           if(refEntity == null){
+           
+                   this.setAppId(null);
+               
+           }else{
+           internalSetRefEntity(PROP_NAME_app, refEntity,()->{
+           
+                           this.setAppId(refEntity.getId());
+                       
+           });
+           }
+       
+    }
+       
    public java.lang.Object getOptions(){
       return (java.lang.Object)internalGetAliasValue("optionsJsonTextComponent.data");
    }

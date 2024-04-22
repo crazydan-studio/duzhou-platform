@@ -22,12 +22,12 @@ package io.crazydan.duzhou.framework.app_modeler.test.biz;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.crazydan.duzhou.framework.junit.NopJunitAutoTestCase;
 import io.nop.api.core.annotations.autotest.EnableSnapshot;
 import io.nop.api.core.annotations.autotest.NopTestConfig;
 import io.nop.api.core.beans.ApiRequest;
 import io.nop.api.core.beans.ApiResponse;
 import io.nop.api.core.util.FutureHelper;
-import io.nop.autotest.junit.JunitAutoTestCase;
 import io.nop.core.lang.json.JsonTool;
 import io.nop.graphql.core.IGraphQLExecutionContext;
 import io.nop.graphql.core.ast.GraphQLOperationType;
@@ -42,18 +42,20 @@ import org.slf4j.LoggerFactory;
  * @date 2024-04-17
  */
 @NopTestConfig(enableActionAuth = "false", initDatabaseSchema = true,
-               testConfigFile = "classpath:/application.properties")
-public class DevAppModuleBizModelTest extends JunitAutoTestCase {
-    private static final Logger log = LoggerFactory.getLogger(DevAppModuleBizModelTest.class);
+               testConfigFile = "classpath:/application-module.properties")
+public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Inject
     IGraphQLEngine graphQLEngine;
 
     @Test
+    // 在以真实数据库做单元测试时，先注释 @EnableSnapshot 以为其生成案例数据，再启用该注解以持续进行单元测试。
+    // 生成案例数据时，测试用例是失败的，无需处理，启用 @EnableSnapshot 继续运行测试用例即可
     @EnableSnapshot
     public void test_release() {
         Map<String, Object> requestData = new HashMap<>();
-        requestData.put("id", "559f97fde5ef49d8a9fc5aec7972e7ab");
+        requestData.put("id", "688807fb90424d5885d40c4e4fde921f");
         requestData.put("releaseDir", getTargetFile("modeler").getAbsolutePath());
 
         ApiRequest<?> request = ApiRequest.build(requestData);

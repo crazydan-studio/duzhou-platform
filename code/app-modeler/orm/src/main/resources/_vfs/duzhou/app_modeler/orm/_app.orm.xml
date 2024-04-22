@@ -93,6 +93,20 @@
                         propId="11" stdDataType="string" stdSqlType="VARCHAR"/>
             </columns>
             <relations>
+                <to-many cascadeDelete="true" name="domains"
+                         refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain"
+                         refPropName="app" tagSet="pub,cascade-delete">
+                    <join>
+                        <on leftProp="id" rightProp="appId"/>
+                    </join>
+                </to-many>
+                <to-many cascadeDelete="true" name="dicts"
+                         refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" refPropName="app"
+                         tagSet="pub,cascade-delete">
+                    <join>
+                        <on leftProp="id" rightProp="appId"/>
+                    </join>
+                </to-many>
                 <to-many cascadeDelete="true" name="modules"
                          refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule"
                          refPropName="app" tagSet="pub,cascade-delete">
@@ -127,6 +141,15 @@
                 <column code="SCALE" displayName="小数位数" name="scale" propId="8" stdDataType="int" stdSqlType="INTEGER"/>
             </columns>
             <comment>对应 ORM 实体的字段属性【数据域】</comment>
+            <relations>
+                <to-one name="app" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
+                        refPropName="domains" tagSet="pub,ref-pub,ref-cascade-delete">
+                    <join>
+                        <on leftProp="appId" rightProp="id"/>
+                    </join>
+                    <ref-set/>
+                </to-one>
+            </relations>
             <unique-keys>
                 <unique-key columns="name,appId" constraint="UK_DEV_APP_DOMAIN_NAME" name="nameKey">
                     <comment>在应用内唯一</comment>
@@ -151,6 +174,15 @@
                         precision="4096" propId="6" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
             </columns>
             <comment>对应 ORM 实体的字段属性【字典】</comment>
+            <relations>
+                <to-one name="app" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
+                        refPropName="dicts" tagSet="pub,ref-pub,ref-cascade-delete">
+                    <join>
+                        <on leftProp="appId" rightProp="id"/>
+                    </join>
+                    <ref-set/>
+                </to-one>
+            </relations>
             <unique-keys>
                 <unique-key columns="name,appId" constraint="UK_DEV_APP_DICT_NAME" name="nameKey">
                     <comment>在应用内唯一</comment>

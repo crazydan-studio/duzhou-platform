@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<c:unit xmlns:c="c">
+<c:unit xmlns:c="c" xmlns:xpl="xpl"
+        xmlns:app-modeler="app-modeler">
 
+    <app-modeler:GenOrmModel devAppModule="${module}"
+                             xpl:return="ormModel"
+                             xpl:lib="/duzhou/xlib/app-modeler.xlib" />
     <c:script><![CDATA[
         $scope.setLocalValue('app', {
             ...app,
-            modules: [module],
+            name: app.displayName,
+            maven: {
+                artifactId: 'parent',
+                groupId: app.classPkgName,
+                version: app.version,
+                parent:{
+                    groupId: 'io.crazydan.duzhou.framework',
+                    artifactId: 'parent',
+                    version: '0.1.0-SNAPSHOT',
+                },
+            },
+            modules: [{
+                ...module,
+                maven: {
+                    artifactId: ormModel['ext:mavenArtifactId'],
+                    groupId: ormModel['ext:mavenGroupId'],
+                    version: ormModel['ext:mavenVersion'],
+                },
+                ormModel: ormModel,
+            }],
         });
 
+        // Note：在调用方构造 codeGenerator 时指定 targetDir
         codeGenerator
             .withTplDir('/duzhou/templates/app')
             .execute('/', $scope);

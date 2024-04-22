@@ -56,6 +56,9 @@ public class _DevAppDomain extends DynamicOrmEntity{
     private static int _PROP_ID_BOUND = 9;
 
     
+    /* relation:  */
+    public static final String PROP_NAME_app = "app";
+    
 
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
@@ -524,5 +527,28 @@ public class _DevAppDomain extends DynamicOrmEntity{
         }
     }
     
+    /**
+     * 
+     */
+    public io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp getApp(){
+       return (io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp)internalGetRefEntity(PROP_NAME_app);
+    }
+
+    public void setApp(io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp refEntity){
+   
+           if(refEntity == null){
+           
+                   this.setAppId(null);
+               
+           }else{
+           internalSetRefEntity(PROP_NAME_app, refEntity,()->{
+           
+                           this.setAppId(refEntity.getId());
+                       
+           });
+           }
+       
+    }
+       
 }
 // resume CPD analysis - CPD-ON

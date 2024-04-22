@@ -19,20 +19,21 @@ public class DevAppModuleBizModel extends _DevAppModuleBizModel {
 
     @BizMutation
     public void release(@Name("id") String id, @Name("releaseDir") String releaseDir) throws Exception {
-        DevAppModule service = dao().getEntityById(id);
-        dao().batchLoadPropsForEntity(service,
-                                      "app,entities"
+        DevAppModule module = dao().getEntityById(id);
+        dao().batchLoadPropsForEntity(module,
+                                      "app.domains,app.dicts"
                                       + ",entities.columns,entities.relations"
-                                      + ",entities.relations.source,entities.relations.target");
-        DevApp app = service.getApp();
+                                      + ",entities.relations.target");
+        DevApp app = module.getApp();
 
         FileHelper.assureParent(new File(releaseDir, "/any"));
 
         XCodeGenerator gen = new XCodeGenerator("/duzhou/templates/app-modeler", releaseDir);
+        gen.forceOverride(true);
 
         IEvalScope scope = XLang.newEvalScope();
         scope.setLocalValue("app", app);
-        scope.setLocalValue("service", service);
+        scope.setLocalValue("module", module);
 
         gen.execute("/", scope);
     }
