@@ -19,53 +19,26 @@
   -->
 
 <lib xmlns:x="/nop/schema/xdsl.xdef"
-     xmlns:c="c" xmlns:thisLib="thisLib" xmlns:xpl="xpl"
+     xmlns:c="c" xmlns:thisLib="thisLib" xmlns:gen="gen" xmlns:xpl="xpl"
      x:schema="/nop/schema/xlib.xdef"
 >
     <tags>
         <!-- 根据 DevAppModule 生成 io.nop.orm.model.OrmModel -->
         <GenOrmModel outputMode="none">
+            <attr name="devApp" />
             <attr name="devAppModule" />
 
             <source>
+                <gen:GenOrmModelExtAttrs app="${devApp}" appModule="${devAppModule}"
+                                         xpl:return="moduleExtAttrs"
+                                         xpl:lib="/duzhou/codegen/xlib/gen.xlib" />
                 <c:script><![CDATA[
-                    const devApp = devAppModule.app;
-
-                    const appCodeSegs = devApp.code.split('-');
-                    const appCode1 = appCodeSegs[0];
-                    const appCode2 = appCodeSegs[1];
-
-                    const registerShortName = true;
-                    const moduleCode = devAppModule.code.replaceAll('-', '_');
-                    const moduleId = appCode1 + '/' + moduleCode;
-                    const moduleMavenArtifactId = moduleCode.replaceAll('_', '-');
-                    const moduleBasePackageName = devApp.classPkgName + '.' + moduleCode;
-                    const moduleEntityPackageName = moduleBasePackageName + '.orm.entity';
-                    const moduleExtAttrs = {
-                        'ext:dialect': 'mysql,h2',
-                        'ext:useCoreModule': false,
-                        'ext:registerShortName': registerShortName,
-                        'ext:mavenVersion': devApp.version,
-                        'ext:mavenGroupId': devApp.classPkgName,
-                        'ext:mavenArtifactId': moduleMavenArtifactId,
-                        'ext:mavenParentVersion': devApp.version,
-                        'ext:mavenParentGroupId': devApp.classPkgName,
-                        'ext:mavenParentArtifactId': 'parent',
-                        'ext:mavenParentRelativePath': '../pom.xml',
-                        'ext:moduleId': moduleId,
-                        'ext:moduleName': appCode1 + '-' + moduleCode,
-                        'ext:moduleTitle': devAppModule.displayName,
-                        //'ext:moduleDescription': devAppModule.description,
-                        'ext:moduleBeansName': moduleMavenArtifactId,
-                        'ext:moduleClassPrefix': moduleId.replace('/','_').$camelCase(true),
-                        'ext:moduleClassShortPrefix': moduleCode.$camelCase(true),
-                        //'ext:webStarterType': devAppModule.webStarterType || 'spring',
-                        'ext:basePackageName': moduleBasePackageName,
-                        'ext:entityPackageName': moduleEntityPackageName,
-                    };
+                    const moduleCode2 = moduleExtAttrs['ext:moduleCode2'];
+                    const registerShortName = moduleExtAttrs['ext:registerShortName'];
+                    const moduleEntityPackageName = moduleExtAttrs['ext:entityPackageName'];
 
                     function getDictName(name) {
-                        return name ? moduleCode + '/' + name : null;
+                        return name ? moduleCode2 + '/' + name : null;
                     }
                 ]]></c:script>
                 <thisLib:_DoGenOrmModel xdefPath="/nop/schema/orm/orm.xdef">
@@ -114,6 +87,7 @@
                                 <c:script><![CDATA[
                                     const name = entity.name || entity.tableName.$camelCase(true);
                                     const className = entity.name;//entity.className || entity.name;
+
                                     const entityAttrs = {
                                         registerShortName: registerShortName,
                                         tagSet: entity.tagSet,
@@ -185,6 +159,7 @@
                                             <c:script><![CDATA[
                                                 const target = relation.target;
                                                 const refEntityName = target.name;//target.className || target.name;
+
                                                 const relationAttrs = {
                                                     //displayName: relation.displayName,
                                                     name: relation.sourcePropName,

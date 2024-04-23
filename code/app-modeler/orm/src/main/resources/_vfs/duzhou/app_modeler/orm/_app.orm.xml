@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<orm ext:mavenArtifactId="app-modeler" ext:entityPackageName="io.crazydan.duzhou.platform.app_modeler.orm.entity"
+<orm ext:mavenArtifactId="app-modeler" ext:moduleCode2="app_modeler"
+     ext:entityPackageName="io.crazydan.duzhou.platform.app_modeler.orm.entity" ext:moduleDisplayName="应用建模器"
      ext:mavenParentRelativePath="../pom.xml" ext:webStarterType="spring" ext:moduleName="duzhou-app_modeler"
      ext:basePackageName="io.crazydan.duzhou.platform.app_modeler" ext:mavenParentGroupId="io.crazydan.duzhou.platform"
      ext:mavenParentArtifactId="parent" ext:moduleId="duzhou/app_modeler" ext:moduleClassPrefix="DuzhouAppModeler"
      ext:mavenVersion="0.1.0-SNAPSHOT" ext:moduleDescription="在线设计和维护应用的数据模型" ext:useCoreModule="false"
      ext:registerShortName="true" ext:mavenParentVersion="0.1.0-SNAPSHOT" ext:mavenGroupId="io.crazydan.duzhou.platform"
-     ext:moduleBeansName="app-modeler" ext:moduleClassShortPrefix="AppModeler" ext:moduleTitle="应用建模器"
-     ext:dialect="mysql,h2" x:schema="/nop/schema/orm/orm.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en"
-     xmlns:ref-i18n-en="ref-i18n-en" xmlns:ext="ext" xmlns:orm-gen="orm-gen" xmlns:xpl="xpl" xmlns:ui="ui">
+     ext:moduleBeansName="app-modeler" ext:moduleClassShortPrefix="AppModeler" ext:dialect="mysql,h2"
+     ext:moduleCode1="duzhou" x:schema="/nop/schema/orm/orm.xdef" xmlns:x="/nop/schema/xdsl.xdef"
+     xmlns:i18n-en="i18n-en" xmlns:ref-i18n-en="ref-i18n-en" xmlns:ext="ext" xmlns:orm-gen="orm-gen" xmlns:xpl="xpl"
+     xmlns:ui="ui">
 
     <x:post-extends x:override="replace">
         <orm-gen:DefaultPostExtends xpl:lib="/nop/orm/xlib/orm-gen.xlib"/>

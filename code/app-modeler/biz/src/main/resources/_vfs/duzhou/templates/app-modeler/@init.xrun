@@ -2,32 +2,32 @@
 <c:unit xmlns:c="c" xmlns:xpl="xpl"
         xmlns:app-modeler="app-modeler">
 
-    <app-modeler:GenOrmModel devAppModule="${module}"
-                             xpl:return="ormModel"
-                             xpl:lib="/duzhou/xlib/app-modeler.xlib" />
     <c:script><![CDATA[
-        $scope.setLocalValue('app', {
-            ...app,
-            name: app.displayName,
+        const devApp = {
+            ...module.getApp(),
             maven: {
                 artifactId: 'parent',
-                groupId: app.classPkgName,
-                version: app.version,
+                groupId: module.getApp().classPkgName,
+                version: module.getApp().version,
                 parent:{
                     groupId: 'io.crazydan.duzhou.framework',
                     artifactId: 'parent',
                     version: '0.1.0-SNAPSHOT',
                 },
             },
-            modules: [{
-                ...module,
-                maven: {
-                    artifactId: ormModel['ext:mavenArtifactId'],
-                    groupId: ormModel['ext:mavenGroupId'],
-                    version: ormModel['ext:mavenVersion'],
-                },
-                ormModel: ormModel,
-            }],
+        };
+        const devAppModule = {
+            ...module,
+            app: null,
+        };
+    ]]></c:script>
+    <app-modeler:GenOrmModel devApp="${devApp}" devAppModule="${devAppModule}"
+                             xpl:return="ormModel"
+                             xpl:lib="/duzhou/xlib/app-modeler.xlib" />
+    <c:script><![CDATA[
+        $scope.setLocalValue('app', {
+            ...devApp,
+            ormModels: [ ormModel ],
         });
 
         // Note：在调用方构造 codeGenerator 时指定 targetDir

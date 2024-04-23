@@ -56,6 +56,7 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
     public void test_release() {
         Map<String, Object> requestData = new HashMap<>();
         requestData.put("id", "688807fb90424d5885d40c4e4fde921f");
+        requestData.put("forceOverride", true);
         requestData.put("releaseDir", getTargetFile("modeler").getAbsolutePath());
 
         ApiRequest<?> request = ApiRequest.build(requestData);
