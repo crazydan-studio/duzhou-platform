@@ -37,7 +37,9 @@
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict;
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain;
 
-                    const moduleCode2 = ormModel['ext:moduleCode2'] || ormModel['ext:mavenArtifactId'].replaceAll('-', '_');
+                    const moduleCode2 = ormModel['ext:moduleCode2']
+                                            // 兼容 Nop 模块
+                                            || (ormModel['ext:appName'] || ormModel['ext:moduleName']).replaceAll('-', '_');
                     const entityPackageName = ormModel['ext:entityPackageName'];
                     const entityPackagePrefix = entityPackageName + '.';
 

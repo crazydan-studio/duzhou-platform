@@ -1,5 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<biz x:schema="/nop/schema/biz/xbiz.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevAppModule.xbiz">
+<biz xmlns:x="/nop/schema/xdsl.xdef" xmlns:c="c"
+     xmlns:app-modeler="app-modeler" xmlns:xpl="xpl"
+     x:schema="/nop/schema/biz/xbiz.xdef"
+     x:extends="_DevAppModule.xbiz">
 
-    <actions/>
+    <actions>
+        <mutation name="release" displayName="发布">
+            <arg name="id" type="String" />
+            <arg name="forceOverride" type="Boolean" mandatory="false" />
+            <arg name="releaseDir" type="String" />
+            <arg name="svcCtx" kind="ServiceContext" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.nop.commons.util.FileHelper;
+                    import io.nop.codegen.XCodeGenerator;
+                    import io.nop.xlang.api.XLang;
+                    import java.io.File;
+                    import java.lang.Boolean;
+                    import io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel;
+
+                    // Note：其与对应的 BizModel 是独立的，要调用 BizModel 中的方法，需注入该模型。
+                    // 在 BizModel 内标注了 @BizAction 的函数可以通过
+                    // `thisObj.invoke('batchGet',{ids},null, svcCtx)` 方式调用
+                    // io.nop.xlang.functions.GlobalFunctions#inject
+                    const biz = inject(DevAppModuleBizModel);
+
+                    const module = biz.dao().getEntityById(id);
+                    biz.dao().batchLoadPropsForEntity(module,
+                                                  'app.domains,app.dicts'
+                                                  + ',entities.columns,entities.relations'
+                                                  + ',entities.relations.target');
+
+                    FileHelper.assureParent(new File(releaseDir + '/any'));
+
+                    const gen = new XCodeGenerator('/duzhou/templates/app-modeler', releaseDir);
+                    gen.forceOverride(Boolean.TRUE.equals(forceOverride));
+
+                    const scope = XLang.newEvalScope();
+                    scope.setLocalValue('module', module);
+
+                    gen.execute('/', scope);
+                ]]></c:script>
+            </source>
+        </mutation>
+
+        <query name="discover" displayName="发现内置的应用模块">
+            <source>
+                <c:script><![CDATA[
+                    import io.nop.core.module.ModuleManager;
+                    import io.nop.core.resource.component.ResourceComponentManager;
+
+                    return ModuleManager.instance()
+                                .getAllModuleResources('orm/app.orm.xml')
+                                .map(resource => {
+                                    const ormPath = resource.getPath();
+                                    const ormModel = ResourceComponentManager.instance().parseComponentModel(resource);
+
+                                    return {
+                                        path: ormPath,
+                                        code: ormModel['ext:moduleCode2']
+                                                // 兼容 Nop 模块
+                                                || (ormModel['ext:appName'] || ormModel['ext:moduleName']).replaceAll('-', '_'),
+                                        displayName: ormModel['ext:moduleDisplayName']
+                                                        || ormModel['ext:appName'],
+                                    };
+                                });
+                ]]></c:script>
+            </source>
+        </query>
+
+        <mutation name="importDiscovery" displayName="导入发现的应用模块">
+            <arg name="appId" type="String" />
+            <arg name="ormDslPath" type="String" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.nop.core.resource.component.ResourceComponentManager;
+                    import io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel;
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule;
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp;
+
+                    const biz = inject(DevAppModuleBizModel);
+
+                    const devApp = biz.daoFor(DevAppModule).getEntityById(appId);
+                    //biz.daoFor(DevAppModule).batchLoadPropsForEntity(devAppModule, 'domains,dicts');
+
+                    const ormModel = ResourceComponentManager.instance().loadComponentModel(ormDslPath);
+
+                    const moduleCode2 = ormModel['ext:moduleCode2'] || ormModel['ext:mavenArtifactId'];
+                    const codes = moduleCode2.contains('-') ? [moduleCode2, moduleCode2.replaceAll('-', '_')] : [moduleCode2];
+                    let devAppModule = new DevAppModule();
+                    for (let code of codes) {
+                        devAppModule.appId = appId;
+                        devAppModule.code = code;
+                        devAppModule = biz.dao().findFirstByExample(devAppModule);
+
+                        if (devAppModule) { break; }
+                    }
+
+                    if (!devAppModule) {
+                        devAppModule = biz.dao().newEntity();
+                    } else {
+                        biz.dao().batchLoadPropsForEntity(devAppModule,
+                                                  'entities.columns,entities.relations'
+                                                  + ',entities.relations.target');
+                    }
+                ]]></c:script>
+                <app-modeler:PatchDevAppModule
+                        devApp="${devApp}" devAppModule="${devAppModule}" ormModel="${ormModel}"
+                        xpl:lib="/duzhou/xlib/app-modeler.xlib" />
+
+                <c:script><![CDATA[
+                    return devAppModule;
+                ]]></c:script>
+            </source>
+        </mutation>
+    </actions>
 </biz>

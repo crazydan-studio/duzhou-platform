@@ -67,4 +67,18 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
         log.info("devapp.service.release.result={}", JsonTool.stringify(response));
     }
+
+    @Test
+    //@EnableSnapshot
+    public void test_discover() {
+        Map<String, Object> requestData = new HashMap<>();
+
+        ApiRequest<?> request = ApiRequest.build(requestData);
+
+        IGraphQLExecutionContext context = this.graphQLEngine.newRpcContext(GraphQLOperationType.query,
+                                                                            "DevAppModule__discover",
+                                                                            request);
+        ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
+        log.info("devapp.service.release.result={}", JsonTool.stringify(response));
+    }
 }
