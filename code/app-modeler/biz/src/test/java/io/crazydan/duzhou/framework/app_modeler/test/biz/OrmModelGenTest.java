@@ -22,11 +22,17 @@ package io.crazydan.duzhou.framework.app_modeler.test.biz;
 import java.util.HashMap;
 
 import io.crazydan.duzhou.framework.junit.NopJunitTestCase;
+import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp;
+import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule;
 import io.nop.api.core.annotations.autotest.NopTestConfig;
 import io.nop.core.lang.eval.IEvalAction;
 import io.nop.core.lang.eval.IEvalScope;
+import io.nop.core.lang.json.JsonTool;
+import io.nop.core.resource.component.ResourceComponentManager;
+import io.nop.dao.api.IDaoProvider;
 import io.nop.orm.model.OrmModel;
 import io.nop.xlang.api.XLang;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,9 +42,11 @@ import org.junit.jupiter.api.Test;
 @NopTestConfig(enableActionAuth = "false", initDatabaseSchema = true,
                testConfigFile = "classpath:/application.properties")
 public class OrmModelGenTest extends NopJunitTestCase {
+    @Inject
+    protected IDaoProvider daoProvider;
 
     @Test
-    public void test_Gen_OrmModel() {
+    public void test_GenOrmModel() {
         IEvalAction eval = XLang.getTagAction("/duzhou/xlib/app-modeler.xlib", "GenOrmModel");
 
         IEvalScope scope = XLang.newEvalScope();
@@ -46,5 +54,25 @@ public class OrmModelGenTest extends NopJunitTestCase {
 
         OrmModel ormModel = (OrmModel) eval.invoke(scope);
         this.log.info("app-modeler.test.gen.orm-model={}", ormModel.prop_get("ext:mavenArtifactId"));
+    }
+
+    @Test
+    public void test_PatchDevAppModule() {
+        DevApp devApp = this.daoProvider.newEntity(DevApp.class);
+        DevAppModule devAppModule = this.daoProvider.newEntity(DevAppModule.class);
+        OrmModel ormModel = (OrmModel) ResourceComponentManager.instance()
+                                                               .loadComponentModel("/OrmModelGenTest/app.orm.xml");
+
+        IEvalAction eval = XLang.getTagAction("/duzhou/xlib/app-modeler.xlib", "PatchDevAppModule");
+
+        IEvalScope scope = XLang.newEvalScope();
+        scope.setLocalValue("devApp", devApp);
+        scope.setLocalValue("devAppModule", devAppModule);
+        scope.setLocalValue("ormModel", ormModel);
+
+        eval.invoke(scope);
+        this.log.info("app-modeler.test.patch.dev-app-module={},{}",
+                      JsonTool.stringify(devApp.prop_names()),
+                      JsonTool.stringify(devAppModule.prop_names()));
     }
 }
