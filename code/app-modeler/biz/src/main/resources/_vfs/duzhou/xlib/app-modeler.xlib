@@ -314,7 +314,7 @@
                         devApp.domains.add(appDomain);
 
                         appDomain.name = name;
-                        appDomain.displayName = ormDomain.displayName;
+                        appDomain.displayName = ormDomain.displayName || name;
                         appDomain.stdDomain = ormDomain.stdDomain;
                         appDomain.stdSqlType = ormDomain.stdSqlType?.getName();
                         appDomain.precision = ormDomain.precision;
@@ -448,8 +448,11 @@
                                 alias => alias.name + 'JsonTextComponent.data' != alias.propPath
                             )
                             .map(alias => ({
-                                ...alias,
+                                name: alias.name,
                                 type: alias.type?.getTypeName() || 'String',
+                                displayName: alias.displayName,
+                                propPath: alias.propPath,
+                                tagSet: alias.tagSet?.join(','),
                             }));
 
                     appEntity.uniqueKeys =

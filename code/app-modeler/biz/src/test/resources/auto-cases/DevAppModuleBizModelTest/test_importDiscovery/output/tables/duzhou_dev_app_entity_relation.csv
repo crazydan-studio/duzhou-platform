@@ -1,0 +1,8 @@
+_chgType,ID,SOURCE_ID,TARGET_ID,SOURCE_PROP_NAME,TARGET_PROP_NAME,TYPE,TAG_SET,TABLE_NAME,JOIN_ON_CONDS
+A,@var:DevAppEntityRelation@id_6,@var:DevAppEntity@id_6,@var:DevAppEntity@id_4,target,,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""TARGET_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id,@var:DevAppEntity@id_1,@var:DevAppEntity@id,app,domains,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""APP_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id_4,@var:DevAppEntity@id_5,@var:DevAppEntity@id_4,entity,columns,to-many,"pub,ref-cascade-delete,ref-connection",,"{""data"":[{""leftProp"":""ENTITY_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id_2,@var:DevAppEntity@id_3,@var:DevAppEntity@id,app,modules,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""APP_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id_3,@var:DevAppEntity@id_4,@var:DevAppEntity@id_3,module,entities,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""MODULE_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id_5,@var:DevAppEntity@id_6,@var:DevAppEntity@id_4,source,relations,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""SOURCE_ID"",""rightProp"":""ID""}]}"
+A,@var:DevAppEntityRelation@id_1,@var:DevAppEntity@id_2,@var:DevAppEntity@id,app,dicts,to-many,"pub,ref-pub,ref-cascade-delete",,"{""data"":[{""leftProp"":""APP_ID"",""rightProp"":""ID""}]}"

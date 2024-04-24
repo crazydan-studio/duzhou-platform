@@ -1,0 +1,2 @@
+ID,APP_ID,DISPLAY_NAME,NAME,OPTION_TYPE,OPTIONS
+9bda5f965bb749ca865763be592c4716,73aafee98f644d299a503cbd6853a6cf,实体标签,entity-tagset,string,"{""data"":[{""code"":""not-gen"",""value"":""not-gen"",""label"":""不生成代码""},{""code"":""del"",""value"":""del"",""label"":""删除该对象""},{""code"":""mapper"",""value"":""mapper"",""label"":""需生成 SqlMapper 代码""}]}"

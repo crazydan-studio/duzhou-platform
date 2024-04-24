@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--用于服务间的 API 调用-->
-    <artifactId>app-modeler-api</artifactId>
+    <artifactId>duzhou-app-modeler-api</artifactId>
 
     <name>应用建模器 [app-modeler] (API Layer)</name>
 
     <parent>
         <groupId>io.crazydan.duzhou.platform</groupId>
-        <artifactId>app-modeler</artifactId>
+        <artifactId>duzhou-app-modeler</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--当前服务的 ORM 模型定义-->
-    <artifactId>app-modeler-orm</artifactId>
+    <artifactId>duzhou-app-modeler-orm</artifactId>
 
     <name>应用建模器 [app-modeler] (ORM Layer)</name>
 
     <parent>
         <groupId>io.crazydan.duzhou.platform</groupId>
-        <artifactId>app-modeler</artifactId>
+        <artifactId>duzhou-app-modeler</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

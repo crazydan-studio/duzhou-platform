@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--服务启动器，用于启动单体服务，或者本地开发-->
-    <artifactId>app-modeler-starter</artifactId>
+    <artifactId>duzhou-app-modeler-starter</artifactId>
 
     <name>应用建模器 [app-modeler] (Starter)</name>
 
     <parent>
         <groupId>io.crazydan.duzhou.platform</groupId>
-        <artifactId>app-modeler</artifactId>
+        <artifactId>duzhou-app-modeler</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -26,19 +26,19 @@
     <dependencies>
         <dependency>
             <groupId>io.crazydan.duzhou.platform</groupId>
-            <artifactId>app-modeler-delta</artifactId>
+            <artifactId>duzhou-app-modeler-delta</artifactId>
         </dependency>
         <dependency>
             <groupId>io.crazydan.duzhou.platform</groupId>
-            <artifactId>app-modeler-biz</artifactId>
+            <artifactId>duzhou-app-modeler-biz</artifactId>
         </dependency>
         <dependency>
             <groupId>io.crazydan.duzhou.platform</groupId>
-            <artifactId>app-modeler-web</artifactId>
+            <artifactId>duzhou-app-modeler-web</artifactId>
         </dependency>
         <dependency>
             <groupId>io.crazydan.duzhou.framework</groupId>
-            <artifactId>starter-spring</artifactId>
+            <artifactId>duzhou-starter-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

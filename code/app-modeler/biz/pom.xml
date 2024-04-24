@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--当前服务的业务逻辑实现-->
-    <artifactId>app-modeler-biz</artifactId>
+    <artifactId>duzhou-app-modeler-biz</artifactId>
 
     <name>应用建模器 [app-modeler] (Biz Layer)</name>
 
     <parent>
         <groupId>io.crazydan.duzhou.platform</groupId>
-        <artifactId>app-modeler</artifactId>
+        <artifactId>duzhou-app-modeler</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -19,11 +19,12 @@
     <dependencies>
         <dependency>
             <groupId>io.crazydan.duzhou.platform</groupId>
-            <artifactId>app-modeler-orm</artifactId>
+            <artifactId>duzhou-app-modeler-orm</artifactId>
         </dependency>
+
         <dependency>
             <groupId>io.crazydan.duzhou.framework</groupId>
-            <artifactId>codegen</artifactId>
+            <artifactId>duzhou-codegen</artifactId>
         </dependency>
 
         <!--Nop Biz-->
@@ -38,6 +39,10 @@
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>
             <artifactId>nop-file-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.entropy-cloud</groupId>
+            <artifactId>nop-task-core</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.entropy-cloud</groupId>

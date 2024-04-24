@@ -35,13 +35,5 @@
         <module x:id="base">00.base</module>
     </modules>
 
-    <dependencies>
-
-        <!--Note: x:id 属性需保留，其为自动合并的基础-->
-        <dependency x:id="io.crazydan.duzhou.framework:autotest">
-            <groupId>io.crazydan.duzhou.framework</groupId>
-            <artifactId>autotest</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependencies/>
 </project>

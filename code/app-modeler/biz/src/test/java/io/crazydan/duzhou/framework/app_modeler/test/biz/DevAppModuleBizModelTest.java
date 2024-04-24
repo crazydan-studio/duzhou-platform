@@ -84,7 +84,7 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
     }
 
     @Test
-    //@EnableSnapshot
+    @EnableSnapshot
     public void test_importDiscovery() {
         Map<String, Object> requestData = new HashMap<>();
         requestData.put("appId", "73aafee98f644d299a503cbd6853a6cf");

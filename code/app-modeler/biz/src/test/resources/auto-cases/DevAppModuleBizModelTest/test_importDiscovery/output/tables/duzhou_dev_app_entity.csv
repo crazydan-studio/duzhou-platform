@@ -1,0 +1,8 @@
+_chgType,ID,CREATED_BY,CREATED_AT,UPDATED_BY,UPDATED_AT,VER,MODULE_ID,DISPLAY_NAME,NAME,TABLE_NAME,TAG_SET,UNIQUE_KEYS,ALIASES
+A,@var:DevAppEntity@id_2,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,字典定义,DevAppDict,duzhou_dev_app_dict,,"{""data"":[""NAME,APP_ID""]}","{""data"":[]}"
+A,@var:DevAppEntity@id_5,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,应用 ORM 实体字段,DevAppEntityColumn,duzhou_dev_app_entity_column,,"{""data"":[""NAME,ENTITY_ID""]}","{""data"":[]}"
+A,@var:DevAppEntity@id,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,应用,DevApp,duzhou_dev_app,,"{""data"":[""CODE"",""DISPLAY_NAME""]}","{""data"":[]}"
+A,@var:DevAppEntity@id_1,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,域定义,DevAppDomain,duzhou_dev_app_domain,,"{""data"":[""NAME,APP_ID""]}","{""data"":[]}"
+A,@var:DevAppEntity@id_6,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,应用 ORM 实体关联,DevAppEntityRelation,duzhou_dev_app_entity_relation,,"{""data"":[]}","{""data"":[]}"
+A,@var:DevAppEntity@id_4,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,应用 ORM 实体,DevAppEntity,duzhou_dev_app_entity,mapper,"{""data"":[""NAME,MODULE_ID""]}","{""data"":[{""name"":""appId"",""type"":""java.lang.String"",""displayName"":""应用"",""propPath"":""module.appId"",""tagSet"":""pub""}]}"
+A,@var:DevAppEntity@id_3,autotest-ref,*,autotest-ref,*,0,@var:DevAppModule@id,应用模块,DevAppModule,duzhou_dev_app_module,,"{""data"":[""CODE,APP_ID""]}","{""data"":[]}"

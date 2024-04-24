@@ -78,16 +78,16 @@
                 <c:script><![CDATA[
                     import io.nop.core.resource.component.ResourceComponentManager;
                     import io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel;
+                    import io.crazydan.duzhou.platform.app_modeler.biz.DevAppBizModel;
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule;
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp;
                     import io.nop.biz.BizConstants;
 
-                    const biz = inject(DevAppModuleBizModel);
+                    const appBiz = inject(DevAppBizModel);
+                    const moduleBiz = inject(DevAppModuleBizModel);
 
-                    const devApp = biz.daoFor(DevAppModule).getEntityById(appId);
+                    const devApp = appBiz.dao().getEntityById(appId);
                     if (!devApp) { return; }
-
-                    //biz.daoFor(DevAppModule).batchLoadPropsForEntity(devAppModule, 'domains,dicts');
                 ]]></c:script>
                 <c:for var="ormPath" items="${ormPaths}">
                     <c:script><![CDATA[
@@ -98,12 +98,12 @@
                         devAppModule.appId = appId;
                         devAppModule.code = ormModel['ext:moduleCode2'];
 
-                        devAppModule = biz.dao().findFirstByExample(devAppModule);
+                        devAppModule = moduleBiz.dao().findFirstByExample(devAppModule);
 
                         if (!devAppModule) {
-                            devAppModule = biz.dao().newEntity();
+                            devAppModule = moduleBiz.dao().newEntity();
                         } else {
-                            biz.dao().batchLoadPropsForEntity(devAppModule,
+                            moduleBiz.dao().batchLoadPropsForEntity(devAppModule,
                                                       'entities.columns,entities.relations'
                                                       + ',entities.relations.target');
                         }
@@ -113,16 +113,18 @@
                             xpl:lib="/duzhou/xlib/app-modeler.xlib" />
 
                     <c:script><![CDATA[
-                        checkDataAuth(BizConstants.METHOD_SAVE, devAppModule, svcCtx);
+                        devAppModule.app = devApp;
 
-                        biz.dao().saveOrUpdateEntity(devAppModule);
+                        moduleBiz.checkDataAuth(BizConstants.METHOD_SAVE, devAppModule, svcCtx);
+
+                        moduleBiz.dao().saveOrUpdateEntity(devAppModule);
                     ]]></c:script>
                 </c:for>
 
                 <c:script><![CDATA[
-                    checkDataAuth(BizConstants.METHOD_SAVE, devApp, svcCtx);
+                    appBiz.checkDataAuth(BizConstants.METHOD_SAVE, devApp, svcCtx);
 
-                    biz.daoFor(DevAppModule).saveOrUpdateEntity(devApp);
+                    appBiz.dao().saveOrUpdateEntity(devApp);
                 ]]></c:script>
             </source>
         </mutation>

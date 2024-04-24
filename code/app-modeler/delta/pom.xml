@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!--针对当前服务模块的差量内容-->
-    <artifactId>app-modeler-delta</artifactId>
+    <artifactId>duzhou-app-modeler-delta</artifactId>
 
     <name>应用建模器 [app-modeler] (Delta Layer)</name>
 
     <parent>
         <groupId>io.crazydan.duzhou.platform</groupId>
-        <artifactId>app-modeler</artifactId>
+        <artifactId>duzhou-app-modeler</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
