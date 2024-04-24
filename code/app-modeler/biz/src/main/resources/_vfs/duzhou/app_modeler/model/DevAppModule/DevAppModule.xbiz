@@ -56,11 +56,13 @@
                                 .map(resource => {
                                     const ormPath = resource.getPath();
                                     const ormModel = ResourceComponentManager.instance().parseComponentModel(resource);
+                                    const ormCode = ormModel['ext:moduleCode2'];
 
                                     return {
-                                        path: ormPath,
-                                        code: ormModel['ext:moduleCode2'],
-                                        displayName: ormModel['ext:moduleDisplayName'],
+                                        value: ormPath,
+                                        code: ormCode,
+                                        label: ormModel['ext:moduleDisplayName']
+                                                    + ' (' + ormCode + '): ' + ormPath,
                                     };
                                 })
                                 // TODO 暂时不支持 Nop 原生模块，需要先确定对基础模块的定制方案
