@@ -31,124 +31,15 @@
 
             <source>
                 <c:script><![CDATA[
-                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity;
-                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn;
-                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation;
-                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict;
-                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain;
-
-                    const moduleCode2 = ormModel['ext:moduleCode2']
-                                            // 兼容 Nop 模块
-                                            || (ormModel['ext:appName'] || ormModel['ext:moduleName']).replaceAll('-', '_');
-                    const entityPackageName = ormModel['ext:entityPackageName'];
-                    const entityPackagePrefix = entityPackageName + '.';
-
-                    devAppModule.code = moduleCode2;
+                    devAppModule.code = ormModel['ext:moduleCode2'];
                     devAppModule.displayName = ormModel['ext:moduleDisplayName'] || ormModel['ext:appName'];
                     //devAppModule.description = ormModel['ext:moduleDescription'];
                     //devAppModule.webStarterType = ormModel['ext:webStarterType'];
                     //devAppModule.dbDialect = ormModel['ext:dialect'];
-
-                    ormModel.getDicts()?.forEach(ormDict => {
-                        const appDict = new DevAppDict();
-                        devApp.dicts.add(appDict);
-
-                        appDict.name = ormDict.name.$lastPart('/', false);
-                        appDict.displayName = ormDict.label;
-                        appDict.optionType = ormDict.valueType;
-
-                        appDict.options = ormDict.options?.map(option => ({
-                            code: option.code,
-                            label: option.label,
-                            value: option.value,
-                            description: option.description,
-                        }));
-                    });
-
-                    ormModel.getDomains()?.forEach(ormDomain => {
-                        const appDomain = new DevAppDomain();
-                        devApp.domains.add(appDomain);
-
-                        appDomain.name = ormDomain.name;
-                        appDomain.displayName = ormDomain.displayName;
-                        appDomain.stdDomain = ormDomain.stdDomain;
-                        appDomain.stdSqlType = ormDomain.stdSqlType?.getName();
-                        appDomain.precision = ormDomain.precision;
-                        appDomain.scale = ormDomain.scale;
-                    });
-
-                    ormModel.getEntities()?.forEach(ormEntity => {
-                        const appEntity = new DevAppEntity();
-                        devAppModule.entities.add(appEntity);
-
-                        appEntity.name = ormEntity.name.$removeStart(entityPackagePrefix);
-                        appEntity.tableName = ormEntity.tableName;
-                        appEntity.displayName = ormEntity.displayName;
-                        appEntity.tagSet = ormEntity.tagSet?.join(',');
-                        //appEntity.className = ormEntity.className.$removeStart(entityPackagePrefix);
-                        //appEntity.baseClassName = ormEntity['ext:baseClass'].$removeStart(entityPackagePrefix);
-
-                        const columnNameCodeMap = {};
-                        ormEntity.getColumns()?.forEach(ormColumn => {
-                            const appColumn = new DevAppEntityColumn();
-                            appEntity.columns.add(appColumn);
-
-                            columnNameCodeMap[ormColumn.name] = ormColumn.code;
-
-                            appColumn.propId = ormColumn.propId;
-                            appColumn.name = ormColumn.code;
-                            appColumn.displayName = ormColumn.displayName;
-                            appColumn.tagSet = ormColumn.tagSet?.join(',');
-                            appColumn.primary = ormColumn.primary;
-                            appColumn.mandatory = ormColumn.mandatory;
-                            appColumn.domainName = ormColumn.domain;
-                            appColumn.dictName = ormColumn['ext:dict']?.$lastPart('/', false);
-                            //appColumn.uiControl = ormColumn['ui:control'];
-                            appColumn.stdSqlType = ormColumn.stdSqlType?.getName() || 'VARCHAR';
-                            appColumn.precision = ormColumn.precision;
-                            appColumn.scale = ormColumn.scale;
-                            appColumn.defaultValue = ormColumn.defaultValue;
-                        });
-
-                        // 仅需保留 to-one 一方的关联
-                        ormEntity.getToOneRelations()?.forEach(ormRelation => {
-                            const appRelation = new DevAppEntityRelation();
-                            appEntity.relations.add(appRelation);
-
-                            appRelation.type = ormRelation.oneToOne ? 'to-one' : 'to-many';
-                            appRelation.source = appEntity;
-                            // 用实体 name 临时替代关联对象
-                            appRelation.targetId = ormRelation.refEntityName.$removeStart(entityPackagePrefix);
-
-                            //appRelation.displayName = ormRelation.displayName;
-                            appRelation.tagSet = ormRelation.tagSet?.join(',');
-                            appRelation.sourcePropName = ormRelation.name;
-                            appRelation.targetPropName = ormRelation.refPropName;
-                            //appRelation.uiControl = ormRelation['ui:control'];
-
-                            appRelation.joinOnConds =
-                                ormRelation.getJoin()?.map(ormJoin => ({
-                                    leftProp: columnNameCodeMap[ormJoin.leftProp],
-                                    rightProp: columnNameCodeMap[ormJoin.rightProp],
-                                }));
-                        });
-
-                        appEntity.aliases =
-                            ormEntity.getAliases()?.filter(
-                                    // 忽略 json 扩展别名
-                                    alias => alias.name + 'JsonTextComponent.data' != alias.propPath
-                                )
-                                .map(alias => ({
-                                    ...alias,
-                                    type: alias.type?.getTypeName() || 'String',
-                                }));
-
-                        appEntity.uniqueKeys =
-                            ormEntity.getUniqueKeys()?.map(
-                                uk => uk.columns.map(name => columnNameCodeMap[name]).join(',')
-                            );
-                    });
                 ]]></c:script>
+                <thisLib:_DoMergeOrmDicts devApp="${devApp}" ormModel="${ormModel}" />
+                <thisLib:_DoMergeOrmDomains devApp="${devApp}" ormModel="${ormModel}" />
+                <thisLib:_DoMergeOrmEntities devAppModule="${devAppModule}" ormModel="${ormModel}" />
             </source>
         </PatchDevAppModule>
 
@@ -370,5 +261,203 @@
                 ]]></c:script>
             </source>
         </_DoGenOrmModel>
+
+        <_DoMergeOrmDicts outputMode="none">
+            <attr name="devApp" type="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp" />
+            <attr name="ormModel" type="io.nop.orm.model.OrmModel" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict;
+
+                    const appDicts = {};
+                    devApp.dicts.forEach(dict => {
+                        appDicts[dict.name] = dict;
+                    });
+
+                    ormModel.getDicts()?.forEach(ormDict => {
+                        const name = ormDict.name.$lastPart('/', false);
+                        const appDict = appDicts[name] || new DevAppDict();
+                        devApp.dicts.add(appDict);
+
+                        appDict.name = name;
+                        appDict.displayName = ormDict.label;
+                        appDict.optionType = ormDict.valueType;
+
+                        appDict.options = ormDict.options?.map(option => ({
+                            code: option.code,
+                            label: option.label,
+                            value: option.value,
+                            description: option.description,
+                        }));
+                    });
+                ]]></c:script>
+            </source>
+        </_DoMergeOrmDicts>
+
+        <_DoMergeOrmDomains outputMode="none">
+            <attr name="devApp" type="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp" />
+            <attr name="ormModel" type="io.nop.orm.model.OrmModel" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain;
+
+                    const appDomains = {};
+                    devApp.domains.forEach(domain => {
+                        appDomains[domain.name] = domain;
+                    });
+
+                    ormModel.getDomains()?.forEach(ormDomain => {
+                        const name = ormDomain.name;
+                        const appDomain = appDomains[name] || new DevAppDomain();
+                        devApp.domains.add(appDomain);
+
+                        appDomain.name = name;
+                        appDomain.displayName = ormDomain.displayName;
+                        appDomain.stdDomain = ormDomain.stdDomain;
+                        appDomain.stdSqlType = ormDomain.stdSqlType?.getName();
+                        appDomain.precision = ormDomain.precision;
+                        appDomain.scale = ormDomain.scale;
+                    });
+                ]]></c:script>
+            </source>
+        </_DoMergeOrmDomains>
+
+        <_DoMergeOrmEntities outputMode="none">
+            <attr name="devAppModule" type="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule" />
+            <attr name="ormModel" type="io.nop.orm.model.OrmModel" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity;
+
+                    const entityPackagePrefix = ormModel['ext:entityPackageName'] + '.';
+
+                    const appEntities = {};
+                    devAppModule.entities.forEach(entity => {
+                        appEntities[entity.name] = entity;
+                    });
+
+                    // 预添加 entity 以便于在创建 relation 时能与 target entity 关联
+                    ormModel.entities?.forEach(ormEntity => {
+                        const ormEntityName = ormEntity.name.$removeStart(entityPackagePrefix);
+                        if (!appEntities[ormEntityName]) {
+                            appEntities[ormEntityName] = new DevAppEntity();
+                        }
+                    });
+                ]]></c:script>
+                <c:for var="ormEntity" items="${ormModel.entities}">
+                    <c:script><![CDATA[
+                        const ormEntityName = ormEntity.name.$removeStart(entityPackagePrefix);
+                        const appEntity = appEntities[ormEntityName];
+
+                        devAppModule.entities.add(appEntity);
+                    ]]></c:script>
+                    <thisLib:_DoMergeOrmEntity
+                            devAppModule="${devAppModule}"
+                            ormModel="${ormModel}"
+                            appEntities="${appEntities}"
+                            entityPackagePrefix="${entityPackagePrefix}"
+                            appEntity="${appEntity}"
+                            ormEntity="${ormEntity}" />
+                </c:for>
+            </source>
+        </_DoMergeOrmEntities>
+
+        <_DoMergeOrmEntity outputMode="none">
+            <attr name="devAppModule" type="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule" />
+            <attr name="ormModel" type="io.nop.orm.model.OrmModel" />
+            <attr name="appEntities" />
+            <attr name="entityPackagePrefix" />
+            <attr name="appEntity" />
+            <attr name="ormEntity" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn;
+                    import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation;
+
+                    appEntity.name = ormEntity.name.$removeStart(entityPackagePrefix);
+                    appEntity.tableName = ormEntity.tableName;
+                    appEntity.displayName = ormEntity.displayName;
+                    appEntity.tagSet = ormEntity.tagSet?.join(',');
+                    //appEntity.className = ormEntity.className.$removeStart(entityPackagePrefix);
+                    //appEntity.baseClassName = ormEntity['ext:baseClass'].$removeStart(entityPackagePrefix);
+
+                    const appEntityColumns = {};
+                    appEntity.columns.forEach(column => {
+                        appEntityColumns[column.propId] = column;
+                    });
+
+                    const columnNameCodeMap = {};
+                    ormEntity.columns?.forEach(ormColumn => {
+                        const propId = ormColumn.propId;
+                        const appColumn = appEntityColumns[propId] || new DevAppEntityColumn();
+                        appEntity.columns.add(appColumn);
+
+                        columnNameCodeMap[ormColumn.name] = ormColumn.code;
+
+                        appColumn.propId = propId;
+                        appColumn.name = ormColumn.code;
+                        appColumn.displayName = ormColumn.displayName;
+                        appColumn.tagSet = ormColumn.tagSet?.join(',');
+                        appColumn.primary = ormColumn.primary;
+                        appColumn.mandatory = ormColumn.mandatory;
+                        appColumn.domainName = ormColumn.domain;
+                        appColumn.dictName = ormColumn['ext:dict']?.$lastPart('/', false);
+                        //appColumn.uiControl = ormColumn['ui:control'];
+                        appColumn.stdSqlType = ormColumn.stdSqlType?.getName() || 'VARCHAR';
+                        appColumn.precision = ormColumn.precision;
+                        appColumn.scale = ormColumn.scale;
+                        appColumn.defaultValue = ormColumn.defaultValue;
+                    });
+
+                    const appEntityRelations = {};
+                    appEntity.relations.forEach(relation => {
+                        appEntityRelations[relation.sourcePropName] = relation;
+                    });
+
+                    // 仅需保留 to-one 一方的关联
+                    ormEntity.toOneRelations?.forEach(ormRelation => {
+                        const sourcePropName = ormRelation.name;
+                        const targetPropName = ormRelation.refPropName;
+                        const appRelation = appEntityRelations[sourcePropName] || new DevAppEntityRelation();
+                        appEntity.relations.add(appRelation);
+
+                        appRelation.type = ormRelation.oneToOne ? 'to-one' : 'to-many';
+                        appRelation.source = appEntity;
+                        appRelation.target = appEntities[ormRelation.refEntityName.$removeStart(entityPackagePrefix)];
+
+                        //appRelation.displayName = ormRelation.displayName;
+                        appRelation.tagSet = ormRelation.tagSet?.join(',');
+                        appRelation.sourcePropName = sourcePropName;
+                        appRelation.targetPropName = targetPropName;
+                        //appRelation.uiControl = ormRelation['ui:control'];
+
+                        appRelation.joinOnConds =
+                            ormRelation.getJoin()?.map(ormJoin => ({
+                                leftProp: columnNameCodeMap[ormJoin.leftProp],
+                                rightProp: columnNameCodeMap[ormJoin.rightProp],
+                            }));
+                    });
+
+                    appEntity.aliases =
+                        ormEntity.aliases?.filter(
+                                // 忽略 json 扩展别名
+                                alias => alias.name + 'JsonTextComponent.data' != alias.propPath
+                            )
+                            .map(alias => ({
+                                ...alias,
+                                type: alias.type?.getTypeName() || 'String',
+                            }));
+
+                    appEntity.uniqueKeys =
+                        ormEntity.uniqueKeys?.map(
+                            uk => uk.columns.map(name => columnNameCodeMap[name]).join(',')
+                        );
+                ]]></c:script>
+            </source>
+        </_DoMergeOrmEntity>
     </tags>
 </lib>

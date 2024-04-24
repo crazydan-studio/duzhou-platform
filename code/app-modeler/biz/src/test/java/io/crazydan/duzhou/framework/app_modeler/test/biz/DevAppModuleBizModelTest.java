@@ -19,6 +19,7 @@
 
 package io.crazydan.duzhou.framework.app_modeler.test.biz;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,11 +66,11 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
                                                                             "DevAppModule__release",
                                                                             request);
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
-        log.info("devapp.service.release.result={}", JsonTool.stringify(response));
+        log.info("app-modeler.module.release.result={}", JsonTool.stringify(response));
     }
 
     @Test
-    //@EnableSnapshot
+    @EnableSnapshot
     public void test_discover() {
         Map<String, Object> requestData = new HashMap<>();
 
@@ -79,6 +80,22 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
                                                                             "DevAppModule__discover",
                                                                             request);
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
-        log.info("devapp.service.release.result={}", JsonTool.stringify(response));
+        log.info("app-modeler.module.discover.result={}", JsonTool.stringify(response));
+    }
+
+    @Test
+    //@EnableSnapshot
+    public void test_importDiscovery() {
+        Map<String, Object> requestData = new HashMap<>();
+        requestData.put("appId", "73aafee98f644d299a503cbd6853a6cf");
+        requestData.put("ormPaths", Collections.singleton("/OrmModelGenTest/app.orm.xml"));
+
+        ApiRequest<?> request = ApiRequest.build(requestData);
+
+        IGraphQLExecutionContext context = this.graphQLEngine.newRpcContext(GraphQLOperationType.mutation,
+                                                                            "DevAppModule__importDiscovery",
+                                                                            request);
+        ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
+        log.info("app-modeler.module.discovery.import.result={}", JsonTool.stringify(response));
     }
 }
