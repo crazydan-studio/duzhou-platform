@@ -85,14 +85,13 @@
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp;
                     import io.nop.biz.BizConstants;
                     import io.crazydan.duzhou.platform.app_modeler.biz.AppModelerBizErrors;
-                    import io.nop.api.core.exceptions.NopException;
                     import io.nop.api.core.beans.ApiResponse;
 
                     const appBiz = inject(DevAppBizModel);
                     const moduleBiz = inject(DevAppModuleBizModel);
 
                     const devApp = appBiz.dao().getEntityById(appId);
-                    if (!devApp) { throw new NopException(AppModelerBizErrors.Err_DevAppModule_No_App_Exist); }
+                    if (!devApp) { throwError(AppModelerBizErrors.Err_DevAppModule_No_App_Exist); }
 
                     const devAppModules = [];
                 ]]></c:script>
