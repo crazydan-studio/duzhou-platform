@@ -419,13 +419,15 @@
                     });
 
                     // 仅需保留 to-one 一方的关联
-                    ormEntity.toOneRelations?.forEach(ormRelation => {
+                    ormEntity.relations?.forEach(ormRelation => {
+                        if (ormRelation.type != 'to-one') { return; }
+
                         const sourcePropName = ormRelation.name;
                         const targetPropName = ormRelation.refPropName;
                         const appRelation = appEntityRelations[sourcePropName] || new DevAppEntityRelation();
                         appEntity.relations.add(appRelation);
 
-                        appRelation.type = ormRelation.oneToOne ? 'to-one' : 'to-many';
+                        appRelation.type = 'to-one';
                         appRelation.source = appEntity;
                         appRelation.target = appEntities[ormRelation.refEntityName.$removeStart(entityPackagePrefix)];
 
@@ -436,7 +438,7 @@
                         //appRelation.uiControl = ormRelation['ui:control'];
 
                         appRelation.joinOnConds =
-                            ormRelation.getJoin()?.map(ormJoin => ({
+                            ormRelation.join?.map(ormJoin => ({
                                 leftProp: columnNameCodeMap[ormJoin.leftProp],
                                 rightProp: columnNameCodeMap[ormJoin.rightProp],
                             }));
