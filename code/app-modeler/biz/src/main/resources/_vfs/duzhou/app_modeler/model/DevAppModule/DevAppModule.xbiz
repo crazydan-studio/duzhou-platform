@@ -84,12 +84,17 @@
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule;
                     import io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp;
                     import io.nop.biz.BizConstants;
+                    import io.crazydan.duzhou.platform.app_modeler.biz.AppModelerBizErrors;
+                    import io.nop.api.core.exceptions.NopException;
+                    import io.nop.api.core.beans.ApiResponse;
 
                     const appBiz = inject(DevAppBizModel);
                     const moduleBiz = inject(DevAppModuleBizModel);
 
                     const devApp = appBiz.dao().getEntityById(appId);
-                    if (!devApp) { return; }
+                    if (!devApp) { throw new NopException(AppModelerBizErrors.Err_DevAppModule_No_App_Exist); }
+
+                    const devAppModules = [];
                 ]]></c:script>
                 <c:for var="ormPath" items="${ormPaths}">
                     <c:script><![CDATA[
@@ -120,6 +125,8 @@
                         moduleBiz.checkDataAuth(BizConstants.METHOD_SAVE, devAppModule, svcCtx);
 
                         moduleBiz.dao().saveOrUpdateEntity(devAppModule);
+
+                        devAppModules.add(devAppModule);
                     ]]></c:script>
                 </c:for>
 
@@ -127,6 +134,11 @@
                     appBiz.checkDataAuth(BizConstants.METHOD_SAVE, devApp, svcCtx);
 
                     appBiz.dao().saveOrUpdateEntity(devApp);
+
+                    return ApiResponse.buildSuccess(devAppModules.map(module => ({
+                        code: module.code,
+                        displayName: module.displayName,
+                    })));
                 ]]></c:script>
             </source>
         </mutation>
