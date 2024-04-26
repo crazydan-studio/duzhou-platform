@@ -60,6 +60,19 @@
                     function getDictName(name) {
                         return name ? moduleCode2 + '/' + name : null;
                     }
+                    function toSnakeName(str, upper) {
+                        str = str?.replaceAll('-+', '_').replaceAll('\\s+', '_');
+                        return upper ? str?.toUpperCase() : str?.toLowerCase();
+                    }
+                    // Note：在 OrmEntityModelInitializer.initIdProp 中会将名字 id 作为复合主键的属性名称，
+                    // 因此，在复合主键中需要将 id 属性重命名，但在单一主键中，则不需要重命名 id
+                    function columnCodeToPropName(code) {
+                        // 使用复合主键时，需要限制不能使用 ID 作为字段名
+                        if (code?.equalsIgnoreCase('id')) {
+                            return 'id';
+                        }
+                        return toSnakeName(code, false)?.$colCodeToPropName();
+                    }
                 ]]></c:script>
                 <thisLib:_DoGenOrmModel xdefPath="/nop/schema/orm/orm.xdef">
                     <orm xpl:attrs="moduleExtAttrs">
@@ -113,7 +126,7 @@
                                         registerShortName: registerShortName,
                                         tagSet: entity.tagSet,
                                         displayName: entity.displayName,
-                                        tableName: entity.tableName,
+                                        tableName: toSnakeName(entity.tableName, false),
                                         name: name.$fullClassName(moduleEntityPackageName),
                                         className: className.$fullClassName(moduleEntityPackageName),
                                         //'ext:baseClass': entity.baseClassName?.$fullClassName(moduleEntityPackageName),
@@ -125,7 +138,7 @@
 
                                     entity.columns?.forEach((col) => {
                                         const domain = col.domainName;
-                                        const propName = col.name.$colCodeToPropName();
+                                        const propName = columnCodeToPropName(col.name);
 
                                         if (domain == 'version') {
                                             entityAttrs.versionProp = propName;
@@ -150,13 +163,15 @@
                                     });
                                 ]]></c:script>
                                 <entity xpl:attrs="entityAttrs">
+                                    <!--<comment>${entity.description}</comment>-->
                                     <columns>
                                         <c:for var="column" items="${entity.columns}">
                                             <c:script><![CDATA[
+                                                const code = toSnakeName(column.name, true);
                                                 const columnAttrs = {
                                                     propId: column.propId,
-                                                    code: column.name,
-                                                    name: column.name.$colCodeToPropName(),
+                                                    code: code,
+                                                    name: columnCodeToPropName(code),
                                                     displayName: column.displayName,
                                                     tagSet: column.tagSet,
                                                     primary: column.primary,
@@ -166,6 +181,7 @@
                                                     precision: column.precision,
                                                     scale: column.scale,
                                                     defaultValue: column.defaultValue,
+                                                    //comment: column.description,
                                                     'ext:dict': getDictName(column.dictName),
                                                     //'ui:control': column.uiControl,
                                                     notGenCode: column.tagSet?.contains('not-gen')
@@ -194,8 +210,8 @@
                                                 <join>
                                                     <c:for var="cond" items="${relation.joinOnConds}">
                                                         <c:script><![CDATA[
-                                                            const leftProp = cond.leftProp.$colCodeToPropName();
-                                                            const rightProp = cond.rightProp.$colCodeToPropName();
+                                                            const leftProp = columnCodeToPropName(cond.leftProp);
+                                                            const rightProp = columnCodeToPropName(cond.rightProp);
                                                         ]]></c:script>
                                                         <on leftProp="${leftProp}" rightProp="${rightProp}" />
                                                     </c:for>
@@ -220,17 +236,19 @@
                                             <c:script><![CDATA[
                                                 import java.util.Comparator;
 
-                                                const columns = uk.$toCsvSet().map(col => col.$colCodeToPropName());
+                                                const columns = uk.$toCsvSet().map(col => columnCodeToPropName(col));
                                                 columns.sort(Comparator.naturalOrder());
 
                                                 const ukName = columns.join('_');
                                                 const ukAttrs = {
                                                     name: 'key_' + ukName,
                                                     columns: columns.join(','),
-                                                    constraint: 'UK_' + ukName.toUpperCase(),
+                                                    constraint: 'UK_' + ukName,
                                                 };
                                             ]]></c:script>
-                                            <unique-key xpl:attrs="ukAttrs" />
+                                            <unique-key xpl:attrs="ukAttrs">
+                                                <!--<comment>${uk.description}</comment>-->
+                                            </unique-key>
                                         </c:for>
                                     </unique-keys>
                                 </entity>
