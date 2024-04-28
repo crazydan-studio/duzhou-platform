@@ -120,13 +120,14 @@
                             <c:for var="entity" items="${devAppModule.entities}">
                                 <c:script><![CDATA[
                                     const name = entity.name || entity.tableName.$camelCase(true);
+                                    const tableName = toSnakeName(entity.tableName, false);
                                     const className = entity.name;//entity.className || entity.name;
 
                                     const entityAttrs = {
                                         registerShortName: registerShortName,
                                         tagSet: entity.tagSet,
                                         displayName: entity.displayName,
-                                        tableName: toSnakeName(entity.tableName, false),
+                                        tableName: tableName,
                                         name: name.$fullClassName(moduleEntityPackageName),
                                         className: className.$fullClassName(moduleEntityPackageName),
                                         //'ext:baseClass': entity.baseClassName?.$fullClassName(moduleEntityPackageName),
@@ -239,11 +240,13 @@
                                                 const columns = uk.$toCsvSet().map(col => columnCodeToPropName(col));
                                                 columns.sort(Comparator.naturalOrder());
 
-                                                const ukName = columns.join('_');
+                                                // Note: constraint 的名字需确保在同一个库内唯一
+                                                // 将 name 与 constraint 设置为相同值，以便于后续生成差量 DDL 脚本
+                                                const ukName = 'UK_' + tableName + '_' + columns.join('_');
                                                 const ukAttrs = {
-                                                    name: 'key_' + ukName,
+                                                    name: ukName,
+                                                    constraint: ukName,
                                                     columns: columns.join(','),
-                                                    constraint: 'UK_' + ukName,
                                                 };
                                             ]]></c:script>
                                             <unique-key xpl:attrs="ukAttrs">
@@ -273,7 +276,7 @@
                     // Note: DslNodeLoader#loadFromNode 要求节点上必须指定 schema 元模型
                     ormNode.setAttr('x:schema', xdefPath);
 
-                    logInfo('gen.orm-model.xml={}', ormNode.xml());
+                    //logInfo('gen.orm-model.xml={}', ormNode.xml());
 
                     return DslModelHelper.parseDslModelNode(xdefPath, ormNode);
                 ]]></c:script>
@@ -293,7 +296,7 @@
                         appDicts[dict.name] = dict;
                     });
 
-                    ormModel.getDicts()?.forEach(ormDict => {
+                    ormModel.dicts?.forEach(ormDict => {
                         const name = ormDict.name.$lastPart('/', false);
                         const appDict = appDicts[name] || new DevAppDict();
                         devApp.dicts.add(appDict);
@@ -326,7 +329,7 @@
                         appDomains[domain.name] = domain;
                     });
 
-                    ormModel.getDomains()?.forEach(ormDomain => {
+                    ormModel.domains?.forEach(ormDomain => {
                         const name = ormDomain.name;
                         const appDomain = appDomains[name] || new DevAppDomain();
                         devApp.domains.add(appDomain);

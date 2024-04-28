@@ -26,10 +26,10 @@
               i18n-en:label="Entity Column Tag Set">
             <description>自动以 code（短横线替换为下划线） 为父目录名称</description>
             <option code="not_gen" label="不生成代码" value="not-gen"/>
-            <option code="seq" label="生成唯一主键" value="seq"/>
+            <option code="seq" description="UUID 字符串或递增序列" label="生成唯一主键" value="seq"/>
             <option code="del" label="删除该属性" value="del"/>
             <option code="var" label="生成随机值" value="var"/>
-            <option code="masked" label="在日志中打印掩码" value="masked"/>
+            <option code="masked" description="在日志中隐藏敏感信息" label="在日志中打印掩码" value="masked"/>
             <option code="not_pub" label="值不可见" value="not-pub"/>
             <option code="sort" label="默认排序属性（升序）" value="sort"/>
             <option code="sort_desc" label="默认排序属性（降序）" value="sort-desc"/>

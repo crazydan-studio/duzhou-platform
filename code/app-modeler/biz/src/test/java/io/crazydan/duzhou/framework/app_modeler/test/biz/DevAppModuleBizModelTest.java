@@ -35,8 +35,6 @@ import io.nop.graphql.core.ast.GraphQLOperationType;
 import io.nop.graphql.core.engine.IGraphQLEngine;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="mailto:flytreeleft@crazydan.org">flytreeleft</a>
@@ -45,8 +43,6 @@ import org.slf4j.LoggerFactory;
 @NopTestConfig(enableActionAuth = "false", initDatabaseSchema = true,
                testConfigFile = "classpath:/application-module.properties")
 public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
-
     @Inject
     IGraphQLEngine graphQLEngine;
 
@@ -66,7 +62,7 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
                                                                             "DevAppModule__release",
                                                                             request);
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
-        log.info("app-modeler.module.release.result={}", JsonTool.stringify(response));
+        this.log.info("app-modeler.module.release.result={}", JsonTool.stringify(response));
     }
 
     @Test
@@ -80,7 +76,7 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
                                                                             "DevAppModule__discover",
                                                                             request);
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
-        log.info("app-modeler.module.discover.result={}", JsonTool.stringify(response));
+        this.log.info("app-modeler.module.discover.result={}", JsonTool.stringify(response));
     }
 
     @Test
@@ -88,7 +84,7 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
     public void test_importDiscovery() {
         Map<String, Object> requestData = new HashMap<>();
         requestData.put("appId", "73aafee98f644d299a503cbd6853a6cf");
-        requestData.put("ormPaths", Collections.singleton("/OrmModelGenTest/app.orm.xml"));
+        requestData.put("ormModelPaths", Collections.singleton("/OrmModelGenTest/app.orm.xml"));
 
         ApiRequest<?> request = ApiRequest.build(requestData);
 
@@ -96,6 +92,6 @@ public class DevAppModuleBizModelTest extends NopJunitAutoTestCase {
                                                                             "DevAppModule__importDiscovery",
                                                                             request);
         ApiResponse<?> response = FutureHelper.syncGet(this.graphQLEngine.executeRpcAsync(context));
-        log.info("app-modeler.module.discovery.import.result={}", JsonTool.stringify(response));
+        this.log.info("app-modeler.module.discovery.import.result={}", JsonTool.stringify(response));
     }
 }

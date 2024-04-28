@@ -34,5 +34,14 @@
         codeGenerator
             .withTplDir('/duzhou/templates/app')
             .execute('/', $scope);
+
+        const moduleDirName = ormModel['ext:mavenArtifactId'];
+        const moduleId = ormModel['ext:moduleId'];
+        const moduleOrmModelFilePath = codeGenerator.getTargetPath(
+            moduleDirName + '/orm/src/main/resources/_vfs/' + moduleId + '/orm/app.orm.xml'
+        ).replaceAll('^.+:', '');
+
+        // 向上层调用回传 ORM 模型的文件路径
+        $scope.getParentScope().setLocalValue('ormModelFilePath', moduleOrmModelFilePath);
     ]]></c:script>
 </c:unit>

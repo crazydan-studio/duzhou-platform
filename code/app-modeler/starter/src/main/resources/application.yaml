@@ -4,7 +4,7 @@ nop:
     init-database-schema: true
   datasource:
     driver-class-name: org.h2.Driver
-    jdbc-url: jdbc:h2:./db/duzhou-app-modeler
+    jdbc-url: jdbc:h2:./db/duzhou-app-modeler;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     username: sa
     password:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
