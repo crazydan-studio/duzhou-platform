@@ -43,10 +43,26 @@
 
                     gen.execute('/', scope);
 
+                    // 变量 ormModelFilePath 由代码生成脚本复制
                     const ormModelFilePath = scope.getLocalValue('ormModelFilePath');
                     const ormModelResource = new FileResource(new File(ormModelFilePath));
 
                     return biz.genOrmDbDdl(ormModelResource);
+                ]]></c:script>
+            </source>
+        </mutation>
+
+        <mutation name="upgradeDb" displayName="升级数据库">
+            <arg name="ddlList" type="List&lt;String>" />
+            <arg name="svcCtx" kind="ServiceContext" />
+
+            <source>
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel;
+
+                    const biz = inject(DevAppModuleBizModel);
+
+                    return biz.executeDdlList(ddlList);
                 ]]></c:script>
             </source>
         </mutation>
