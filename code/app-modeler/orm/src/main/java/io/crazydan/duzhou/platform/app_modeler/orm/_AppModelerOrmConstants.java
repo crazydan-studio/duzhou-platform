@@ -5,19 +5,19 @@ public interface _AppModelerOrmConstants {
 
     
     /**
-     * 实体标签: 不生成代码 
+     * 数据库类型: H2 
      */
-    String ENTITY_TAGSET_not_gen = "not-gen";
+    String DB_DIALECT_h2 = "h2";
                         
     /**
-     * 实体标签: 删除该对象 
+     * 数据库类型: MySQL 
      */
-    String ENTITY_TAGSET_del = "del";
+    String DB_DIALECT_mysql = "mysql";
                         
     /**
-     * 实体标签: 需生成 SqlMapper 代码 
+     * 数据库类型: Oracle 
      */
-    String ENTITY_TAGSET_mapper = "mapper";
+    String DB_DIALECT_oracle = "oracle";
                         
     /**
      * 实体字段标签: 不生成代码 
@@ -25,7 +25,7 @@ public interface _AppModelerOrmConstants {
     String ENTITY_COLUMN_TAGSET_not_gen = "not-gen";
                         
     /**
-     * 实体字段标签: 生成唯一主键 UUID 字符串或递增序列
+     * 实体字段标签: 生成唯一主键 
      */
     String ENTITY_COLUMN_TAGSET_seq = "seq";
                         
@@ -40,7 +40,7 @@ public interface _AppModelerOrmConstants {
     String ENTITY_COLUMN_TAGSET_var = "var";
                         
     /**
-     * 实体字段标签: 在日志中打印掩码 在日志中隐藏敏感信息
+     * 实体字段标签: 在日志中打印掩码 
      */
     String ENTITY_COLUMN_TAGSET_masked = "masked";
                         
@@ -60,16 +60,6 @@ public interface _AppModelerOrmConstants {
     String ENTITY_COLUMN_TAGSET_sort_desc = "sort-desc";
                         
     /**
-     * 实体关联类型: 一对一关联 
-     */
-    String ENTITY_RELATION_TYPE_to_one = "to-one";
-                        
-    /**
-     * 实体关联类型: 一对多关联 
-     */
-    String ENTITY_RELATION_TYPE_to_many = "to-many";
-                        
-    /**
      * 实体关联标签: 该关联可访问 
      */
     String ENTITY_RELATION_TAGSET_pub = "pub";
@@ -83,6 +73,41 @@ public interface _AppModelerOrmConstants {
      * 实体关联标签: 级联删除 
      */
     String ENTITY_RELATION_TAGSET_ref_cascade_delete = "ref-cascade-delete";
+                        
+    /**
+     * 实体关联类型: 一对一关联 
+     */
+    String ENTITY_RELATION_TYPE_to_one = "to-one";
+                        
+    /**
+     * 实体关联类型: 一对多关联 
+     */
+    String ENTITY_RELATION_TYPE_to_many = "to-many";
+                        
+    /**
+     * 实体标签: 不生成代码 
+     */
+    String ENTITY_TAGSET_not_gen = "not-gen";
+                        
+    /**
+     * 实体标签: 删除该对象 
+     */
+    String ENTITY_TAGSET_del = "del";
+                        
+    /**
+     * 实体标签: 需生成 SqlMapper 代码 
+     */
+    String ENTITY_TAGSET_mapper = "mapper";
+                        
+    /**
+     * Web 启动器类型: Spring Boot 启动器 以 Spring Boot 作为模块的启动器
+     */
+    String WEB_STARTER_TYPE_spring = "spring";
+                        
+    /**
+     * Web 启动器类型: Quarkus 启动器 以 Quarkus 作为模块的启动器
+     */
+    String WEB_STARTER_TYPE_quarkus = "quarkus";
                         
     
 }

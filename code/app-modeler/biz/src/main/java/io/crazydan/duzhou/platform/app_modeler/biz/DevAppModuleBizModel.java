@@ -18,14 +18,10 @@ import io.nop.dbtool.core.discovery.jdbc.JdbcMetaDiscovery;
 import io.nop.orm.model.OrmModel;
 import io.nop.xlang.xdsl.DslModelHelper;
 import jakarta.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /** {@link DevAppModule} 的业务处理模型 */
 @BizModel("DevAppModule")
 public class DevAppModuleBizModel extends _DevAppModuleBizModel {
-    private static final Logger log = LoggerFactory.getLogger(DevAppModuleBizModel.class);
-
     @Inject
     protected DataSource dataSource;
 
@@ -52,7 +48,7 @@ public class DevAppModuleBizModel extends _DevAppModuleBizModel {
 
                 executedDdlList.add(ddl);
             } catch (Exception e) {
-                log.warn("duzhou.biz.dev-app-module.execute-ddl.failed", e);
+                log().warn("duzhou.biz.dev-app-module.execute-ddl.failed", e);
                 resp.setMsg(e.getMessage());
                 break;
             }

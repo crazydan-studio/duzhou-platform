@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en" xmlns:ext="ext"
       xmlns:xpl="xpl" ext:model="orm" xmlns:c="c" xmlns:graphql="graphql" xmlns:meta-gen="meta-gen" xmlns:biz="biz"
-      displayName="应用模块" i18n-en:displayName="Application Module" xmlns:ui="ui" xmlns:orm="orm">
+      displayName="应用模块" xmlns:ui="ui" xmlns:orm="orm">
 
     <entityName>io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule</entityName>
 
@@ -16,7 +16,7 @@
     </x:post-extends>
 
     <keys>
-        <key name="codeKey" props="code,appId"/>
+        <key name="UK_duzhou_dev_app_module_appId_code" props="appId,code"/>
     </keys>
 
     <orderBy>
@@ -59,6 +59,18 @@
         <prop name="code" displayName="编码" propId="9" mandatory="true" queryable="true" sortable="true"
               insertable="true" updatable="true">
             <schema type="java.lang.String" precision="100"/>
+        </prop>
+        <prop name="description" displayName="说明" propId="10" queryable="true" sortable="true" insertable="true"
+              updatable="true">
+            <schema type="java.lang.String" precision="500"/>
+        </prop>
+        <prop name="webStarterType" displayName="Web 启动器类型" propId="11" queryable="true" sortable="true"
+              insertable="true" updatable="true">
+            <schema type="java.lang.String" precision="20" dict="app_modeler/web-starter-type"/>
+        </prop>
+        <prop name="dbDialect" displayName="支持的数据库类型" propId="12" queryable="true" sortable="true" insertable="true"
+              updatable="true">
+            <schema type="java.lang.String" precision="20" dict="app_modeler/db-dialect"/>
         </prop>
         <prop name="app" tagSet="pub,ref-pub,ref-cascade-delete" ext:kind="to-one" internal="true" queryable="true"
               ext:joinLeftProp="appId" ext:joinRightProp="id" insertable="false" updatable="false" mandatory="true"

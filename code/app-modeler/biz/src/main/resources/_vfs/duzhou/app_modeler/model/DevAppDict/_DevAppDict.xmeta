@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en" xmlns:ext="ext"
       xmlns:xpl="xpl" ext:model="orm" xmlns:c="c" xmlns:graphql="graphql" xmlns:meta-gen="meta-gen" xmlns:biz="biz"
-      displayName="字典定义" i18n-en:displayName="Dict" xmlns:ui="ui" xmlns:orm="orm">
+      displayName="字典定义" xmlns:ui="ui" xmlns:orm="orm">
 
     <entityName>io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict</entityName>
 
@@ -16,7 +16,7 @@
     </x:post-extends>
 
     <keys>
-        <key name="nameKey" props="name,appId"/>
+        <key name="UK_duzhou_dev_app_dict_appId_name" props="appId,name"/>
     </keys>
 
     <orderBy>
@@ -43,6 +43,10 @@
         <prop name="optionType" displayName="字典项类型" propId="5" mandatory="true" queryable="true" sortable="true"
               insertable="true" updatable="true">
             <schema type="java.lang.String" precision="50"/>
+        </prop>
+        <prop name="description" displayName="说明" propId="7" queryable="true" sortable="true" insertable="true"
+              updatable="true">
+            <schema type="java.lang.String" precision="500"/>
         </prop>
         <prop name="app" tagSet="pub,ref-pub,ref-cascade-delete" ext:kind="to-one" internal="true" queryable="true"
               ext:joinLeftProp="appId" ext:joinRightProp="id" insertable="false" updatable="false" mandatory="true"

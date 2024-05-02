@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en" xmlns:ext="ext"
       xmlns:xpl="xpl" ext:model="orm" xmlns:c="c" xmlns:graphql="graphql" xmlns:meta-gen="meta-gen" xmlns:biz="biz"
-      displayName="域定义" i18n-en:displayName="Domain" xmlns:ui="ui" xmlns:orm="orm">
+      displayName="域定义" xmlns:ui="ui" xmlns:orm="orm">
 
     <entityName>io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain</entityName>
 
@@ -16,7 +16,7 @@
     </x:post-extends>
 
     <keys>
-        <key name="nameKey" props="name,appId"/>
+        <key name="UK_duzhou_dev_app_domain_appId_name" props="appId,name"/>
     </keys>
 
     <orderBy>

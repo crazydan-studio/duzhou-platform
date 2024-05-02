@@ -72,8 +72,16 @@ public class _DevAppEntity extends DynamicOrmEntity{
     public static final String PROP_NAME_aliasesJsonText = "aliasesJsonText";
     public static final int PROP_ID_aliasesJsonText = 13;
     
+    /* 基类: BASE_CLASS_NAME VARCHAR */
+    public static final String PROP_NAME_baseClassName = "baseClassName";
+    public static final int PROP_ID_baseClassName = 14;
+    
+    /* 说明: DESCRIPTION VARCHAR */
+    public static final String PROP_NAME_description = "description";
+    public static final int PROP_ID_description = 15;
+    
 
-    private static int _PROP_ID_BOUND = 14;
+    private static int _PROP_ID_BOUND = 16;
 
     
     /* relation:  */
@@ -104,7 +112,7 @@ public class _DevAppEntity extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[14];
+    private static final String[] PROP_ID_TO_NAME = new String[16];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -147,6 +155,12 @@ public class _DevAppEntity extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_aliasesJsonText] = PROP_NAME_aliasesJsonText;
           PROP_NAME_TO_ID.put(PROP_NAME_aliasesJsonText, PROP_ID_aliasesJsonText);
       
+          PROP_ID_TO_NAME[PROP_ID_baseClassName] = PROP_NAME_baseClassName;
+          PROP_NAME_TO_ID.put(PROP_NAME_baseClassName, PROP_ID_baseClassName);
+      
+          PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
+          PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
+      
     }
 
     
@@ -188,6 +202,12 @@ public class _DevAppEntity extends DynamicOrmEntity{
     
     /* 别名列表: ALIASES */
     private java.lang.String _aliasesJsonText;
+    
+    /* 基类: BASE_CLASS_NAME */
+    private java.lang.String _baseClassName;
+    
+    /* 说明: DESCRIPTION */
+    private java.lang.String _description;
     
 
     public _DevAppEntity(){
@@ -298,6 +318,12 @@ public class _DevAppEntity extends DynamicOrmEntity{
         
             case PROP_ID_aliasesJsonText:
                return getAliasesJsonText();
+        
+            case PROP_ID_baseClassName:
+               return getBaseClassName();
+        
+            case PROP_ID_description:
+               return getDescription();
         
            default:
               return super.orm_propValue(propId);
@@ -440,6 +466,26 @@ public class _DevAppEntity extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_baseClassName:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_baseClassName));
+               }
+               setBaseClassName(typedValue);
+               break;
+            }
+        
+            case PROP_ID_description:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_description));
+               }
+               setDescription(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -536,6 +582,20 @@ public class _DevAppEntity extends DynamicOrmEntity{
             case PROP_ID_aliasesJsonText:{
                onInitProp(propId);
                this._aliasesJsonText = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_baseClassName:{
+               onInitProp(propId);
+               this._baseClassName = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_description:{
+               onInitProp(propId);
+               this._description = (java.lang.String)value;
                
                break;
             }
@@ -789,6 +849,44 @@ public class _DevAppEntity extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_aliasesJsonText,value)){
             this._aliasesJsonText = value;
             internalClearRefs(PROP_ID_aliasesJsonText);
+            
+        }
+    }
+    
+    /**
+     * 基类: BASE_CLASS_NAME
+     */
+    public java.lang.String getBaseClassName(){
+         onPropGet(PROP_ID_baseClassName);
+         return _baseClassName;
+    }
+
+    /**
+     * 基类: BASE_CLASS_NAME
+     */
+    public void setBaseClassName(java.lang.String value){
+        if(onPropSet(PROP_ID_baseClassName,value)){
+            this._baseClassName = value;
+            internalClearRefs(PROP_ID_baseClassName);
+            
+        }
+    }
+    
+    /**
+     * 说明: DESCRIPTION
+     */
+    public java.lang.String getDescription(){
+         onPropGet(PROP_ID_description);
+         return _description;
+    }
+
+    /**
+     * 说明: DESCRIPTION
+     */
+    public void setDescription(java.lang.String value){
+        if(onPropSet(PROP_ID_description,value)){
+            this._description = value;
+            internalClearRefs(PROP_ID_description);
             
         }
     }

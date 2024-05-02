@@ -1,0 +1,15 @@
+# __XGEN_FORCE_OVERRIDE__
+label: Web 启动器类型
+locale: zh-CN
+valueType: string
+description: 
+options:
+
+  - label: Spring Boot 启动器
+    value: spring
+    description: 以 Spring Boot 作为模块的启动器
+  
+  - label: Quarkus 启动器
+    value: quarkus
+    description: 以 Quarkus 作为模块的启动器
+  

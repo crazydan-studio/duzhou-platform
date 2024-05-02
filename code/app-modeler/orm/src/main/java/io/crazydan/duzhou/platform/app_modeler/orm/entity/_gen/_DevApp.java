@@ -64,18 +64,40 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_classPkgName = "classPkgName";
     public static final int PROP_ID_classPkgName = 11;
     
-
-    private static int _PROP_ID_BOUND = 12;
-
+    /* 说明: DESCRIPTION VARCHAR */
+    public static final String PROP_NAME_description = "description";
+    public static final int PROP_ID_description = 12;
     
-    /* relation:  */
-    public static final String PROP_NAME_domains = "domains";
+    /* 许可协议: LICENSE VARCHAR */
+    public static final String PROP_NAME_license = "license";
+    public static final int PROP_ID_license = 13;
+    
+    /* 版权声明: COPYRIGHT VARCHAR */
+    public static final String PROP_NAME_copyright = "copyright";
+    public static final int PROP_ID_copyright = 14;
+    
+    /* Maven 配置: MAVEN_CFG VARCHAR */
+    public static final String PROP_NAME_mavenCfgJsonText = "mavenCfgJsonText";
+    public static final int PROP_ID_mavenCfgJsonText = 15;
+    
+
+    private static int _PROP_ID_BOUND = 16;
+
     
     /* relation:  */
     public static final String PROP_NAME_dicts = "dicts";
     
     /* relation:  */
+    public static final String PROP_NAME_domains = "domains";
+    
+    /* relation:  */
     public static final String PROP_NAME_modules = "modules";
+    
+    /* alias: mavenCfgJsonTextComponent.data Maven 配置 */
+    public static final String PROP_NAME_mavenCfg = "mavenCfg";
+    
+    /* component:  */
+    public static final String PROP_NAME_mavenCfgJsonTextComponent = "mavenCfgJsonTextComponent";
     
     /* component:  */
     public static final String PROP_NAME_logoComponent = "logoComponent";
@@ -84,7 +106,7 @@ public class _DevApp extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[12];
+    private static final String[] PROP_ID_TO_NAME = new String[16];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -121,6 +143,18 @@ public class _DevApp extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_classPkgName] = PROP_NAME_classPkgName;
           PROP_NAME_TO_ID.put(PROP_NAME_classPkgName, PROP_ID_classPkgName);
       
+          PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
+          PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
+      
+          PROP_ID_TO_NAME[PROP_ID_license] = PROP_NAME_license;
+          PROP_NAME_TO_ID.put(PROP_NAME_license, PROP_ID_license);
+      
+          PROP_ID_TO_NAME[PROP_ID_copyright] = PROP_NAME_copyright;
+          PROP_NAME_TO_ID.put(PROP_NAME_copyright, PROP_ID_copyright);
+      
+          PROP_ID_TO_NAME[PROP_ID_mavenCfgJsonText] = PROP_NAME_mavenCfgJsonText;
+          PROP_NAME_TO_ID.put(PROP_NAME_mavenCfgJsonText, PROP_ID_mavenCfgJsonText);
+      
     }
 
     
@@ -156,6 +190,18 @@ public class _DevApp extends DynamicOrmEntity{
     
     /* 代码包名: CLASS_PKG_NAME */
     private java.lang.String _classPkgName;
+    
+    /* 说明: DESCRIPTION */
+    private java.lang.String _description;
+    
+    /* 许可协议: LICENSE */
+    private java.lang.String _license;
+    
+    /* 版权声明: COPYRIGHT */
+    private java.lang.String _copyright;
+    
+    /* Maven 配置: MAVEN_CFG */
+    private java.lang.String _mavenCfgJsonText;
     
 
     public _DevApp(){
@@ -260,6 +306,18 @@ public class _DevApp extends DynamicOrmEntity{
         
             case PROP_ID_classPkgName:
                return getClassPkgName();
+        
+            case PROP_ID_description:
+               return getDescription();
+        
+            case PROP_ID_license:
+               return getLicense();
+        
+            case PROP_ID_copyright:
+               return getCopyright();
+        
+            case PROP_ID_mavenCfgJsonText:
+               return getMavenCfgJsonText();
         
            default:
               return super.orm_propValue(propId);
@@ -382,6 +440,46 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_description:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_description));
+               }
+               setDescription(typedValue);
+               break;
+            }
+        
+            case PROP_ID_license:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_license));
+               }
+               setLicense(typedValue);
+               break;
+            }
+        
+            case PROP_ID_copyright:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_copyright));
+               }
+               setCopyright(typedValue);
+               break;
+            }
+        
+            case PROP_ID_mavenCfgJsonText:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_mavenCfgJsonText));
+               }
+               setMavenCfgJsonText(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -464,6 +562,34 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_classPkgName:{
                onInitProp(propId);
                this._classPkgName = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_description:{
+               onInitProp(propId);
+               this._description = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_license:{
+               onInitProp(propId);
+               this._license = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_copyright:{
+               onInitProp(propId);
+               this._copyright = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_mavenCfgJsonText:{
+               onInitProp(propId);
+               this._mavenCfgJsonText = (java.lang.String)value;
                
                break;
             }
@@ -683,16 +809,82 @@ public class _DevApp extends DynamicOrmEntity{
         }
     }
     
-    private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> _domains = new OrmEntitySet<>(this, PROP_NAME_domains,
-        io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.class);
+    /**
+     * 说明: DESCRIPTION
+     */
+    public java.lang.String getDescription(){
+         onPropGet(PROP_ID_description);
+         return _description;
+    }
 
     /**
-     * 。 refPropName: app, keyProp: {rel.keyProp}
+     * 说明: DESCRIPTION
      */
-    public IOrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> getDomains(){
-       return _domains;
+    public void setDescription(java.lang.String value){
+        if(onPropSet(PROP_ID_description,value)){
+            this._description = value;
+            internalClearRefs(PROP_ID_description);
+            
+        }
     }
-       
+    
+    /**
+     * 许可协议: LICENSE
+     */
+    public java.lang.String getLicense(){
+         onPropGet(PROP_ID_license);
+         return _license;
+    }
+
+    /**
+     * 许可协议: LICENSE
+     */
+    public void setLicense(java.lang.String value){
+        if(onPropSet(PROP_ID_license,value)){
+            this._license = value;
+            internalClearRefs(PROP_ID_license);
+            
+        }
+    }
+    
+    /**
+     * 版权声明: COPYRIGHT
+     */
+    public java.lang.String getCopyright(){
+         onPropGet(PROP_ID_copyright);
+         return _copyright;
+    }
+
+    /**
+     * 版权声明: COPYRIGHT
+     */
+    public void setCopyright(java.lang.String value){
+        if(onPropSet(PROP_ID_copyright,value)){
+            this._copyright = value;
+            internalClearRefs(PROP_ID_copyright);
+            
+        }
+    }
+    
+    /**
+     * Maven 配置: MAVEN_CFG
+     */
+    public java.lang.String getMavenCfgJsonText(){
+         onPropGet(PROP_ID_mavenCfgJsonText);
+         return _mavenCfgJsonText;
+    }
+
+    /**
+     * Maven 配置: MAVEN_CFG
+     */
+    public void setMavenCfgJsonText(java.lang.String value){
+        if(onPropSet(PROP_ID_mavenCfgJsonText,value)){
+            this._mavenCfgJsonText = value;
+            internalClearRefs(PROP_ID_mavenCfgJsonText);
+            
+        }
+    }
+    
     private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict> _dicts = new OrmEntitySet<>(this, PROP_NAME_dicts,
         io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.class);
 
@@ -701,6 +893,16 @@ public class _DevApp extends DynamicOrmEntity{
      */
     public IOrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict> getDicts(){
        return _dicts;
+    }
+       
+    private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> _domains = new OrmEntitySet<>(this, PROP_NAME_domains,
+        io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain.class);
+
+    /**
+     * 。 refPropName: app, keyProp: {rel.keyProp}
+     */
+    public IOrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain> getDomains(){
+       return _domains;
     }
        
     private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule> _modules = new OrmEntitySet<>(this, PROP_NAME_modules,
@@ -713,6 +915,31 @@ public class _DevApp extends DynamicOrmEntity{
        return _modules;
     }
        
+   public java.lang.Object getMavenCfg(){
+      return (java.lang.Object)internalGetAliasValue("mavenCfgJsonTextComponent.data");
+   }
+
+   public void setMavenCfg(java.lang.Object value){
+      internalSetAliasValue("mavenCfgJsonTextComponent.data",value);
+   }
+
+   private io.nop.orm.component.JsonOrmComponent _mavenCfgJsonTextComponent;
+
+   private static Map<String,Integer> COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent = new HashMap<>();
+   static{
+      
+         COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent.put(io.nop.orm.component.JsonOrmComponent.PROP_NAME__jsonText,PROP_ID_mavenCfgJsonText);
+      
+   }
+
+   public io.nop.orm.component.JsonOrmComponent getMavenCfgJsonTextComponent(){
+      if(_mavenCfgJsonTextComponent == null){
+          _mavenCfgJsonTextComponent = new io.nop.orm.component.JsonOrmComponent();
+          _mavenCfgJsonTextComponent.bindToEntity(this, COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent);
+      }
+      return _mavenCfgJsonTextComponent;
+   }
+
    private io.nop.orm.component.OrmFileComponent _logoComponent;
 
    private static Map<String,Integer> COMPONENT_PROP_ID_MAP_logoComponent = new HashMap<>();

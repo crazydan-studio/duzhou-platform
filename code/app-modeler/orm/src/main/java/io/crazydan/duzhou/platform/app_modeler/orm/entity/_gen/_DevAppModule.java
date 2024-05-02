@@ -56,8 +56,20 @@ public class _DevAppModule extends DynamicOrmEntity{
     public static final String PROP_NAME_code = "code";
     public static final int PROP_ID_code = 9;
     
+    /* 说明: DESCRIPTION VARCHAR */
+    public static final String PROP_NAME_description = "description";
+    public static final int PROP_ID_description = 10;
+    
+    /* Web 启动器类型: WEB_STARTER_TYPE VARCHAR */
+    public static final String PROP_NAME_webStarterType = "webStarterType";
+    public static final int PROP_ID_webStarterType = 11;
+    
+    /* 支持的数据库类型: DB_DIALECT VARCHAR */
+    public static final String PROP_NAME_dbDialect = "dbDialect";
+    public static final int PROP_ID_dbDialect = 12;
+    
 
-    private static int _PROP_ID_BOUND = 10;
+    private static int _PROP_ID_BOUND = 13;
 
     
     /* relation:  */
@@ -70,7 +82,7 @@ public class _DevAppModule extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[10];
+    private static final String[] PROP_ID_TO_NAME = new String[13];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -101,6 +113,15 @@ public class _DevAppModule extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_code] = PROP_NAME_code;
           PROP_NAME_TO_ID.put(PROP_NAME_code, PROP_ID_code);
       
+          PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
+          PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
+      
+          PROP_ID_TO_NAME[PROP_ID_webStarterType] = PROP_NAME_webStarterType;
+          PROP_NAME_TO_ID.put(PROP_NAME_webStarterType, PROP_ID_webStarterType);
+      
+          PROP_ID_TO_NAME[PROP_ID_dbDialect] = PROP_NAME_dbDialect;
+          PROP_NAME_TO_ID.put(PROP_NAME_dbDialect, PROP_ID_dbDialect);
+      
     }
 
     
@@ -130,6 +151,15 @@ public class _DevAppModule extends DynamicOrmEntity{
     
     /* 编码: CODE */
     private java.lang.String _code;
+    
+    /* 说明: DESCRIPTION */
+    private java.lang.String _description;
+    
+    /* Web 启动器类型: WEB_STARTER_TYPE */
+    private java.lang.String _webStarterType;
+    
+    /* 支持的数据库类型: DB_DIALECT */
+    private java.lang.String _dbDialect;
     
 
     public _DevAppModule(){
@@ -228,6 +258,15 @@ public class _DevAppModule extends DynamicOrmEntity{
         
             case PROP_ID_code:
                return getCode();
+        
+            case PROP_ID_description:
+               return getDescription();
+        
+            case PROP_ID_webStarterType:
+               return getWebStarterType();
+        
+            case PROP_ID_dbDialect:
+               return getDbDialect();
         
            default:
               return super.orm_propValue(propId);
@@ -330,6 +369,36 @@ public class _DevAppModule extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_description:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_description));
+               }
+               setDescription(typedValue);
+               break;
+            }
+        
+            case PROP_ID_webStarterType:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_webStarterType));
+               }
+               setWebStarterType(typedValue);
+               break;
+            }
+        
+            case PROP_ID_dbDialect:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_dbDialect));
+               }
+               setDbDialect(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -398,6 +467,27 @@ public class _DevAppModule extends DynamicOrmEntity{
             case PROP_ID_code:{
                onInitProp(propId);
                this._code = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_description:{
+               onInitProp(propId);
+               this._description = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_webStarterType:{
+               onInitProp(propId);
+               this._webStarterType = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_dbDialect:{
+               onInitProp(propId);
+               this._dbDialect = (java.lang.String)value;
                
                break;
             }
@@ -575,6 +665,63 @@ public class _DevAppModule extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_code,value)){
             this._code = value;
             internalClearRefs(PROP_ID_code);
+            
+        }
+    }
+    
+    /**
+     * 说明: DESCRIPTION
+     */
+    public java.lang.String getDescription(){
+         onPropGet(PROP_ID_description);
+         return _description;
+    }
+
+    /**
+     * 说明: DESCRIPTION
+     */
+    public void setDescription(java.lang.String value){
+        if(onPropSet(PROP_ID_description,value)){
+            this._description = value;
+            internalClearRefs(PROP_ID_description);
+            
+        }
+    }
+    
+    /**
+     * Web 启动器类型: WEB_STARTER_TYPE
+     */
+    public java.lang.String getWebStarterType(){
+         onPropGet(PROP_ID_webStarterType);
+         return _webStarterType;
+    }
+
+    /**
+     * Web 启动器类型: WEB_STARTER_TYPE
+     */
+    public void setWebStarterType(java.lang.String value){
+        if(onPropSet(PROP_ID_webStarterType,value)){
+            this._webStarterType = value;
+            internalClearRefs(PROP_ID_webStarterType);
+            
+        }
+    }
+    
+    /**
+     * 支持的数据库类型: DB_DIALECT
+     */
+    public java.lang.String getDbDialect(){
+         onPropGet(PROP_ID_dbDialect);
+         return _dbDialect;
+    }
+
+    /**
+     * 支持的数据库类型: DB_DIALECT
+     */
+    public void setDbDialect(java.lang.String value){
+        if(onPropSet(PROP_ID_dbDialect,value)){
+            this._dbDialect = value;
+            internalClearRefs(PROP_ID_dbDialect);
             
         }
     }

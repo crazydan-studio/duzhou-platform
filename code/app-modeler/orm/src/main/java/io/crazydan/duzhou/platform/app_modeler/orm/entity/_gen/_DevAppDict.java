@@ -44,8 +44,12 @@ public class _DevAppDict extends DynamicOrmEntity{
     public static final String PROP_NAME_optionsJsonText = "optionsJsonText";
     public static final int PROP_ID_optionsJsonText = 6;
     
+    /* 说明: DESCRIPTION VARCHAR */
+    public static final String PROP_NAME_description = "description";
+    public static final int PROP_ID_description = 7;
+    
 
-    private static int _PROP_ID_BOUND = 7;
+    private static int _PROP_ID_BOUND = 8;
 
     
     /* relation:  */
@@ -61,7 +65,7 @@ public class _DevAppDict extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[7];
+    private static final String[] PROP_ID_TO_NAME = new String[8];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -83,6 +87,9 @@ public class _DevAppDict extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_optionsJsonText] = PROP_NAME_optionsJsonText;
           PROP_NAME_TO_ID.put(PROP_NAME_optionsJsonText, PROP_ID_optionsJsonText);
       
+          PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
+          PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
+      
     }
 
     
@@ -103,6 +110,9 @@ public class _DevAppDict extends DynamicOrmEntity{
     
     /* 字典项列表: OPTIONS */
     private java.lang.String _optionsJsonText;
+    
+    /* 说明: DESCRIPTION */
+    private java.lang.String _description;
     
 
     public _DevAppDict(){
@@ -193,6 +203,9 @@ public class _DevAppDict extends DynamicOrmEntity{
             case PROP_ID_optionsJsonText:
                return getOptionsJsonText();
         
+            case PROP_ID_description:
+               return getDescription();
+        
            default:
               return super.orm_propValue(propId);
         }
@@ -264,6 +277,16 @@ public class _DevAppDict extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_description:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_description));
+               }
+               setDescription(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -311,6 +334,13 @@ public class _DevAppDict extends DynamicOrmEntity{
             case PROP_ID_optionsJsonText:{
                onInitProp(propId);
                this._optionsJsonText = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_description:{
+               onInitProp(propId);
+               this._description = (java.lang.String)value;
                
                break;
             }
@@ -431,6 +461,25 @@ public class _DevAppDict extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_optionsJsonText,value)){
             this._optionsJsonText = value;
             internalClearRefs(PROP_ID_optionsJsonText);
+            
+        }
+    }
+    
+    /**
+     * 说明: DESCRIPTION
+     */
+    public java.lang.String getDescription(){
+         onPropGet(PROP_ID_description);
+         return _description;
+    }
+
+    /**
+     * 说明: DESCRIPTION
+     */
+    public void setDescription(java.lang.String value){
+        if(onPropSet(PROP_ID_description,value)){
+            this._description = value;
+            internalClearRefs(PROP_ID_description);
             
         }
     }

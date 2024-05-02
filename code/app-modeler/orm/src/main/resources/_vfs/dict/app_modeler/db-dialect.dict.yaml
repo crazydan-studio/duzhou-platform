@@ -1,0 +1,19 @@
+# __XGEN_FORCE_OVERRIDE__
+label: 数据库类型
+locale: zh-CN
+valueType: string
+description: 
+options:
+
+  - label: H2
+    value: h2
+    description: 
+  
+  - label: MySQL
+    value: mysql
+    description: 
+  
+  - label: Oracle
+    value: oracle
+    description: 
+  
