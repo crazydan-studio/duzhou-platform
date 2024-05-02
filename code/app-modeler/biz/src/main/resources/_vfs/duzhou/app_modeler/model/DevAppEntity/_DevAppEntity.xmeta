@@ -88,7 +88,8 @@
             </schema>
         </prop>
         <prop name="relations" tagSet="pub,cascade-delete" ext:kind="to-many" internal="true" ext:joinLeftProp="id"
-              ext:joinRightProp="sourceId" insertable="false" updatable="false" lazy="true">
+              ext:joinRightProp="sourceId" ext:joinRightDisplayProp="displayName" insertable="false" updatable="false"
+              lazy="true">
             <schema>
                 <item bizObjName="DevAppEntityRelation"/>
             </schema>

@@ -5,6 +5,7 @@
 并基于及其理论实现 [Nop](https://github.com/entropy-cloud/nop-entropy)
 而搭建的自运维、自监控、可演化的**全功能型应用平台**。
 
+
 ## 许可协议
 
 [LGPL 3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html)

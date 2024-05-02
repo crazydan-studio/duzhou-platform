@@ -2,7 +2,7 @@
 label: 数据库类型
 locale: zh-CN
 valueType: string
-description: 
+description: 平台可支持的数据库
 options:
 
   - label: H2

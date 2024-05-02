@@ -33,9 +33,9 @@
                 <c:script><![CDATA[
                     devAppModule.code = ormModel['ext:moduleCode2'];
                     devAppModule.displayName = ormModel['ext:moduleDisplayName'] || ormModel['ext:appName'];
-                    //devAppModule.description = ormModel['ext:moduleDescription'];
-                    //devAppModule.webStarterType = ormModel['ext:webStarterType'];
-                    //devAppModule.dbDialect = ormModel['ext:dialect'];
+                    devAppModule.description = ormModel['ext:moduleDescription'];
+                    devAppModule.webStarterType = ormModel['ext:webStarterType'];
+                    devAppModule.dbDialect = ormModel['ext:dialect'];
                 ]]></c:script>
                 <thisLib:_DoMergeOrmDicts devApp="${devApp}" ormModel="${ormModel}" />
                 <thisLib:_DoMergeOrmDomains devApp="${devApp}" ormModel="${ormModel}" />
@@ -101,7 +101,7 @@
                                     };
                                 ]]></c:script>
                                 <dict xpl:attrs="dictAttrs">
-                                    <!--<description>${dict.description}</description>-->
+                                    <description>${dict.description}</description>
                                     <c:for var="option" items="${dict.options}">
                                         <c:script><![CDATA[
                                             const optionAttrs = {
@@ -130,7 +130,7 @@
                                         tableName: tableName,
                                         name: name.$fullClassName(moduleEntityPackageName),
                                         className: className.$fullClassName(moduleEntityPackageName),
-                                        //'ext:baseClass': entity.baseClassName?.$fullClassName(moduleEntityPackageName),
+                                        'ext:baseClass': entity.baseClassName?.$fullClassName(moduleEntityPackageName),
                                         useGlobalCache: entity.tagSet?.contains('cache'),
                                         kvTable: entity.tagSet?.contains('kv-table'),
                                         notGenCode: entity.tagSet?.contains('not-gen')
@@ -164,7 +164,7 @@
                                     });
                                 ]]></c:script>
                                 <entity xpl:attrs="entityAttrs">
-                                    <!--<comment>${entity.description}</comment>-->
+                                    <comment>${entity.description}</comment>
                                     <columns>
                                         <c:for var="column" items="${entity.columns}">
                                             <c:script><![CDATA[
@@ -182,7 +182,7 @@
                                                     precision: column.precision,
                                                     scale: column.scale,
                                                     defaultValue: column.defaultValue,
-                                                    //comment: column.description,
+                                                    comment: column.description,
                                                     'ext:dict': getDictName(column.dictName),
                                                     //'ui:control': column.uiControl,
                                                     notGenCode: column.tagSet?.contains('not-gen')
@@ -199,7 +199,7 @@
                                                 const refEntityName = target.name;//target.className || target.name;
 
                                                 const relationAttrs = {
-                                                    //displayName: relation.displayName,
+                                                    displayName: relation.displayName,
                                                     name: relation.sourcePropName,
                                                     tagSet: relation.tagSet,
                                                     refEntityName: refEntityName.$fullClassName(moduleEntityPackageName),
@@ -237,7 +237,7 @@
                                             <c:script><![CDATA[
                                                 import java.util.Comparator;
 
-                                                const columns = uk.$toCsvSet().map(col => columnCodeToPropName(col));
+                                                const columns = uk.columns.$toCsvSet().map(col => columnCodeToPropName(col));
                                                 columns.sort(Comparator.naturalOrder());
 
                                                 // Note: constraint 的名字需确保在同一个库内唯一
@@ -250,7 +250,7 @@
                                                 };
                                             ]]></c:script>
                                             <unique-key xpl:attrs="ukAttrs">
-                                                <!--<comment>${uk.description}</comment>-->
+                                                <comment>${uk.description}</comment>
                                             </unique-key>
                                         </c:for>
                                     </unique-keys>
@@ -404,7 +404,7 @@
                     appEntity.displayName = ormEntity.displayName;
                     appEntity.tagSet = ormEntity.tagSet?.join(',');
                     //appEntity.className = ormEntity.className.$removeStart(entityPackagePrefix);
-                    //appEntity.baseClassName = ormEntity['ext:baseClass'].$removeStart(entityPackagePrefix);
+                    appEntity.baseClassName = ormEntity['ext:baseClass']?.$removeStart(entityPackagePrefix);
 
                     const appEntityColumns = {};
                     appEntity.columns.forEach(column => {
@@ -452,7 +452,7 @@
                         appRelation.source = appEntity;
                         appRelation.target = appEntities[ormRelation.refEntityName.$removeStart(entityPackagePrefix)];
 
-                        //appRelation.displayName = ormRelation.displayName;
+                        appRelation.displayName = ormRelation.displayName;
                         appRelation.tagSet = ormRelation.tagSet?.join(',');
                         appRelation.sourcePropName = sourcePropName;
                         appRelation.targetPropName = targetPropName;
@@ -480,7 +480,10 @@
 
                     appEntity.uniqueKeys =
                         ormEntity.uniqueKeys?.map(
-                            uk => uk.columns.map(name => columnNameCodeMap[name]).join(',')
+                            uk => ({
+                                columns: uk.columns.map(name => columnNameCodeMap[name]).join(','),
+                                description: uk.comment,
+                            })
                         );
                 ]]></c:script>
             </source>

@@ -2,7 +2,7 @@
 label: 实体标签
 locale: zh-CN
 valueType: string
-description: 
+description: 在 ORM 实体模型上的标注，用于控制其代码生成等
 options:
 
   - label: 不生成代码

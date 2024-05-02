@@ -56,8 +56,12 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
     public static final String PROP_NAME_joinOnCondsJsonText = "joinOnCondsJsonText";
     public static final int PROP_ID_joinOnCondsJsonText = 9;
     
+    /* 显示名称: DISPLAY_NAME VARCHAR */
+    public static final String PROP_NAME_displayName = "displayName";
+    public static final int PROP_ID_displayName = 10;
+    
 
-    private static int _PROP_ID_BOUND = 10;
+    private static int _PROP_ID_BOUND = 11;
 
     
     /* relation:  */
@@ -76,7 +80,7 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[10];
+    private static final String[] PROP_ID_TO_NAME = new String[11];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -107,6 +111,9 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_joinOnCondsJsonText] = PROP_NAME_joinOnCondsJsonText;
           PROP_NAME_TO_ID.put(PROP_NAME_joinOnCondsJsonText, PROP_ID_joinOnCondsJsonText);
       
+          PROP_ID_TO_NAME[PROP_ID_displayName] = PROP_NAME_displayName;
+          PROP_NAME_TO_ID.put(PROP_NAME_displayName, PROP_ID_displayName);
+      
     }
 
     
@@ -136,6 +143,9 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
     
     /* 关联条件列表: JOIN_ON_CONDS */
     private java.lang.String _joinOnCondsJsonText;
+    
+    /* 显示名称: DISPLAY_NAME */
+    private java.lang.String _displayName;
     
 
     public _DevAppEntityRelation(){
@@ -234,6 +244,9 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
         
             case PROP_ID_joinOnCondsJsonText:
                return getJoinOnCondsJsonText();
+        
+            case PROP_ID_displayName:
+               return getDisplayName();
         
            default:
               return super.orm_propValue(propId);
@@ -336,6 +349,16 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_displayName:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_displayName));
+               }
+               setDisplayName(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -404,6 +427,13 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
             case PROP_ID_joinOnCondsJsonText:{
                onInitProp(propId);
                this._joinOnCondsJsonText = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_displayName:{
+               onInitProp(propId);
+               this._displayName = (java.lang.String)value;
                
                break;
             }
@@ -581,6 +611,25 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_joinOnCondsJsonText,value)){
             this._joinOnCondsJsonText = value;
             internalClearRefs(PROP_ID_joinOnCondsJsonText);
+            
+        }
+    }
+    
+    /**
+     * 显示名称: DISPLAY_NAME
+     */
+    public java.lang.String getDisplayName(){
+         onPropGet(PROP_ID_displayName);
+         return _displayName;
+    }
+
+    /**
+     * 显示名称: DISPLAY_NAME
+     */
+    public void setDisplayName(java.lang.String value){
+        if(onPropSet(PROP_ID_displayName,value)){
+            this._displayName = value;
+            internalClearRefs(PROP_ID_displayName);
             
         }
     }

@@ -48,9 +48,9 @@
               updatable="true">
             <schema type="java.lang.String" precision="500"/>
         </prop>
-        <prop name="app" tagSet="pub,ref-pub,ref-cascade-delete" ext:kind="to-one" internal="true" queryable="true"
-              ext:joinLeftProp="appId" ext:joinRightProp="id" insertable="false" updatable="false" mandatory="true"
-              lazy="true">
+        <prop name="app" displayName="所属应用" tagSet="pub,ref-pub,ref-cascade-delete" ext:kind="to-one" internal="true"
+              queryable="true" ext:joinLeftProp="appId" ext:joinRightProp="id" insertable="false" updatable="false"
+              mandatory="true" lazy="true">
             <schema bizObjName="DevApp"/>
         </prop>
         <prop name="options" displayName="字典项列表" tagSet="pub" ext:kind="alias" internal="false" insertable="true"

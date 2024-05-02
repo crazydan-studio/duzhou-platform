@@ -13,3 +13,7 @@ options:
     value: quarkus
     description: 以 Quarkus 作为模块的启动器
   
+  - label: Light4J 启动器
+    value: light4j
+    description: 以 Light4J 作为模块的启动器
+  

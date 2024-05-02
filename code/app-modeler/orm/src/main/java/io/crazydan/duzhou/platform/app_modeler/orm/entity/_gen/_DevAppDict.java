@@ -52,7 +52,7 @@ public class _DevAppDict extends DynamicOrmEntity{
     private static int _PROP_ID_BOUND = 8;
 
     
-    /* relation:  */
+    /* relation: 所属应用 */
     public static final String PROP_NAME_app = "app";
     
     /* alias: optionsJsonTextComponent.data 字典项列表 */
@@ -485,7 +485,7 @@ public class _DevAppDict extends DynamicOrmEntity{
     }
     
     /**
-     * 
+     * 所属应用
      */
     public io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp getApp(){
        return (io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp)internalGetRefEntity(PROP_NAME_app);

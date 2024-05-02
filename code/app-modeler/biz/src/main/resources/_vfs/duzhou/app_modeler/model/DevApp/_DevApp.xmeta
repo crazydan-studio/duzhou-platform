@@ -17,7 +17,6 @@
 
     <keys>
         <key name="UK_duzhou_dev_app_code" props="code"/>
-        <key name="UK_duzhou_dev_app_displayName" props="displayName"/>
     </keys>
 
     <orderBy>

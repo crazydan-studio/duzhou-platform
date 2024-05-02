@@ -4,12 +4,12 @@
      ext:mavenParentRelativePath="../pom.xml" ext:webStarterType="spring" ext:moduleName="duzhou-app_modeler"
      ext:basePackageName="io.crazydan.duzhou.platform.app_modeler" ext:mavenParentGroupId="io.crazydan.duzhou.platform"
      ext:mavenParentArtifactId="parent" ext:moduleId="duzhou/app_modeler" ext:moduleClassPrefix="DuzhouAppModeler"
-     ext:mavenVersion="0.1.0-SNAPSHOT" ext:useCoreModule="false" ext:registerShortName="true"
-     ext:mavenParentVersion="0.1.0-SNAPSHOT" ext:mavenArtifactIdPrefix="duzhou-"
+     ext:mavenVersion="0.1.0-SNAPSHOT" ext:moduleDescription="在线设计和维护应用的数据模型" ext:useCoreModule="false"
+     ext:registerShortName="true" ext:mavenParentVersion="0.1.0-SNAPSHOT" ext:mavenArtifactIdPrefix="duzhou-"
      ext:mavenGroupId="io.crazydan.duzhou.platform" ext:moduleBeansName="app-modeler"
-     ext:moduleClassShortPrefix="AppModeler" ext:moduleCode1="duzhou" x:schema="/nop/schema/orm/orm.xdef"
-     xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en" xmlns:ref-i18n-en="ref-i18n-en" xmlns:ext="ext"
-     xmlns:orm-gen="orm-gen" xmlns:xpl="xpl" xmlns:ui="ui">
+     ext:moduleClassShortPrefix="AppModeler" ext:dialect="h2,mysql" ext:moduleCode1="duzhou"
+     x:schema="/nop/schema/orm/orm.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en"
+     xmlns:ref-i18n-en="ref-i18n-en" xmlns:ext="ext" xmlns:orm-gen="orm-gen" xmlns:xpl="xpl" xmlns:ui="ui">
 
     <x:post-extends x:override="replace">
         <orm-gen:DefaultPostExtends xpl:lib="/nop/orm/xlib/orm-gen.xlib"/>
@@ -17,6 +17,7 @@
 
     <dicts>
         <dict label="数据库类型" name="app_modeler/db-dialect" valueType="string">
+            <description>平台可支持的数据库</description>
             <option code="h2" label="H2" value="h2"/>
             <option code="mysql" label="MySQL" value="mysql"/>
             <option code="oracle" label="Oracle" value="oracle"/>
@@ -41,6 +42,7 @@
             <option code="to_many" label="一对多关联" value="to-many"/>
         </dict>
         <dict label="实体标签" name="app_modeler/entity-tagset" valueType="string">
+            <description>在 ORM 实体模型上的标注，用于控制其代码生成等</description>
             <option code="not_gen" label="不生成代码" value="not-gen"/>
             <option code="del" label="删除该对象" value="del"/>
             <option code="mapper" label="需生成 SqlMapper 代码" value="mapper"/>
@@ -48,6 +50,7 @@
         <dict label="Web 启动器类型" name="app_modeler/web-starter-type" valueType="string">
             <option code="spring" description="以 Spring Boot 作为模块的启动器" label="Spring Boot 启动器" value="spring"/>
             <option code="quarkus" description="以 Quarkus 作为模块的启动器" label="Quarkus 启动器" value="quarkus"/>
+            <option code="light4j" description="以 Light4J 作为模块的启动器" label="Light4J 启动器" value="light4j"/>
         </dict>
     </dicts>
 
@@ -77,12 +80,12 @@
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
-                <column code="CREATED_BY" displayName="创建人" domain="createdBy" name="createdBy" precision="50"
-                        propId="2" stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="CREATED_BY" comment="由 Nop ORM 引擎自动绑定数据创建人" displayName="创建人" domain="createdBy"
+                        name="createdBy" precision="50" propId="2" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="CREATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
                         mandatory="true" name="createdAt" propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="UPDATED_BY" displayName="更新人" domain="updatedBy" name="updatedBy" precision="50"
-                        propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="UPDATED_BY" comment="由 Nop ORM 引擎自动绑定数据更新人" displayName="更新人" domain="updatedBy"
+                        name="updatedBy" precision="50" propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="UPDATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
                         mandatory="true" name="updatedAt" propId="5" stdDataType="timestamp" stdSqlType="TIMESTAMP"
                         tagSet="sort-desc"/>
@@ -107,6 +110,7 @@
                 <column code="MAVEN_CFG" displayName="Maven 配置" domain="json-1k" name="mavenCfgJsonText" precision="50"
                         propId="15" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
             </columns>
+            <comment>应用模型</comment>
             <relations>
                 <to-many cascadeDelete="true" name="dicts"
                          refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" refPropName="app"
@@ -131,9 +135,9 @@
                 </to-many>
             </relations>
             <unique-keys>
-                <unique-key columns="code" constraint="UK_duzhou_dev_app_code" name="UK_duzhou_dev_app_code"/>
-                <unique-key columns="displayName" constraint="UK_duzhou_dev_app_displayName"
-                            name="UK_duzhou_dev_app_displayName"/>
+                <unique-key columns="code" constraint="UK_duzhou_dev_app_code" name="UK_duzhou_dev_app_code">
+                    <comment>应用编码全局唯一</comment>
+                </unique-key>
             </unique-keys>
             <aliases>
                 <alias displayName="Maven 配置" name="mavenCfg" propPath="mavenCfgJsonTextComponent.data" tagSet="pub"
@@ -159,9 +163,11 @@
                 <column code="DESCRIPTION" displayName="说明" name="description" precision="500" propId="7"
                         stdDataType="string" stdSqlType="VARCHAR"/>
             </columns>
+            <comment>确定的可枚举类型数据，在应用模块内共享</comment>
             <relations>
-                <to-one name="app" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
-                        refPropName="dicts" tagSet="pub,ref-pub,ref-cascade-delete">
+                <to-one displayName="所属应用" name="app"
+                        refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp" refPropName="dicts"
+                        tagSet="pub,ref-pub,ref-cascade-delete">
                     <join>
                         <on leftProp="appId" rightProp="id"/>
                     </join>
@@ -169,7 +175,9 @@
             </relations>
             <unique-keys>
                 <unique-key columns="appId,name" constraint="UK_duzhou_dev_app_dict_appId_name"
-                            name="UK_duzhou_dev_app_dict_appId_name"/>
+                            name="UK_duzhou_dev_app_dict_appId_name">
+                    <comment>字典名在应用内唯一</comment>
+                </unique-key>
             </unique-keys>
             <aliases>
                 <alias displayName="字典项列表" name="options" propPath="optionsJsonTextComponent.data" tagSet="pub"
@@ -206,7 +214,9 @@
             </relations>
             <unique-keys>
                 <unique-key columns="appId,name" constraint="UK_duzhou_dev_app_domain_appId_name"
-                            name="UK_duzhou_dev_app_domain_appId_name"/>
+                            name="UK_duzhou_dev_app_domain_appId_name">
+                    <comment>域定义名称在应用内唯一</comment>
+                </unique-key>
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity" createTimeProp="createdAt"
@@ -278,13 +288,14 @@
             </relations>
             <unique-keys>
                 <unique-key columns="moduleId,name" constraint="UK_duzhou_dev_app_entity_moduleId_name"
-                            name="UK_duzhou_dev_app_entity_moduleId_name"/>
+                            name="UK_duzhou_dev_app_entity_moduleId_name">
+                    <comment>实体名称在模块内唯一</comment>
+                </unique-key>
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn"
-                createTimeProp="createdTime" createrProp="createdBy" displayName="应用 ORM 实体字段"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn" registerShortName="true"
-                tableName="duzhou_dev_app_entity_column" updateTimeProp="updatedTime" updaterProp="updatedBy">
+                displayName="应用 ORM 实体字段" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn"
+                registerShortName="true" tableName="duzhou_dev_app_entity_column">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
@@ -315,14 +326,6 @@
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="DESCRIPTION" displayName="说明" name="description" precision="500" propId="15"
                         stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
-                        mandatory="true" name="createdTime" propId="16" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
-                        mandatory="true" name="updatedTime" propId="17" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="CREATED_BY" displayName="创建人" domain="createdBy" name="createdBy" precision="50"
-                        propId="18" stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="UPDATED_BY" displayName="更新人" domain="updatedBy" name="updatedBy" precision="50"
-                        propId="19" stdDataType="string" stdSqlType="VARCHAR"/>
             </columns>
             <relations>
                 <to-one name="entity" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity"
@@ -334,7 +337,9 @@
             </relations>
             <unique-keys>
                 <unique-key columns="entityId,name" constraint="UK_duzhou_dev_app_entity_column_entityId_name"
-                            name="UK_duzhou_dev_app_entity_column_entityId_name"/>
+                            name="UK_duzhou_dev_app_entity_column_entityId_name">
+                    <comment>字段名在实体内唯一</comment>
+                </unique-key>
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation"
@@ -360,6 +365,8 @@
                 <column code="JOIN_ON_CONDS" displayName="关联条件列表" domain="json-1k" mandatory="true"
                         name="joinOnCondsJsonText" precision="1024" propId="9" stdDataType="string" stdDomain="json"
                         stdSqlType="VARCHAR"/>
+                <column code="DISPLAY_NAME" displayName="显示名称" name="displayName" precision="100" propId="10"
+                        stdDataType="string" stdSqlType="VARCHAR" tagSet="disp"/>
             </columns>
             <relations>
                 <to-one name="source" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity"
@@ -408,7 +415,7 @@
                 <column code="WEB_STARTER_TYPE" displayName="Web 启动器类型" name="webStarterType" precision="20" propId="11"
                         stdDataType="string" stdSqlType="VARCHAR" ext:dict="app_modeler/web-starter-type"/>
                 <column code="DB_DIALECT" displayName="支持的数据库类型" name="dbDialect" precision="20" propId="12"
-                        stdDataType="string" stdSqlType="VARCHAR" ext:dict="app_modeler/db-dialect"/>
+                        stdDataType="string" stdSqlType="VARCHAR"/>
             </columns>
             <relations>
                 <to-one name="app" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
@@ -427,7 +434,9 @@
             </relations>
             <unique-keys>
                 <unique-key columns="appId,code" constraint="UK_duzhou_dev_app_module_appId_code"
-                            name="UK_duzhou_dev_app_module_appId_code"/>
+                            name="UK_duzhou_dev_app_module_appId_code">
+                    <comment>模块编码在应用内唯一</comment>
+                </unique-key>
             </unique-keys>
         </entity>
     </entities>
