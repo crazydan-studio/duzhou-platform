@@ -80,8 +80,16 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
     public static final String PROP_NAME_description = "description";
     public static final int PROP_ID_description = 15;
     
+    /* 创建时间: CREATED_TIME TIMESTAMP */
+    public static final String PROP_NAME_createdTime = "createdTime";
+    public static final int PROP_ID_createdTime = 16;
+    
+    /* 更新时间: UPDATED_TIME TIMESTAMP */
+    public static final String PROP_NAME_updatedTime = "updatedTime";
+    public static final int PROP_ID_updatedTime = 17;
+    
 
-    private static int _PROP_ID_BOUND = 16;
+    private static int _PROP_ID_BOUND = 18;
 
     
     /* relation:  */
@@ -91,7 +99,7 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[16];
+    private static final String[] PROP_ID_TO_NAME = new String[18];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -140,6 +148,12 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
           PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
       
+          PROP_ID_TO_NAME[PROP_ID_createdTime] = PROP_NAME_createdTime;
+          PROP_NAME_TO_ID.put(PROP_NAME_createdTime, PROP_ID_createdTime);
+      
+          PROP_ID_TO_NAME[PROP_ID_updatedTime] = PROP_NAME_updatedTime;
+          PROP_NAME_TO_ID.put(PROP_NAME_updatedTime, PROP_ID_updatedTime);
+      
     }
 
     
@@ -187,6 +201,12 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
     
     /* 说明: DESCRIPTION */
     private java.lang.String _description;
+    
+    /* 创建时间: CREATED_TIME */
+    private java.sql.Timestamp _createdTime;
+    
+    /* 更新时间: UPDATED_TIME */
+    private java.sql.Timestamp _updatedTime;
     
 
     public _DevAppEntityColumn(){
@@ -303,6 +323,12 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
         
             case PROP_ID_description:
                return getDescription();
+        
+            case PROP_ID_createdTime:
+               return getCreatedTime();
+        
+            case PROP_ID_updatedTime:
+               return getUpdatedTime();
         
            default:
               return super.orm_propValue(propId);
@@ -465,6 +491,26 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
                break;
             }
         
+            case PROP_ID_createdTime:{
+               java.sql.Timestamp typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toTimestamp(value,
+                       err-> newTypeConversionError(PROP_NAME_createdTime));
+               }
+               setCreatedTime(typedValue);
+               break;
+            }
+        
+            case PROP_ID_updatedTime:{
+               java.sql.Timestamp typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toTimestamp(value,
+                       err-> newTypeConversionError(PROP_NAME_updatedTime));
+               }
+               setUpdatedTime(typedValue);
+               break;
+            }
+        
            default:
               super.orm_propValue(propId,value);
         }
@@ -575,6 +621,20 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
             case PROP_ID_description:{
                onInitProp(propId);
                this._description = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_createdTime:{
+               onInitProp(propId);
+               this._createdTime = (java.sql.Timestamp)value;
+               
+               break;
+            }
+        
+            case PROP_ID_updatedTime:{
+               onInitProp(propId);
+               this._updatedTime = (java.sql.Timestamp)value;
                
                break;
             }
@@ -866,6 +926,44 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_description,value)){
             this._description = value;
             internalClearRefs(PROP_ID_description);
+            
+        }
+    }
+    
+    /**
+     * 创建时间: CREATED_TIME
+     */
+    public java.sql.Timestamp getCreatedTime(){
+         onPropGet(PROP_ID_createdTime);
+         return _createdTime;
+    }
+
+    /**
+     * 创建时间: CREATED_TIME
+     */
+    public void setCreatedTime(java.sql.Timestamp value){
+        if(onPropSet(PROP_ID_createdTime,value)){
+            this._createdTime = value;
+            internalClearRefs(PROP_ID_createdTime);
+            
+        }
+    }
+    
+    /**
+     * 更新时间: UPDATED_TIME
+     */
+    public java.sql.Timestamp getUpdatedTime(){
+         onPropGet(PROP_ID_updatedTime);
+         return _updatedTime;
+    }
+
+    /**
+     * 更新时间: UPDATED_TIME
+     */
+    public void setUpdatedTime(java.sql.Timestamp value){
+        if(onPropSet(PROP_ID_updatedTime,value)){
+            this._updatedTime = value;
+            internalClearRefs(PROP_ID_updatedTime);
             
         }
     }

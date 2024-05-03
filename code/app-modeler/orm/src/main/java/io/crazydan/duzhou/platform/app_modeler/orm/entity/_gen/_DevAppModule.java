@@ -24,17 +24,9 @@ public class _DevAppModule extends DynamicOrmEntity{
     public static final String PROP_NAME_id = "id";
     public static final int PROP_ID_id = 1;
     
-    /* 创建人: CREATED_BY VARCHAR */
-    public static final String PROP_NAME_createdBy = "createdBy";
-    public static final int PROP_ID_createdBy = 2;
-    
     /* 创建时间: CREATED_AT TIMESTAMP */
     public static final String PROP_NAME_createdAt = "createdAt";
     public static final int PROP_ID_createdAt = 3;
-    
-    /* 更新人: UPDATED_BY VARCHAR */
-    public static final String PROP_NAME_updatedBy = "updatedBy";
-    public static final int PROP_ID_updatedBy = 4;
     
     /* 更新时间: UPDATED_AT TIMESTAMP */
     public static final String PROP_NAME_updatedAt = "updatedAt";
@@ -89,14 +81,8 @@ public class _DevAppModule extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_id] = PROP_NAME_id;
           PROP_NAME_TO_ID.put(PROP_NAME_id, PROP_ID_id);
       
-          PROP_ID_TO_NAME[PROP_ID_createdBy] = PROP_NAME_createdBy;
-          PROP_NAME_TO_ID.put(PROP_NAME_createdBy, PROP_ID_createdBy);
-      
           PROP_ID_TO_NAME[PROP_ID_createdAt] = PROP_NAME_createdAt;
           PROP_NAME_TO_ID.put(PROP_NAME_createdAt, PROP_ID_createdAt);
-      
-          PROP_ID_TO_NAME[PROP_ID_updatedBy] = PROP_NAME_updatedBy;
-          PROP_NAME_TO_ID.put(PROP_NAME_updatedBy, PROP_ID_updatedBy);
       
           PROP_ID_TO_NAME[PROP_ID_updatedAt] = PROP_NAME_updatedAt;
           PROP_NAME_TO_ID.put(PROP_NAME_updatedAt, PROP_ID_updatedAt);
@@ -128,14 +114,8 @@ public class _DevAppModule extends DynamicOrmEntity{
     /* ID: ID */
     private java.lang.String _id;
     
-    /* 创建人: CREATED_BY */
-    private java.lang.String _createdBy;
-    
     /* 创建时间: CREATED_AT */
     private java.sql.Timestamp _createdAt;
-    
-    /* 更新人: UPDATED_BY */
-    private java.lang.String _updatedBy;
     
     /* 更新时间: UPDATED_AT */
     private java.sql.Timestamp _updatedAt;
@@ -235,14 +215,8 @@ public class _DevAppModule extends DynamicOrmEntity{
             case PROP_ID_id:
                return getId();
         
-            case PROP_ID_createdBy:
-               return getCreatedBy();
-        
             case PROP_ID_createdAt:
                return getCreatedAt();
-        
-            case PROP_ID_updatedBy:
-               return getUpdatedBy();
         
             case PROP_ID_updatedAt:
                return getUpdatedAt();
@@ -289,16 +263,6 @@ public class _DevAppModule extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdBy:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_createdBy));
-               }
-               setCreatedBy(typedValue);
-               break;
-            }
-        
             case PROP_ID_createdAt:{
                java.sql.Timestamp typedValue = null;
                if(value != null){
@@ -306,16 +270,6 @@ public class _DevAppModule extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_createdAt));
                }
                setCreatedAt(typedValue);
-               break;
-            }
-        
-            case PROP_ID_updatedBy:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_updatedBy));
-               }
-               setUpdatedBy(typedValue);
                break;
             }
         
@@ -415,23 +369,9 @@ public class _DevAppModule extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdBy:{
-               onInitProp(propId);
-               this._createdBy = (java.lang.String)value;
-               
-               break;
-            }
-        
             case PROP_ID_createdAt:{
                onInitProp(propId);
                this._createdAt = (java.sql.Timestamp)value;
-               
-               break;
-            }
-        
-            case PROP_ID_updatedBy:{
-               onInitProp(propId);
-               this._updatedBy = (java.lang.String)value;
                
                break;
             }
@@ -518,25 +458,6 @@ public class _DevAppModule extends DynamicOrmEntity{
     }
     
     /**
-     * 创建人: CREATED_BY
-     */
-    public java.lang.String getCreatedBy(){
-         onPropGet(PROP_ID_createdBy);
-         return _createdBy;
-    }
-
-    /**
-     * 创建人: CREATED_BY
-     */
-    public void setCreatedBy(java.lang.String value){
-        if(onPropSet(PROP_ID_createdBy,value)){
-            this._createdBy = value;
-            internalClearRefs(PROP_ID_createdBy);
-            
-        }
-    }
-    
-    /**
      * 创建时间: CREATED_AT
      */
     public java.sql.Timestamp getCreatedAt(){
@@ -551,25 +472,6 @@ public class _DevAppModule extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_createdAt,value)){
             this._createdAt = value;
             internalClearRefs(PROP_ID_createdAt);
-            
-        }
-    }
-    
-    /**
-     * 更新人: UPDATED_BY
-     */
-    public java.lang.String getUpdatedBy(){
-         onPropGet(PROP_ID_updatedBy);
-         return _updatedBy;
-    }
-
-    /**
-     * 更新人: UPDATED_BY
-     */
-    public void setUpdatedBy(java.lang.String value){
-        if(onPropSet(PROP_ID_updatedBy,value)){
-            this._updatedBy = value;
-            internalClearRefs(PROP_ID_updatedBy);
             
         }
     }

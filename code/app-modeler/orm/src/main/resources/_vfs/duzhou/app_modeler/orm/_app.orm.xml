@@ -74,18 +74,13 @@
 
     <entities>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp" createTimeProp="createdAt"
-                createrProp="createdBy" displayName="应用"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp" registerShortName="true"
-                tableName="duzhou_dev_app" updateTimeProp="updatedAt" updaterProp="updatedBy" versionProp="ver">
+                displayName="应用" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
+                registerShortName="true" tableName="duzhou_dev_app" updateTimeProp="updatedAt" versionProp="ver">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
-                <column code="CREATED_BY" comment="由 Nop ORM 引擎自动绑定数据创建人" displayName="创建人" domain="createdBy"
-                        name="createdBy" precision="50" propId="2" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="CREATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
                         mandatory="true" name="createdAt" propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="UPDATED_BY" comment="由 Nop ORM 引擎自动绑定数据更新人" displayName="更新人" domain="updatedBy"
-                        name="updatedBy" precision="50" propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="UPDATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
                         mandatory="true" name="updatedAt" propId="5" stdDataType="timestamp" stdSqlType="TIMESTAMP"
                         tagSet="sort-desc"/>
@@ -107,8 +102,8 @@
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="COPYRIGHT" displayName="版权声明" name="copyright" precision="2048" propId="14"
                         stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="MAVEN_CFG" displayName="Maven 配置" domain="json-1k" name="mavenCfgJsonText" precision="50"
-                        propId="15" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
+                <column code="CONFIG" comment="应用开发相关的配置信息" displayName="应用配置" domain="json-1k" name="configJsonText"
+                        precision="50" propId="15" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
             </columns>
             <comment>应用模型</comment>
             <relations>
@@ -140,13 +135,13 @@
                 </unique-key>
             </unique-keys>
             <aliases>
-                <alias displayName="Maven 配置" name="mavenCfg" propPath="mavenCfgJsonTextComponent.data" tagSet="pub"
+                <alias displayName="应用配置" name="config" propPath="configJsonTextComponent.data" tagSet="pub"
                        type="Object"/>
             </aliases>
         </entity>
-        <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" displayName="字典定义"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" registerShortName="true"
-                tableName="duzhou_dev_app_dict">
+        <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" createTimeProp="createdTime"
+                displayName="字典定义" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict"
+                registerShortName="true" tableName="duzhou_dev_app_dict" updateTimeProp="updatedTime">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
@@ -162,6 +157,10 @@
                         precision="4096" propId="6" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
                 <column code="DESCRIPTION" displayName="说明" name="description" precision="500" propId="7"
                         stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
+                        mandatory="true" name="createdTime" propId="10" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
+                        mandatory="true" name="updatedTime" propId="11" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
             </columns>
             <comment>确定的可枚举类型数据，在应用模块内共享</comment>
             <relations>
@@ -184,9 +183,9 @@
                        type="Object"/>
             </aliases>
         </entity>
-        <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain" displayName="域定义"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain" registerShortName="true"
-                tableName="duzhou_dev_app_domain">
+        <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain" createTimeProp="createdTime"
+                displayName="域定义" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDomain"
+                registerShortName="true" tableName="duzhou_dev_app_domain" updateTimeProp="updatedTime">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
@@ -203,6 +202,10 @@
                 <column code="PRECISION" displayName="数据长度" name="precision" propId="7" stdDataType="int"
                         stdSqlType="INTEGER"/>
                 <column code="SCALE" displayName="小数位数" name="scale" propId="8" stdDataType="int" stdSqlType="INTEGER"/>
+                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
+                        mandatory="true" name="createdTime" propId="9" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
+                        mandatory="true" name="updatedTime" propId="10" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
             </columns>
             <relations>
                 <to-one name="app" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevApp"
@@ -220,9 +223,8 @@
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity" createTimeProp="createdAt"
-                createrProp="createdBy" displayName="应用 ORM 实体"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity" registerShortName="true"
-                tableName="duzhou_dev_app_entity" tagSet="mapper" updateTimeProp="updatedAt" updaterProp="updatedBy"
+                displayName="应用 ORM 实体" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity"
+                registerShortName="true" tableName="duzhou_dev_app_entity" tagSet="mapper" updateTimeProp="updatedAt"
                 versionProp="ver">
             <aliases>
                 <alias displayName="应用" name="appId" propPath="module.appId" tagSet="pub" type="String"/>
@@ -234,12 +236,8 @@
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
-                <column code="CREATED_BY" displayName="创建人" domain="createdBy" name="createdBy" precision="50"
-                        propId="2" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="CREATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
                         mandatory="true" name="createdAt" propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="UPDATED_BY" displayName="更新人" domain="updatedBy" name="updatedBy" precision="50"
-                        propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="UPDATED_AT" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
                         mandatory="true" name="updatedAt" propId="5" stdDataType="timestamp" stdSqlType="TIMESTAMP"
                         tagSet="sort-desc"/>
@@ -294,8 +292,9 @@
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn"
-                displayName="应用 ORM 实体字段" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn"
-                registerShortName="true" tableName="duzhou_dev_app_entity_column">
+                createTimeProp="createdTime" displayName="应用 ORM 实体字段"
+                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityColumn" registerShortName="true"
+                tableName="duzhou_dev_app_entity_column" updateTimeProp="updatedTime">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
@@ -326,6 +325,10 @@
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="DESCRIPTION" displayName="说明" name="description" precision="500" propId="15"
                         stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
+                        mandatory="true" name="createdTime" propId="16" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
+                        mandatory="true" name="updatedTime" propId="17" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
             </columns>
             <relations>
                 <to-one name="entity" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity"
@@ -343,8 +346,9 @@
             </unique-keys>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation"
-                displayName="应用 ORM 实体关联" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation"
-                registerShortName="true" tableName="duzhou_dev_app_entity_relation">
+                createTimeProp="createdTime" displayName="应用 ORM 实体关联"
+                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntityRelation" registerShortName="true"
+                tableName="duzhou_dev_app_entity_relation" updateTimeProp="updatedTime">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
@@ -367,6 +371,10 @@
                         stdSqlType="VARCHAR"/>
                 <column code="DISPLAY_NAME" displayName="显示名称" name="displayName" precision="100" propId="10"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="disp"/>
+                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createTime"
+                        mandatory="true" name="createdTime" propId="11" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updateTime"
+                        mandatory="true" name="updatedTime" propId="12" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
             </columns>
             <relations>
                 <to-one name="source" refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppEntity"
@@ -388,18 +396,13 @@
             </aliases>
         </entity>
         <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule" createTimeProp="createdAt"
-                createrProp="createdBy" displayName="应用模块"
-                name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule" registerShortName="true"
-                tableName="duzhou_dev_app_module" updateTimeProp="updatedAt" updaterProp="updatedBy" versionProp="ver">
+                displayName="应用模块" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModule"
+                registerShortName="true" tableName="duzhou_dev_app_module" updateTimeProp="updatedAt" versionProp="ver">
             <columns>
                 <column code="ID" displayName="ID" mandatory="true" name="id" precision="32" primary="true" propId="1"
                         stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
-                <column code="CREATED_BY" displayName="创建人" domain="createdBy" name="createdBy" precision="50"
-                        propId="2" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="CREATED_AT" displayName="创建时间" domain="createTime" mandatory="true" name="createdAt"
                         propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="UPDATED_BY" displayName="更新人" domain="updatedBy" name="updatedBy" precision="50"
-                        propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="UPDATED_AT" displayName="更新时间" domain="updateTime" mandatory="true" name="updatedAt"
                         propId="5" stdDataType="timestamp" stdSqlType="TIMESTAMP" tagSet="sort-desc"/>
                 <column code="VER" defaultValue="0" displayName="数据版本" domain="version" mandatory="true" name="ver"

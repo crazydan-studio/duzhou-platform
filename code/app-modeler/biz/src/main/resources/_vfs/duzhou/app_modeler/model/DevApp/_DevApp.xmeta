@@ -28,17 +28,9 @@
               insertable="true" updatable="false">
             <schema type="java.lang.String" precision="32"/>
         </prop>
-        <prop name="createdBy" displayName="创建人" propId="2" queryable="true" sortable="true" insertable="false"
-              updatable="false">
-            <schema domain="createdBy" type="java.lang.String" precision="50"/>
-        </prop>
         <prop name="createdAt" displayName="创建时间" propId="3" mandatory="true" queryable="true" sortable="true"
               insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
             <schema domain="createTime" type="java.sql.Timestamp"/>
-        </prop>
-        <prop name="updatedBy" displayName="更新人" propId="4" queryable="true" sortable="true" insertable="false"
-              updatable="false">
-            <schema domain="updatedBy" type="java.lang.String" precision="50"/>
         </prop>
         <prop name="updatedAt" displayName="更新时间" propId="5" tagSet="sort-desc" mandatory="true" queryable="true"
               sortable="true" insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
@@ -102,7 +94,7 @@
               published="false">
             <schema type="io.nop.orm.component.OrmFileComponent"/>
         </prop>
-        <prop name="mavenCfg" displayName="Maven 配置" tagSet="pub" ext:kind="alias" internal="false" insertable="true"
+        <prop name="config" displayName="应用配置" tagSet="pub" ext:kind="alias" internal="false" insertable="true"
               updatable="true" lazy="true" queryable="true" graphql:type="[Map]"/>
     </props>
 </meta>

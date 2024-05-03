@@ -48,6 +48,14 @@
               updatable="true">
             <schema type="java.lang.String" precision="500"/>
         </prop>
+        <prop name="createdTime" displayName="创建时间" propId="10" mandatory="true" queryable="true" sortable="true"
+              insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
+            <schema domain="createTime" type="java.sql.Timestamp"/>
+        </prop>
+        <prop name="updatedTime" displayName="更新时间" propId="11" mandatory="true" queryable="true" sortable="true"
+              insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
+            <schema domain="updateTime" type="java.sql.Timestamp"/>
+        </prop>
         <prop name="app" displayName="所属应用" tagSet="pub,ref-pub,ref-cascade-delete" ext:kind="to-one" internal="true"
               queryable="true" ext:joinLeftProp="appId" ext:joinRightProp="id" insertable="false" updatable="false"
               mandatory="true" lazy="true">

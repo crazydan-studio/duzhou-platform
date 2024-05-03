@@ -24,17 +24,9 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_id = "id";
     public static final int PROP_ID_id = 1;
     
-    /* 创建人: CREATED_BY VARCHAR */
-    public static final String PROP_NAME_createdBy = "createdBy";
-    public static final int PROP_ID_createdBy = 2;
-    
     /* 创建时间: CREATED_AT TIMESTAMP */
     public static final String PROP_NAME_createdAt = "createdAt";
     public static final int PROP_ID_createdAt = 3;
-    
-    /* 更新人: UPDATED_BY VARCHAR */
-    public static final String PROP_NAME_updatedBy = "updatedBy";
-    public static final int PROP_ID_updatedBy = 4;
     
     /* 更新时间: UPDATED_AT TIMESTAMP */
     public static final String PROP_NAME_updatedAt = "updatedAt";
@@ -76,9 +68,9 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_copyright = "copyright";
     public static final int PROP_ID_copyright = 14;
     
-    /* Maven 配置: MAVEN_CFG VARCHAR */
-    public static final String PROP_NAME_mavenCfgJsonText = "mavenCfgJsonText";
-    public static final int PROP_ID_mavenCfgJsonText = 15;
+    /* 应用配置: CONFIG VARCHAR */
+    public static final String PROP_NAME_configJsonText = "configJsonText";
+    public static final int PROP_ID_configJsonText = 15;
     
 
     private static int _PROP_ID_BOUND = 16;
@@ -93,11 +85,11 @@ public class _DevApp extends DynamicOrmEntity{
     /* relation:  */
     public static final String PROP_NAME_modules = "modules";
     
-    /* alias: mavenCfgJsonTextComponent.data Maven 配置 */
-    public static final String PROP_NAME_mavenCfg = "mavenCfg";
+    /* alias: configJsonTextComponent.data 应用配置 */
+    public static final String PROP_NAME_config = "config";
     
     /* component:  */
-    public static final String PROP_NAME_mavenCfgJsonTextComponent = "mavenCfgJsonTextComponent";
+    public static final String PROP_NAME_configJsonTextComponent = "configJsonTextComponent";
     
     /* component:  */
     public static final String PROP_NAME_logoComponent = "logoComponent";
@@ -113,14 +105,8 @@ public class _DevApp extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_id] = PROP_NAME_id;
           PROP_NAME_TO_ID.put(PROP_NAME_id, PROP_ID_id);
       
-          PROP_ID_TO_NAME[PROP_ID_createdBy] = PROP_NAME_createdBy;
-          PROP_NAME_TO_ID.put(PROP_NAME_createdBy, PROP_ID_createdBy);
-      
           PROP_ID_TO_NAME[PROP_ID_createdAt] = PROP_NAME_createdAt;
           PROP_NAME_TO_ID.put(PROP_NAME_createdAt, PROP_ID_createdAt);
-      
-          PROP_ID_TO_NAME[PROP_ID_updatedBy] = PROP_NAME_updatedBy;
-          PROP_NAME_TO_ID.put(PROP_NAME_updatedBy, PROP_ID_updatedBy);
       
           PROP_ID_TO_NAME[PROP_ID_updatedAt] = PROP_NAME_updatedAt;
           PROP_NAME_TO_ID.put(PROP_NAME_updatedAt, PROP_ID_updatedAt);
@@ -152,8 +138,8 @@ public class _DevApp extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_copyright] = PROP_NAME_copyright;
           PROP_NAME_TO_ID.put(PROP_NAME_copyright, PROP_ID_copyright);
       
-          PROP_ID_TO_NAME[PROP_ID_mavenCfgJsonText] = PROP_NAME_mavenCfgJsonText;
-          PROP_NAME_TO_ID.put(PROP_NAME_mavenCfgJsonText, PROP_ID_mavenCfgJsonText);
+          PROP_ID_TO_NAME[PROP_ID_configJsonText] = PROP_NAME_configJsonText;
+          PROP_NAME_TO_ID.put(PROP_NAME_configJsonText, PROP_ID_configJsonText);
       
     }
 
@@ -161,14 +147,8 @@ public class _DevApp extends DynamicOrmEntity{
     /* ID: ID */
     private java.lang.String _id;
     
-    /* 创建人: CREATED_BY */
-    private java.lang.String _createdBy;
-    
     /* 创建时间: CREATED_AT */
     private java.sql.Timestamp _createdAt;
-    
-    /* 更新人: UPDATED_BY */
-    private java.lang.String _updatedBy;
     
     /* 更新时间: UPDATED_AT */
     private java.sql.Timestamp _updatedAt;
@@ -200,8 +180,8 @@ public class _DevApp extends DynamicOrmEntity{
     /* 版权声明: COPYRIGHT */
     private java.lang.String _copyright;
     
-    /* Maven 配置: MAVEN_CFG */
-    private java.lang.String _mavenCfgJsonText;
+    /* 应用配置: CONFIG */
+    private java.lang.String _configJsonText;
     
 
     public _DevApp(){
@@ -277,14 +257,8 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_id:
                return getId();
         
-            case PROP_ID_createdBy:
-               return getCreatedBy();
-        
             case PROP_ID_createdAt:
                return getCreatedAt();
-        
-            case PROP_ID_updatedBy:
-               return getUpdatedBy();
         
             case PROP_ID_updatedAt:
                return getUpdatedAt();
@@ -316,8 +290,8 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_copyright:
                return getCopyright();
         
-            case PROP_ID_mavenCfgJsonText:
-               return getMavenCfgJsonText();
+            case PROP_ID_configJsonText:
+               return getConfigJsonText();
         
            default:
               return super.orm_propValue(propId);
@@ -340,16 +314,6 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdBy:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_createdBy));
-               }
-               setCreatedBy(typedValue);
-               break;
-            }
-        
             case PROP_ID_createdAt:{
                java.sql.Timestamp typedValue = null;
                if(value != null){
@@ -357,16 +321,6 @@ public class _DevApp extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_createdAt));
                }
                setCreatedAt(typedValue);
-               break;
-            }
-        
-            case PROP_ID_updatedBy:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_updatedBy));
-               }
-               setUpdatedBy(typedValue);
                break;
             }
         
@@ -470,13 +424,13 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_mavenCfgJsonText:{
+            case PROP_ID_configJsonText:{
                java.lang.String typedValue = null;
                if(value != null){
                    typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_mavenCfgJsonText));
+                       err-> newTypeConversionError(PROP_NAME_configJsonText));
                }
-               setMavenCfgJsonText(typedValue);
+               setConfigJsonText(typedValue);
                break;
             }
         
@@ -496,23 +450,9 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdBy:{
-               onInitProp(propId);
-               this._createdBy = (java.lang.String)value;
-               
-               break;
-            }
-        
             case PROP_ID_createdAt:{
                onInitProp(propId);
                this._createdAt = (java.sql.Timestamp)value;
-               
-               break;
-            }
-        
-            case PROP_ID_updatedBy:{
-               onInitProp(propId);
-               this._updatedBy = (java.lang.String)value;
                
                break;
             }
@@ -587,9 +527,9 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_mavenCfgJsonText:{
+            case PROP_ID_configJsonText:{
                onInitProp(propId);
-               this._mavenCfgJsonText = (java.lang.String)value;
+               this._configJsonText = (java.lang.String)value;
                
                break;
             }
@@ -620,25 +560,6 @@ public class _DevApp extends DynamicOrmEntity{
     }
     
     /**
-     * 创建人: CREATED_BY
-     */
-    public java.lang.String getCreatedBy(){
-         onPropGet(PROP_ID_createdBy);
-         return _createdBy;
-    }
-
-    /**
-     * 创建人: CREATED_BY
-     */
-    public void setCreatedBy(java.lang.String value){
-        if(onPropSet(PROP_ID_createdBy,value)){
-            this._createdBy = value;
-            internalClearRefs(PROP_ID_createdBy);
-            
-        }
-    }
-    
-    /**
      * 创建时间: CREATED_AT
      */
     public java.sql.Timestamp getCreatedAt(){
@@ -653,25 +574,6 @@ public class _DevApp extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_createdAt,value)){
             this._createdAt = value;
             internalClearRefs(PROP_ID_createdAt);
-            
-        }
-    }
-    
-    /**
-     * 更新人: UPDATED_BY
-     */
-    public java.lang.String getUpdatedBy(){
-         onPropGet(PROP_ID_updatedBy);
-         return _updatedBy;
-    }
-
-    /**
-     * 更新人: UPDATED_BY
-     */
-    public void setUpdatedBy(java.lang.String value){
-        if(onPropSet(PROP_ID_updatedBy,value)){
-            this._updatedBy = value;
-            internalClearRefs(PROP_ID_updatedBy);
             
         }
     }
@@ -867,20 +769,20 @@ public class _DevApp extends DynamicOrmEntity{
     }
     
     /**
-     * Maven 配置: MAVEN_CFG
+     * 应用配置: CONFIG
      */
-    public java.lang.String getMavenCfgJsonText(){
-         onPropGet(PROP_ID_mavenCfgJsonText);
-         return _mavenCfgJsonText;
+    public java.lang.String getConfigJsonText(){
+         onPropGet(PROP_ID_configJsonText);
+         return _configJsonText;
     }
 
     /**
-     * Maven 配置: MAVEN_CFG
+     * 应用配置: CONFIG
      */
-    public void setMavenCfgJsonText(java.lang.String value){
-        if(onPropSet(PROP_ID_mavenCfgJsonText,value)){
-            this._mavenCfgJsonText = value;
-            internalClearRefs(PROP_ID_mavenCfgJsonText);
+    public void setConfigJsonText(java.lang.String value){
+        if(onPropSet(PROP_ID_configJsonText,value)){
+            this._configJsonText = value;
+            internalClearRefs(PROP_ID_configJsonText);
             
         }
     }
@@ -915,29 +817,29 @@ public class _DevApp extends DynamicOrmEntity{
        return _modules;
     }
        
-   public java.lang.Object getMavenCfg(){
-      return (java.lang.Object)internalGetAliasValue("mavenCfgJsonTextComponent.data");
+   public java.lang.Object getConfig(){
+      return (java.lang.Object)internalGetAliasValue("configJsonTextComponent.data");
    }
 
-   public void setMavenCfg(java.lang.Object value){
-      internalSetAliasValue("mavenCfgJsonTextComponent.data",value);
+   public void setConfig(java.lang.Object value){
+      internalSetAliasValue("configJsonTextComponent.data",value);
    }
 
-   private io.nop.orm.component.JsonOrmComponent _mavenCfgJsonTextComponent;
+   private io.nop.orm.component.JsonOrmComponent _configJsonTextComponent;
 
-   private static Map<String,Integer> COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent = new HashMap<>();
+   private static Map<String,Integer> COMPONENT_PROP_ID_MAP_configJsonTextComponent = new HashMap<>();
    static{
       
-         COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent.put(io.nop.orm.component.JsonOrmComponent.PROP_NAME__jsonText,PROP_ID_mavenCfgJsonText);
+         COMPONENT_PROP_ID_MAP_configJsonTextComponent.put(io.nop.orm.component.JsonOrmComponent.PROP_NAME__jsonText,PROP_ID_configJsonText);
       
    }
 
-   public io.nop.orm.component.JsonOrmComponent getMavenCfgJsonTextComponent(){
-      if(_mavenCfgJsonTextComponent == null){
-          _mavenCfgJsonTextComponent = new io.nop.orm.component.JsonOrmComponent();
-          _mavenCfgJsonTextComponent.bindToEntity(this, COMPONENT_PROP_ID_MAP_mavenCfgJsonTextComponent);
+   public io.nop.orm.component.JsonOrmComponent getConfigJsonTextComponent(){
+      if(_configJsonTextComponent == null){
+          _configJsonTextComponent = new io.nop.orm.component.JsonOrmComponent();
+          _configJsonTextComponent.bindToEntity(this, COMPONENT_PROP_ID_MAP_configJsonTextComponent);
       }
-      return _mavenCfgJsonTextComponent;
+      return _configJsonTextComponent;
    }
 
    private io.nop.orm.component.OrmFileComponent _logoComponent;
