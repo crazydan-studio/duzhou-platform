@@ -143,11 +143,11 @@
 
                                         if (domain == 'version') {
                                             entityAttrs.versionProp = propName;
-                                        } else if (domain == 'createTime') {
+                                        } else if (domain == 'createTime' || domain == 'createdTime') {
                                             entityAttrs.createTimeProp = propName;
                                         } else if (domain == 'createdBy') {
                                             entityAttrs.createrProp = propName;
-                                        } else if (domain == 'updateTime') {
+                                        } else if (domain == 'updateTime' || domain == 'updatedTime') {
                                             entityAttrs.updateTimeProp = propName;
                                         } else if (domain == 'updatedBy') {
                                             entityAttrs.updaterProp = propName;

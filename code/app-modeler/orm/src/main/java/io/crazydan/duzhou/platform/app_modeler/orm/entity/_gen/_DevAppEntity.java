@@ -24,13 +24,13 @@ public class _DevAppEntity extends DynamicOrmEntity{
     public static final String PROP_NAME_id = "id";
     public static final int PROP_ID_id = 1;
     
-    /* 创建时间: CREATED_AT TIMESTAMP */
-    public static final String PROP_NAME_createdAt = "createdAt";
-    public static final int PROP_ID_createdAt = 3;
+    /* 创建时间: CREATED_TIME TIMESTAMP */
+    public static final String PROP_NAME_createdTime = "createdTime";
+    public static final int PROP_ID_createdTime = 3;
     
-    /* 更新时间: UPDATED_AT TIMESTAMP */
-    public static final String PROP_NAME_updatedAt = "updatedAt";
-    public static final int PROP_ID_updatedAt = 5;
+    /* 更新时间: UPDATED_TIME TIMESTAMP */
+    public static final String PROP_NAME_updatedTime = "updatedTime";
+    public static final int PROP_ID_updatedTime = 5;
     
     /* 数据版本: VER INTEGER */
     public static final String PROP_NAME_ver = "ver";
@@ -111,11 +111,11 @@ public class _DevAppEntity extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_id] = PROP_NAME_id;
           PROP_NAME_TO_ID.put(PROP_NAME_id, PROP_ID_id);
       
-          PROP_ID_TO_NAME[PROP_ID_createdAt] = PROP_NAME_createdAt;
-          PROP_NAME_TO_ID.put(PROP_NAME_createdAt, PROP_ID_createdAt);
+          PROP_ID_TO_NAME[PROP_ID_createdTime] = PROP_NAME_createdTime;
+          PROP_NAME_TO_ID.put(PROP_NAME_createdTime, PROP_ID_createdTime);
       
-          PROP_ID_TO_NAME[PROP_ID_updatedAt] = PROP_NAME_updatedAt;
-          PROP_NAME_TO_ID.put(PROP_NAME_updatedAt, PROP_ID_updatedAt);
+          PROP_ID_TO_NAME[PROP_ID_updatedTime] = PROP_NAME_updatedTime;
+          PROP_NAME_TO_ID.put(PROP_NAME_updatedTime, PROP_ID_updatedTime);
       
           PROP_ID_TO_NAME[PROP_ID_ver] = PROP_NAME_ver;
           PROP_NAME_TO_ID.put(PROP_NAME_ver, PROP_ID_ver);
@@ -153,11 +153,11 @@ public class _DevAppEntity extends DynamicOrmEntity{
     /* ID: ID */
     private java.lang.String _id;
     
-    /* 创建时间: CREATED_AT */
-    private java.sql.Timestamp _createdAt;
+    /* 创建时间: CREATED_TIME */
+    private java.sql.Timestamp _createdTime;
     
-    /* 更新时间: UPDATED_AT */
-    private java.sql.Timestamp _updatedAt;
+    /* 更新时间: UPDATED_TIME */
+    private java.sql.Timestamp _updatedTime;
     
     /* 数据版本: VER */
     private java.lang.Integer _ver;
@@ -263,11 +263,11 @@ public class _DevAppEntity extends DynamicOrmEntity{
             case PROP_ID_id:
                return getId();
         
-            case PROP_ID_createdAt:
-               return getCreatedAt();
+            case PROP_ID_createdTime:
+               return getCreatedTime();
         
-            case PROP_ID_updatedAt:
-               return getUpdatedAt();
+            case PROP_ID_updatedTime:
+               return getUpdatedTime();
         
             case PROP_ID_ver:
                return getVer();
@@ -320,23 +320,23 @@ public class _DevAppEntity extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdAt:{
+            case PROP_ID_createdTime:{
                java.sql.Timestamp typedValue = null;
                if(value != null){
                    typedValue = ConvertHelper.toTimestamp(value,
-                       err-> newTypeConversionError(PROP_NAME_createdAt));
+                       err-> newTypeConversionError(PROP_NAME_createdTime));
                }
-               setCreatedAt(typedValue);
+               setCreatedTime(typedValue);
                break;
             }
         
-            case PROP_ID_updatedAt:{
+            case PROP_ID_updatedTime:{
                java.sql.Timestamp typedValue = null;
                if(value != null){
                    typedValue = ConvertHelper.toTimestamp(value,
-                       err-> newTypeConversionError(PROP_NAME_updatedAt));
+                       err-> newTypeConversionError(PROP_NAME_updatedTime));
                }
-               setUpdatedAt(typedValue);
+               setUpdatedTime(typedValue);
                break;
             }
         
@@ -456,16 +456,16 @@ public class _DevAppEntity extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_createdAt:{
+            case PROP_ID_createdTime:{
                onInitProp(propId);
-               this._createdAt = (java.sql.Timestamp)value;
+               this._createdTime = (java.sql.Timestamp)value;
                
                break;
             }
         
-            case PROP_ID_updatedAt:{
+            case PROP_ID_updatedTime:{
                onInitProp(propId);
-               this._updatedAt = (java.sql.Timestamp)value;
+               this._updatedTime = (java.sql.Timestamp)value;
                
                break;
             }
@@ -566,39 +566,39 @@ public class _DevAppEntity extends DynamicOrmEntity{
     }
     
     /**
-     * 创建时间: CREATED_AT
+     * 创建时间: CREATED_TIME
      */
-    public java.sql.Timestamp getCreatedAt(){
-         onPropGet(PROP_ID_createdAt);
-         return _createdAt;
+    public java.sql.Timestamp getCreatedTime(){
+         onPropGet(PROP_ID_createdTime);
+         return _createdTime;
     }
 
     /**
-     * 创建时间: CREATED_AT
+     * 创建时间: CREATED_TIME
      */
-    public void setCreatedAt(java.sql.Timestamp value){
-        if(onPropSet(PROP_ID_createdAt,value)){
-            this._createdAt = value;
-            internalClearRefs(PROP_ID_createdAt);
+    public void setCreatedTime(java.sql.Timestamp value){
+        if(onPropSet(PROP_ID_createdTime,value)){
+            this._createdTime = value;
+            internalClearRefs(PROP_ID_createdTime);
             
         }
     }
     
     /**
-     * 更新时间: UPDATED_AT
+     * 更新时间: UPDATED_TIME
      */
-    public java.sql.Timestamp getUpdatedAt(){
-         onPropGet(PROP_ID_updatedAt);
-         return _updatedAt;
+    public java.sql.Timestamp getUpdatedTime(){
+         onPropGet(PROP_ID_updatedTime);
+         return _updatedTime;
     }
 
     /**
-     * 更新时间: UPDATED_AT
+     * 更新时间: UPDATED_TIME
      */
-    public void setUpdatedAt(java.sql.Timestamp value){
-        if(onPropSet(PROP_ID_updatedAt,value)){
-            this._updatedAt = value;
-            internalClearRefs(PROP_ID_updatedAt);
+    public void setUpdatedTime(java.sql.Timestamp value){
+        if(onPropSet(PROP_ID_updatedTime,value)){
+            this._updatedTime = value;
+            internalClearRefs(PROP_ID_updatedTime);
             
         }
     }
