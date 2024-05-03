@@ -40,10 +40,6 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_displayName = "displayName";
     public static final int PROP_ID_displayName = 7;
     
-    /* 编码: CODE VARCHAR */
-    public static final String PROP_NAME_code = "code";
-    public static final int PROP_ID_code = 8;
-    
     /* 版本号: VERSION VARCHAR */
     public static final String PROP_NAME_version = "version";
     public static final int PROP_ID_version = 9;
@@ -68,13 +64,24 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_copyright = "copyright";
     public static final int PROP_ID_copyright = 14;
     
-    /* 应用配置: CONFIG VARCHAR */
-    public static final String PROP_NAME_configJsonText = "configJsonText";
-    public static final int PROP_ID_configJsonText = 15;
+    /* 应用配置: CONFIG_ID VARCHAR */
+    public static final String PROP_NAME_configId = "configId";
+    public static final int PROP_ID_configId = 16;
+    
+    /* 一级编码: CODE1 VARCHAR */
+    public static final String PROP_NAME_code1 = "code1";
+    public static final int PROP_ID_code1 = 17;
+    
+    /* 二级编码: CODE2 VARCHAR */
+    public static final String PROP_NAME_code2 = "code2";
+    public static final int PROP_ID_code2 = 18;
     
 
-    private static int _PROP_ID_BOUND = 16;
+    private static int _PROP_ID_BOUND = 19;
 
+    
+    /* relation: 应用配置 */
+    public static final String PROP_NAME_config = "config";
     
     /* relation:  */
     public static final String PROP_NAME_dicts = "dicts";
@@ -85,12 +92,6 @@ public class _DevApp extends DynamicOrmEntity{
     /* relation:  */
     public static final String PROP_NAME_modules = "modules";
     
-    /* alias: configJsonTextComponent.data 应用配置 */
-    public static final String PROP_NAME_config = "config";
-    
-    /* component:  */
-    public static final String PROP_NAME_configJsonTextComponent = "configJsonTextComponent";
-    
     /* component:  */
     public static final String PROP_NAME_logoComponent = "logoComponent";
     
@@ -98,7 +99,7 @@ public class _DevApp extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[16];
+    private static final String[] PROP_ID_TO_NAME = new String[19];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -116,9 +117,6 @@ public class _DevApp extends DynamicOrmEntity{
       
           PROP_ID_TO_NAME[PROP_ID_displayName] = PROP_NAME_displayName;
           PROP_NAME_TO_ID.put(PROP_NAME_displayName, PROP_ID_displayName);
-      
-          PROP_ID_TO_NAME[PROP_ID_code] = PROP_NAME_code;
-          PROP_NAME_TO_ID.put(PROP_NAME_code, PROP_ID_code);
       
           PROP_ID_TO_NAME[PROP_ID_version] = PROP_NAME_version;
           PROP_NAME_TO_ID.put(PROP_NAME_version, PROP_ID_version);
@@ -138,8 +136,14 @@ public class _DevApp extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_copyright] = PROP_NAME_copyright;
           PROP_NAME_TO_ID.put(PROP_NAME_copyright, PROP_ID_copyright);
       
-          PROP_ID_TO_NAME[PROP_ID_configJsonText] = PROP_NAME_configJsonText;
-          PROP_NAME_TO_ID.put(PROP_NAME_configJsonText, PROP_ID_configJsonText);
+          PROP_ID_TO_NAME[PROP_ID_configId] = PROP_NAME_configId;
+          PROP_NAME_TO_ID.put(PROP_NAME_configId, PROP_ID_configId);
+      
+          PROP_ID_TO_NAME[PROP_ID_code1] = PROP_NAME_code1;
+          PROP_NAME_TO_ID.put(PROP_NAME_code1, PROP_ID_code1);
+      
+          PROP_ID_TO_NAME[PROP_ID_code2] = PROP_NAME_code2;
+          PROP_NAME_TO_ID.put(PROP_NAME_code2, PROP_ID_code2);
       
     }
 
@@ -159,9 +163,6 @@ public class _DevApp extends DynamicOrmEntity{
     /* 显示名称: DISPLAY_NAME */
     private java.lang.String _displayName;
     
-    /* 编码: CODE */
-    private java.lang.String _code;
-    
     /* 版本号: VERSION */
     private java.lang.String _version;
     
@@ -180,8 +181,14 @@ public class _DevApp extends DynamicOrmEntity{
     /* 版权声明: COPYRIGHT */
     private java.lang.String _copyright;
     
-    /* 应用配置: CONFIG */
-    private java.lang.String _configJsonText;
+    /* 应用配置: CONFIG_ID */
+    private java.lang.String _configId;
+    
+    /* 一级编码: CODE1 */
+    private java.lang.String _code1;
+    
+    /* 二级编码: CODE2 */
+    private java.lang.String _code2;
     
 
     public _DevApp(){
@@ -269,9 +276,6 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_displayName:
                return getDisplayName();
         
-            case PROP_ID_code:
-               return getCode();
-        
             case PROP_ID_version:
                return getVersion();
         
@@ -290,8 +294,14 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_copyright:
                return getCopyright();
         
-            case PROP_ID_configJsonText:
-               return getConfigJsonText();
+            case PROP_ID_configId:
+               return getConfigId();
+        
+            case PROP_ID_code1:
+               return getCode1();
+        
+            case PROP_ID_code2:
+               return getCode2();
         
            default:
               return super.orm_propValue(propId);
@@ -351,16 +361,6 @@ public class _DevApp extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_displayName));
                }
                setDisplayName(typedValue);
-               break;
-            }
-        
-            case PROP_ID_code:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_code));
-               }
-               setCode(typedValue);
                break;
             }
         
@@ -424,13 +424,33 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_configJsonText:{
+            case PROP_ID_configId:{
                java.lang.String typedValue = null;
                if(value != null){
                    typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_configJsonText));
+                       err-> newTypeConversionError(PROP_NAME_configId));
                }
-               setConfigJsonText(typedValue);
+               setConfigId(typedValue);
+               break;
+            }
+        
+            case PROP_ID_code1:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_code1));
+               }
+               setCode1(typedValue);
+               break;
+            }
+        
+            case PROP_ID_code2:{
+               java.lang.String typedValue = null;
+               if(value != null){
+                   typedValue = ConvertHelper.toString(value,
+                       err-> newTypeConversionError(PROP_NAME_code2));
+               }
+               setCode2(typedValue);
                break;
             }
         
@@ -478,13 +498,6 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_code:{
-               onInitProp(propId);
-               this._code = (java.lang.String)value;
-               
-               break;
-            }
-        
             case PROP_ID_version:{
                onInitProp(propId);
                this._version = (java.lang.String)value;
@@ -527,9 +540,23 @@ public class _DevApp extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_configJsonText:{
+            case PROP_ID_configId:{
                onInitProp(propId);
-               this._configJsonText = (java.lang.String)value;
+               this._configId = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_code1:{
+               onInitProp(propId);
+               this._code1 = (java.lang.String)value;
+               
+               break;
+            }
+        
+            case PROP_ID_code2:{
+               onInitProp(propId);
+               this._code2 = (java.lang.String)value;
                
                break;
             }
@@ -631,25 +658,6 @@ public class _DevApp extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_displayName,value)){
             this._displayName = value;
             internalClearRefs(PROP_ID_displayName);
-            
-        }
-    }
-    
-    /**
-     * 编码: CODE
-     */
-    public java.lang.String getCode(){
-         onPropGet(PROP_ID_code);
-         return _code;
-    }
-
-    /**
-     * 编码: CODE
-     */
-    public void setCode(java.lang.String value){
-        if(onPropSet(PROP_ID_code,value)){
-            this._code = value;
-            internalClearRefs(PROP_ID_code);
             
         }
     }
@@ -769,24 +777,85 @@ public class _DevApp extends DynamicOrmEntity{
     }
     
     /**
-     * 应用配置: CONFIG
+     * 应用配置: CONFIG_ID
      */
-    public java.lang.String getConfigJsonText(){
-         onPropGet(PROP_ID_configJsonText);
-         return _configJsonText;
+    public java.lang.String getConfigId(){
+         onPropGet(PROP_ID_configId);
+         return _configId;
     }
 
     /**
-     * 应用配置: CONFIG
+     * 应用配置: CONFIG_ID
      */
-    public void setConfigJsonText(java.lang.String value){
-        if(onPropSet(PROP_ID_configJsonText,value)){
-            this._configJsonText = value;
-            internalClearRefs(PROP_ID_configJsonText);
+    public void setConfigId(java.lang.String value){
+        if(onPropSet(PROP_ID_configId,value)){
+            this._configId = value;
+            internalClearRefs(PROP_ID_configId);
             
         }
     }
     
+    /**
+     * 一级编码: CODE1
+     */
+    public java.lang.String getCode1(){
+         onPropGet(PROP_ID_code1);
+         return _code1;
+    }
+
+    /**
+     * 一级编码: CODE1
+     */
+    public void setCode1(java.lang.String value){
+        if(onPropSet(PROP_ID_code1,value)){
+            this._code1 = value;
+            internalClearRefs(PROP_ID_code1);
+            
+        }
+    }
+    
+    /**
+     * 二级编码: CODE2
+     */
+    public java.lang.String getCode2(){
+         onPropGet(PROP_ID_code2);
+         return _code2;
+    }
+
+    /**
+     * 二级编码: CODE2
+     */
+    public void setCode2(java.lang.String value){
+        if(onPropSet(PROP_ID_code2,value)){
+            this._code2 = value;
+            internalClearRefs(PROP_ID_code2);
+            
+        }
+    }
+    
+    /**
+     * 应用配置
+     */
+    public io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig getConfig(){
+       return (io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig)internalGetRefEntity(PROP_NAME_config);
+    }
+
+    public void setConfig(io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig refEntity){
+   
+           if(refEntity == null){
+           
+                   this.setConfigId(null);
+               
+           }else{
+           internalSetRefEntity(PROP_NAME_config, refEntity,()->{
+           
+                           this.setConfigId(refEntity.getId());
+                       
+           });
+           }
+       
+    }
+       
     private final OrmEntitySet<io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict> _dicts = new OrmEntitySet<>(this, PROP_NAME_dicts,
         io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.PROP_NAME_app, null,io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict.class);
 
@@ -817,31 +886,6 @@ public class _DevApp extends DynamicOrmEntity{
        return _modules;
     }
        
-   public java.lang.Object getConfig(){
-      return (java.lang.Object)internalGetAliasValue("configJsonTextComponent.data");
-   }
-
-   public void setConfig(java.lang.Object value){
-      internalSetAliasValue("configJsonTextComponent.data",value);
-   }
-
-   private io.nop.orm.component.JsonOrmComponent _configJsonTextComponent;
-
-   private static Map<String,Integer> COMPONENT_PROP_ID_MAP_configJsonTextComponent = new HashMap<>();
-   static{
-      
-         COMPONENT_PROP_ID_MAP_configJsonTextComponent.put(io.nop.orm.component.JsonOrmComponent.PROP_NAME__jsonText,PROP_ID_configJsonText);
-      
-   }
-
-   public io.nop.orm.component.JsonOrmComponent getConfigJsonTextComponent(){
-      if(_configJsonTextComponent == null){
-          _configJsonTextComponent = new io.nop.orm.component.JsonOrmComponent();
-          _configJsonTextComponent.bindToEntity(this, COMPONENT_PROP_ID_MAP_configJsonTextComponent);
-      }
-      return _configJsonTextComponent;
-   }
-
    private io.nop.orm.component.OrmFileComponent _logoComponent;
 
    private static Map<String,Integer> COMPONENT_PROP_ID_MAP_logoComponent = new HashMap<>();

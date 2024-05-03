@@ -6,11 +6,13 @@
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
-    </option>
-    <option name="ignoredFiles">
+      <list>
+        <option value="$PROJECT_DIR$/app-modeler/api/pom.xml" />
+        <option value="$PROJECT_DIR$/app-modeler/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/00.base/pom.xml" />
+      </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
 </project>

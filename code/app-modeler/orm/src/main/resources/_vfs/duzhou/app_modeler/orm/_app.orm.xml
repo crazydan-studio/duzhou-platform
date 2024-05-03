@@ -88,8 +88,6 @@
                         propId="6" stdDataType="int" stdSqlType="INTEGER"/>
                 <column code="DISPLAY_NAME" displayName="显示名称" mandatory="true" name="displayName" precision="100"
                         propId="7" stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="CODE" displayName="编码" mandatory="true" name="code" precision="50" propId="8"
-                        stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="VERSION" displayName="版本号" mandatory="true" name="version" precision="50" propId="9"
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="LOGO" displayName="图片" domain="image" name="logo" precision="200" propId="10"
@@ -102,11 +100,21 @@
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="COPYRIGHT" displayName="版权声明" name="copyright" precision="2048" propId="14"
                         stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="CONFIG" comment="应用开发相关的配置信息" displayName="应用配置" domain="json-1k" name="configJsonText"
-                        precision="50" propId="15" stdDataType="string" stdDomain="json" stdSqlType="VARCHAR"/>
+                <column code="CONFIG_ID" displayName="应用配置" domain="uuid" name="configId" precision="32" propId="16"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="CODE1" displayName="一级编码" mandatory="true" name="code1" precision="25" propId="17"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="CODE2" displayName="二级编码" mandatory="true" name="code2" precision="25" propId="18"
+                        stdDataType="string" stdSqlType="VARCHAR"/>
             </columns>
             <comment>应用模型</comment>
             <relations>
+                <to-one displayName="应用配置" name="config"
+                        refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig" tagSet="pub">
+                    <join>
+                        <on leftProp="configId" rightProp="id"/>
+                    </join>
+                </to-one>
                 <to-many cascadeDelete="true" name="dicts"
                          refEntityName="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppDict" refPropName="app"
                          tagSet="pub,cascade-delete">
@@ -130,12 +138,34 @@
                 </to-many>
             </relations>
             <unique-keys>
-                <unique-key columns="code" constraint="UK_duzhou_dev_app_code" name="UK_duzhou_dev_app_code">
+                <unique-key columns="code1,code2" constraint="UK_duzhou_dev_app_code1_code2"
+                            name="UK_duzhou_dev_app_code1_code2">
                     <comment>应用编码全局唯一</comment>
                 </unique-key>
             </unique-keys>
+        </entity>
+        <entity className="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig" createTimeProp="createdTime"
+                displayName="应用配置" name="io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig"
+                registerShortName="true" tableName="duzhou_dev_app_config" updateTimeProp="updatedTime">
+            <columns>
+                <column code="ID" displayName="ID" domain="uuid" mandatory="true" name="id" precision="32"
+                        primary="true" propId="1" stdDataType="string" stdSqlType="VARCHAR" tagSet="seq"/>
+                <column code="CREATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="创建时间" domain="createdTime"
+                        mandatory="true" name="createdTime" propId="2" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updatedTime"
+                        mandatory="true" name="updatedTime" propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
+                <column code="APP_ID" comment="配置所属的应用" displayName="应用" domain="uuid" mandatory="true" name="appId"
+                        precision="32" propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
+                <column code="BASE_CLASS_PACKAGE_NAME" comment="应用所有模块的 Java Class 包名均为其子包" displayName="基础 Java 包名"
+                        mandatory="true" name="baseClassPackageName" precision="200" propId="5" stdDataType="string"
+                        stdSqlType="VARCHAR"/>
+                <column code="MAVEN" comment="应用 Maven 工程的基础配置" displayName="Maven 配置" domain="json-4k" mandatory="true"
+                        name="mavenJsonText" precision="4096" propId="6" stdDataType="string" stdDomain="json"
+                        stdSqlType="VARCHAR"/>
+            </columns>
+            <comment>应用配置</comment>
             <aliases>
-                <alias displayName="应用配置" name="config" propPath="configJsonTextComponent.data" tagSet="pub"
+                <alias displayName="Maven 配置" name="maven" propPath="mavenJsonTextComponent.data" tagSet="pub"
                        type="Object"/>
             </aliases>
         </entity>

@@ -3,6 +3,8 @@
 
     <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppBizModel" ioc:type="@bean:id" ioc:default="true"/>
 
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppConfigBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
     <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppDictBizModel" ioc:type="@bean:id" ioc:default="true"/>
 
     <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppDomainBizModel" ioc:type="@bean:id" ioc:default="true"/>

@@ -16,7 +16,7 @@
     </x:post-extends>
 
     <keys>
-        <key name="UK_duzhou_dev_app_code" props="code"/>
+        <key name="UK_duzhou_dev_app_code1_code2" props="code1,code2"/>
     </keys>
 
     <orderBy>
@@ -44,10 +44,6 @@
               insertable="true" updatable="true">
             <schema type="java.lang.String" precision="100"/>
         </prop>
-        <prop name="code" displayName="编码" propId="8" mandatory="true" queryable="true" sortable="true"
-              insertable="true" updatable="true">
-            <schema type="java.lang.String" precision="50"/>
-        </prop>
         <prop name="version" displayName="版本号" propId="9" mandatory="true" queryable="true" sortable="true"
               insertable="true" updatable="true">
             <schema type="java.lang.String" precision="50"/>
@@ -72,6 +68,22 @@
               updatable="true">
             <schema type="java.lang.String" precision="2048"/>
         </prop>
+        <prop name="configId" displayName="应用配置" propId="16" queryable="true" sortable="true" insertable="true"
+              updatable="true" ext:relation="config">
+            <schema domain="uuid" type="java.lang.String" precision="32"/>
+        </prop>
+        <prop name="code1" displayName="一级编码" propId="17" mandatory="true" queryable="true" sortable="true"
+              insertable="true" updatable="true">
+            <schema type="java.lang.String" precision="25"/>
+        </prop>
+        <prop name="code2" displayName="二级编码" propId="18" mandatory="true" queryable="true" sortable="true"
+              insertable="true" updatable="true">
+            <schema type="java.lang.String" precision="25"/>
+        </prop>
+        <prop name="config" displayName="应用配置" tagSet="pub" ext:kind="to-one" internal="true" queryable="true"
+              ext:joinLeftProp="configId" ext:joinRightProp="id" insertable="false" updatable="false" lazy="true">
+            <schema bizObjName="DevAppConfig"/>
+        </prop>
         <prop name="dicts" tagSet="pub,cascade-delete" ext:kind="to-many" internal="true" ext:joinLeftProp="id"
               ext:joinRightProp="appId" insertable="false" updatable="false" lazy="true">
             <schema>
@@ -94,7 +106,5 @@
               published="false">
             <schema type="io.nop.orm.component.OrmFileComponent"/>
         </prop>
-        <prop name="config" displayName="应用配置" tagSet="pub" ext:kind="alias" internal="false" insertable="true"
-              updatable="true" lazy="true" queryable="true" graphql:type="[Map]"/>
     </props>
 </meta>

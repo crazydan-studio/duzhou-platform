@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" xmlns:i18n-en="i18n-en" xmlns:ext="ext"
+      xmlns:xpl="xpl" ext:model="orm" xmlns:c="c" xmlns:graphql="graphql" xmlns:meta-gen="meta-gen" xmlns:biz="biz"
+      displayName="应用配置" xmlns:ui="ui" xmlns:orm="orm">
+
+    <entityName>io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppConfig</entityName>
+
+    <primaryKey>id</primaryKey>
+
+    <x:gen-extends>
+        <meta-gen:DefaultMetaGenExtends xpl:lib="/nop/core/xlib/meta-gen.xlib"/>
+    </x:gen-extends>
+
+    <x:post-extends>
+        <meta-gen:DefaultMetaPostExtends xpl:lib="/nop/core/xlib/meta-gen.xlib"/>
+    </x:post-extends>
+
+    <keys/>
+
+    <props>
+        <prop name="id" displayName="ID" propId="1" tagSet="seq" mandatory="true" queryable="true" sortable="true"
+              insertable="true" updatable="false">
+            <schema domain="uuid" type="java.lang.String" precision="32"/>
+        </prop>
+        <prop name="createdTime" displayName="创建时间" propId="2" mandatory="true" queryable="true" sortable="true"
+              insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
+            <schema domain="createdTime" type="java.sql.Timestamp"/>
+        </prop>
+        <prop name="updatedTime" displayName="更新时间" propId="3" mandatory="true" queryable="true" sortable="true"
+              insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
+            <schema domain="updatedTime" type="java.sql.Timestamp"/>
+        </prop>
+        <prop name="appId" displayName="应用" propId="4" mandatory="true" queryable="true" sortable="true"
+              insertable="true" updatable="true">
+            <schema domain="uuid" type="java.lang.String" precision="32"/>
+        </prop>
+        <prop name="baseClassPackageName" displayName="基础 Java 包名" propId="5" mandatory="true" queryable="true"
+              sortable="true" insertable="true" updatable="true">
+            <schema type="java.lang.String" precision="200"/>
+        </prop>
+        <prop name="maven" displayName="Maven 配置" tagSet="pub" ext:kind="alias" internal="false" insertable="true"
+              updatable="true" lazy="true" queryable="true" graphql:type="[Map]"/>
+    </props>
+</meta>

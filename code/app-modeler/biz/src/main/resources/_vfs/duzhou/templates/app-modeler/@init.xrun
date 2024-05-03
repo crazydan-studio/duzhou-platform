@@ -3,12 +3,14 @@
         xmlns:app-modeler="app-modeler">
 
     <c:script><![CDATA[
+        const app = module.getApp();
         const devApp = {
-            ...module.getApp(),
+            ...app,
+            code: app.code1 + '-' + app.code2,
             maven: {
                 artifactId: 'parent',
-                groupId: module.getApp().classPkgName,
-                version: module.getApp().version,
+                groupId: app.classPkgName,
+                version: app.version,
                 parent:{
                     groupId: 'io.crazydan.duzhou.framework',
                     artifactId: 'parent',

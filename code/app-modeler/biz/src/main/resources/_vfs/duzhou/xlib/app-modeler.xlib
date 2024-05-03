@@ -56,6 +56,7 @@
                     const moduleCode2 = moduleExtAttrs['ext:moduleCode2'];
                     const registerShortName = moduleExtAttrs['ext:registerShortName'];
                     const moduleEntityPackageName = moduleExtAttrs['ext:entityPackageName'];
+                    const moduleDomainDefs = {};
 
                     function getDictName(name) {
                         return name ? moduleCode2 + '/' + name : null;
@@ -87,6 +88,8 @@
                                         precision: domain.precision,
                                         scale: domain.scale,
                                     };
+
+                                    moduleDomainDefs[domainAttrs.name] = domainAttrs;
                                 ]]></c:script>
                                 <domain xpl:attrs="domainAttrs" />
                             </c:for>
@@ -169,6 +172,13 @@
                                         <c:for var="column" items="${entity.columns}">
                                             <c:script><![CDATA[
                                                 const code = toSnakeName(column.name, true);
+                                                const domain = column.domainName;
+                                                const domainDef = moduleDomainDefs[domain] || {
+                                                    stdSqlType: column.stdSqlType,
+                                                    precision: column.precision,
+                                                    scale: column.scale,
+                                                };
+
                                                 const columnAttrs = {
                                                     propId: column.propId,
                                                     code: code,
@@ -177,10 +187,11 @@
                                                     tagSet: column.tagSet,
                                                     primary: column.primary,
                                                     mandatory: column.mandatory,
-                                                    domain: column.domainName,
-                                                    stdSqlType: column.stdSqlType,
-                                                    precision: column.precision,
-                                                    scale: column.scale,
+                                                    domain: domain,
+                                                    stdDomain: domainDef.stdDomain,
+                                                    stdSqlType: domainDef.stdSqlType,
+                                                    precision: domainDef.precision,
+                                                    scale: domainDef.scale,
                                                     defaultValue: column.defaultValue,
                                                     comment: column.description,
                                                     'ext:dict': getDictName(column.dictName),
