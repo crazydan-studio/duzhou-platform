@@ -4,5 +4,13 @@
     <props>
         <!-- Note：由后端填充该值 -->
         <prop name="propId" mandatory="false" />
+
+        <prop name="name">
+            <!-- 可访问变量见 ObjMetaBasedValidator#transformIn -->
+            <transformIn>
+                <str:ToSnakeCase xmlns:str="str" xmlns:xpl="xpl" xpl:lib="/duzhou/commons/xlib/str.xlib"
+                                 str="${value}" upper="true" />
+            </transformIn>
+        </prop>
     </props>
 </meta>

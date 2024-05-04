@@ -9,12 +9,6 @@ import static io.crazydan.duzhou.framework.commons.StringHelper.snakeCase;
 public class DevAppEntity extends _DevAppEntity {
     private long columnSize;
 
-    /** 表名采用 snake-case（全部小写） */
-    @Override
-    public void setTableName(String value) {
-        super.setTableName(snakeCase(value));
-    }
-
     public long getColumnSize() {
         return this.columnSize;
     }

@@ -6,7 +6,6 @@
         const app = module.getApp();
         const devApp = {
             ...app,
-            code: app.code1 + '-' + app.code2,
             maven: {
                 artifactId: 'parent',
                 groupId: app.classPkgName,

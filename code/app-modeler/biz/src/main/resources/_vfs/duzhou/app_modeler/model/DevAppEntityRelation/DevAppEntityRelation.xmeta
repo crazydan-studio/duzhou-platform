@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevAppEntityRelation.xmeta">
 
-    <props/>
+    <props>
+        <prop name="tableName">
+            <!-- 可访问变量见 ObjMetaBasedValidator#transformIn -->
+            <transformIn>
+                <str:ToSnakeCase xmlns:str="str" xmlns:xpl="xpl" xpl:lib="/duzhou/commons/xlib/str.xlib"
+                                 str="${value}" upper="true" />
+            </transformIn>
+        </prop>
+    </props>
 </meta>

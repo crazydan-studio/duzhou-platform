@@ -5,5 +5,13 @@
         <prop name="columnSize">
             <schema type="java.lang.Integer" />
         </prop>
+
+        <prop name="tableName">
+            <!-- 可访问变量见 ObjMetaBasedValidator#transformIn -->
+            <transformIn>
+                <str:ToSnakeCase xmlns:str="str" xmlns:xpl="xpl" xpl:lib="/duzhou/commons/xlib/str.xlib"
+                                 str="${value}" />
+            </transformIn>
+        </prop>
     </props>
 </meta>

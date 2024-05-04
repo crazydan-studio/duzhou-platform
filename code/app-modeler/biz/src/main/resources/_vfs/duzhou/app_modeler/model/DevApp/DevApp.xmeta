@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevApp.xmeta">
+<meta x:schema="/nop/schema/xmeta.xdef"
+      xmlns:x="/nop/schema/xdsl.xdef" xmlns:c="c"
+      x:extends="_DevApp.xmeta">
 
-    <props/>
+    <props>
+        <prop name="code" displayName="编码">
+            <schema type="String" />
+            <getter>
+                <c:script><![CDATA[
+                    return entity.code1 + '-' + entity.code2;
+                ]]></c:script>
+            </getter>
+        </prop>
+        <prop name="code1">
+            <!-- 可访问变量见 ObjMetaBasedValidator#transformIn -->
+            <transformIn>
+                <str:ToSnakeCase xmlns:str="str" xmlns:xpl="xpl" xpl:lib="/duzhou/commons/xlib/str.xlib"
+                                 str="${value}" />
+            </transformIn>
+        </prop>
+        <prop name="code2">
+            <transformIn>
+                <str:ToSnakeCase xmlns:str="str" xmlns:xpl="xpl" xpl:lib="/duzhou/commons/xlib/str.xlib"
+                                 str="${value}" />
+            </transformIn>
+        </prop>
+    </props>
 </meta>
