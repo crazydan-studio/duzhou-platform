@@ -48,10 +48,6 @@ public class _DevApp extends DynamicOrmEntity{
     public static final String PROP_NAME_logo = "logo";
     public static final int PROP_ID_logo = 10;
     
-    /* 代码包名: CLASS_PKG_NAME VARCHAR */
-    public static final String PROP_NAME_classPkgName = "classPkgName";
-    public static final int PROP_ID_classPkgName = 11;
-    
     /* 说明: DESCRIPTION VARCHAR */
     public static final String PROP_NAME_description = "description";
     public static final int PROP_ID_description = 12;
@@ -124,9 +120,6 @@ public class _DevApp extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_logo] = PROP_NAME_logo;
           PROP_NAME_TO_ID.put(PROP_NAME_logo, PROP_ID_logo);
       
-          PROP_ID_TO_NAME[PROP_ID_classPkgName] = PROP_NAME_classPkgName;
-          PROP_NAME_TO_ID.put(PROP_NAME_classPkgName, PROP_ID_classPkgName);
-      
           PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
           PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
       
@@ -168,9 +161,6 @@ public class _DevApp extends DynamicOrmEntity{
     
     /* 图片: LOGO */
     private java.lang.String _logo;
-    
-    /* 代码包名: CLASS_PKG_NAME */
-    private java.lang.String _classPkgName;
     
     /* 说明: DESCRIPTION */
     private java.lang.String _description;
@@ -282,9 +272,6 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_logo:
                return getLogo();
         
-            case PROP_ID_classPkgName:
-               return getClassPkgName();
-        
             case PROP_ID_description:
                return getDescription();
         
@@ -381,16 +368,6 @@ public class _DevApp extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_logo));
                }
                setLogo(typedValue);
-               break;
-            }
-        
-            case PROP_ID_classPkgName:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_classPkgName));
-               }
-               setClassPkgName(typedValue);
                break;
             }
         
@@ -508,13 +485,6 @@ public class _DevApp extends DynamicOrmEntity{
             case PROP_ID_logo:{
                onInitProp(propId);
                this._logo = (java.lang.String)value;
-               
-               break;
-            }
-        
-            case PROP_ID_classPkgName:{
-               onInitProp(propId);
-               this._classPkgName = (java.lang.String)value;
                
                break;
             }
@@ -696,25 +666,6 @@ public class _DevApp extends DynamicOrmEntity{
         if(onPropSet(PROP_ID_logo,value)){
             this._logo = value;
             internalClearRefs(PROP_ID_logo);
-            
-        }
-    }
-    
-    /**
-     * 代码包名: CLASS_PKG_NAME
-     */
-    public java.lang.String getClassPkgName(){
-         onPropGet(PROP_ID_classPkgName);
-         return _classPkgName;
-    }
-
-    /**
-     * 代码包名: CLASS_PKG_NAME
-     */
-    public void setClassPkgName(java.lang.String value){
-        if(onPropSet(PROP_ID_classPkgName,value)){
-            this._classPkgName = value;
-            internalClearRefs(PROP_ID_classPkgName);
             
         }
     }

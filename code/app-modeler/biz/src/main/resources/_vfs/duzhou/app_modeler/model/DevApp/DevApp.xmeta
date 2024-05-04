@@ -4,7 +4,7 @@
       x:extends="_DevApp.xmeta">
 
     <props>
-        <prop name="code" displayName="编码">
+        <prop name="code" displayName="编码" virtual="true">
             <schema type="String" />
             <getter>
                 <c:script><![CDATA[
@@ -25,5 +25,7 @@
                                  str="${value}" />
             </transformIn>
         </prop>
+        <!-- 设置关联对象可新增、可更新 -->
+        <prop name="config" insertable="true" updatable="true" />
     </props>
 </meta>

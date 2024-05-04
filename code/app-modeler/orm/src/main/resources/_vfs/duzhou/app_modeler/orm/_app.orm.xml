@@ -92,8 +92,6 @@
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="LOGO" displayName="图片" domain="image" name="logo" precision="200" propId="10"
                         stdDataType="string" stdDomain="file" stdSqlType="VARCHAR"/>
-                <column code="CLASS_PKG_NAME" displayName="代码包名" mandatory="true" name="classPkgName" precision="200"
-                        propId="11" stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="DESCRIPTION" displayName="说明" name="description" precision="500" propId="12"
                         stdDataType="string" stdSqlType="VARCHAR"/>
                 <column code="LICENSE" displayName="许可协议" name="license" precision="2048" propId="13"
@@ -154,9 +152,7 @@
                         mandatory="true" name="createdTime" propId="2" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
                 <column code="UPDATED_TIME" defaultValue="CURRENT_TIMESTAMP" displayName="更新时间" domain="updatedTime"
                         mandatory="true" name="updatedTime" propId="3" stdDataType="timestamp" stdSqlType="TIMESTAMP"/>
-                <column code="APP_ID" comment="配置所属的应用" displayName="应用" domain="uuid" mandatory="true" name="appId"
-                        precision="32" propId="4" stdDataType="string" stdSqlType="VARCHAR"/>
-                <column code="BASE_CLASS_PACKAGE_NAME" comment="应用所有模块的 Java Class 包名均为其子包" displayName="基础 Java 包名"
+                <column code="BASE_CLASS_PACKAGE_NAME" comment="应用所有模块的 Java Class 包名均为其子包" displayName="Java 基础包名"
                         mandatory="true" name="baseClassPackageName" precision="200" propId="5" stdDataType="string"
                         stdSqlType="VARCHAR"/>
                 <column code="MAVEN" comment="应用 Maven 工程的基础配置" displayName="Maven 配置" domain="json-4k" mandatory="true"

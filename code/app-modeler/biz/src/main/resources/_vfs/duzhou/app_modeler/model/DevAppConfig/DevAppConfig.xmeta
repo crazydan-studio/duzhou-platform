@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevAppConfig.xmeta">
 
-    <props/>
+    <props>
+        <prop name="maven">
+            <transformIn xmlns:c="c">
+                <c:script><![CDATA[
+                    const depInfo = value.parent.split(':');
+                    const parent = {
+                        groupId: depInfo[0],
+                        artifactId: depInfo[1],
+                        version: depInfo[2],
+                    };
+
+                    return {
+                        ...value,
+                        parent,
+                    };
+                ]]></c:script>
+            </transformIn>
+            <transformOut xmlns:c="c">
+                <c:script><![CDATA[
+                    return {
+                        ...value,
+                        parent: value.parent.groupId
+                                    + ':' + value.parent.artifactId
+                                    + ':' + value.parent.version,
+                    };
+                ]]></c:script>
+            </transformOut>
+        </prop>
+    </props>
 </meta>

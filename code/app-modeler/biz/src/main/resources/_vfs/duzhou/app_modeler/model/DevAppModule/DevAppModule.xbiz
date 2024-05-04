@@ -29,7 +29,7 @@
 
                     const module = biz.dao().getEntityById(id);
                     biz.dao().batchLoadPropsForEntity(module,
-                                                  'app.domains,app.dicts'
+                                                  'app.domains,app.dicts,app.config'
                                                   + ',entities.columns,entities.relations'
                                                   + ',entities.relations.target');
 

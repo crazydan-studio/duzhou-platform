@@ -32,11 +32,7 @@ public class _DevAppConfig extends DynamicOrmEntity{
     public static final String PROP_NAME_updatedTime = "updatedTime";
     public static final int PROP_ID_updatedTime = 3;
     
-    /* 应用: APP_ID VARCHAR */
-    public static final String PROP_NAME_appId = "appId";
-    public static final int PROP_ID_appId = 4;
-    
-    /* 基础 Java 包名: BASE_CLASS_PACKAGE_NAME VARCHAR */
+    /* Java 基础包名: BASE_CLASS_PACKAGE_NAME VARCHAR */
     public static final String PROP_NAME_baseClassPackageName = "baseClassPackageName";
     public static final int PROP_ID_baseClassPackageName = 5;
     
@@ -71,9 +67,6 @@ public class _DevAppConfig extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_updatedTime] = PROP_NAME_updatedTime;
           PROP_NAME_TO_ID.put(PROP_NAME_updatedTime, PROP_ID_updatedTime);
       
-          PROP_ID_TO_NAME[PROP_ID_appId] = PROP_NAME_appId;
-          PROP_NAME_TO_ID.put(PROP_NAME_appId, PROP_ID_appId);
-      
           PROP_ID_TO_NAME[PROP_ID_baseClassPackageName] = PROP_NAME_baseClassPackageName;
           PROP_NAME_TO_ID.put(PROP_NAME_baseClassPackageName, PROP_ID_baseClassPackageName);
       
@@ -92,10 +85,7 @@ public class _DevAppConfig extends DynamicOrmEntity{
     /* 更新时间: UPDATED_TIME */
     private java.sql.Timestamp _updatedTime;
     
-    /* 应用: APP_ID */
-    private java.lang.String _appId;
-    
-    /* 基础 Java 包名: BASE_CLASS_PACKAGE_NAME */
+    /* Java 基础包名: BASE_CLASS_PACKAGE_NAME */
     private java.lang.String _baseClassPackageName;
     
     /* Maven 配置: MAVEN */
@@ -181,9 +171,6 @@ public class _DevAppConfig extends DynamicOrmEntity{
             case PROP_ID_updatedTime:
                return getUpdatedTime();
         
-            case PROP_ID_appId:
-               return getAppId();
-        
             case PROP_ID_baseClassPackageName:
                return getBaseClassPackageName();
         
@@ -228,16 +215,6 @@ public class _DevAppConfig extends DynamicOrmEntity{
                        err-> newTypeConversionError(PROP_NAME_updatedTime));
                }
                setUpdatedTime(typedValue);
-               break;
-            }
-        
-            case PROP_ID_appId:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_appId));
-               }
-               setAppId(typedValue);
                break;
             }
         
@@ -287,13 +264,6 @@ public class _DevAppConfig extends DynamicOrmEntity{
             case PROP_ID_updatedTime:{
                onInitProp(propId);
                this._updatedTime = (java.sql.Timestamp)value;
-               
-               break;
-            }
-        
-            case PROP_ID_appId:{
-               onInitProp(propId);
-               this._appId = (java.lang.String)value;
                
                break;
             }
@@ -376,26 +346,7 @@ public class _DevAppConfig extends DynamicOrmEntity{
     }
     
     /**
-     * 应用: APP_ID
-     */
-    public java.lang.String getAppId(){
-         onPropGet(PROP_ID_appId);
-         return _appId;
-    }
-
-    /**
-     * 应用: APP_ID
-     */
-    public void setAppId(java.lang.String value){
-        if(onPropSet(PROP_ID_appId,value)){
-            this._appId = value;
-            internalClearRefs(PROP_ID_appId);
-            
-        }
-    }
-    
-    /**
-     * 基础 Java 包名: BASE_CLASS_PACKAGE_NAME
+     * Java 基础包名: BASE_CLASS_PACKAGE_NAME
      */
     public java.lang.String getBaseClassPackageName(){
          onPropGet(PROP_ID_baseClassPackageName);
@@ -403,7 +354,7 @@ public class _DevAppConfig extends DynamicOrmEntity{
     }
 
     /**
-     * 基础 Java 包名: BASE_CLASS_PACKAGE_NAME
+     * Java 基础包名: BASE_CLASS_PACKAGE_NAME
      */
     public void setBaseClassPackageName(java.lang.String value){
         if(onPropSet(PROP_ID_baseClassPackageName,value)){

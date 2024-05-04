@@ -30,11 +30,7 @@
               insertable="false" updatable="false" defaultValue="CURRENT_TIMESTAMP">
             <schema domain="updatedTime" type="java.sql.Timestamp"/>
         </prop>
-        <prop name="appId" displayName="应用" propId="4" mandatory="true" queryable="true" sortable="true"
-              insertable="true" updatable="true">
-            <schema domain="uuid" type="java.lang.String" precision="32"/>
-        </prop>
-        <prop name="baseClassPackageName" displayName="基础 Java 包名" propId="5" mandatory="true" queryable="true"
+        <prop name="baseClassPackageName" displayName="Java 基础包名" propId="5" mandatory="true" queryable="true"
               sortable="true" insertable="true" updatable="true">
             <schema type="java.lang.String" precision="200"/>
         </prop>

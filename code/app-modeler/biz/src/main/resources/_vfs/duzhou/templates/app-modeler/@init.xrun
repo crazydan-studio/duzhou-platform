@@ -8,13 +8,9 @@
             ...app,
             maven: {
                 artifactId: 'parent',
-                groupId: app.classPkgName,
+                groupId: app.config.baseClassPackageName,
                 version: app.version,
-                parent:{
-                    groupId: 'io.crazydan.duzhou.framework',
-                    artifactId: 'parent',
-                    version: '0.1.0-SNAPSHOT',
-                },
+                parent: app.config.maven.parent,
             },
         };
         const devAppModule = {

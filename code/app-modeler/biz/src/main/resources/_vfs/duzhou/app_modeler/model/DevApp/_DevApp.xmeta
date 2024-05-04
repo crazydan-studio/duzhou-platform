@@ -52,10 +52,6 @@
               updatable="true">
             <schema stdDomain="file" domain="image" type="java.lang.String" precision="200"/>
         </prop>
-        <prop name="classPkgName" displayName="代码包名" propId="11" mandatory="true" queryable="true" sortable="true"
-              insertable="true" updatable="true">
-            <schema type="java.lang.String" precision="200"/>
-        </prop>
         <prop name="description" displayName="说明" propId="12" queryable="true" sortable="true" insertable="true"
               updatable="true">
             <schema type="java.lang.String" precision="500"/>
