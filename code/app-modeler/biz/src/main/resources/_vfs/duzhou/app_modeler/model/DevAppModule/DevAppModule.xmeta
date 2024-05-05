@@ -9,5 +9,7 @@
                                  str="${value}" />
             </transformIn>
         </prop>
+        <!-- 设置关联对象可新增、可更新 -->
+        <prop name="config" insertable="true" updatable="true" />
     </props>
 </meta>

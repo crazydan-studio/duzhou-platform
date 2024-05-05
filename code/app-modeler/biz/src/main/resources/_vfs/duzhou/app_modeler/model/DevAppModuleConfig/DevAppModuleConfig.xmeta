@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<meta x:schema="/nop/schema/xmeta.xdef" xmlns:x="/nop/schema/xdsl.xdef" x:extends="_DevAppModuleConfig.xmeta">
+
+    <props>
+        <prop name="entityTableNamePrefix">
+            <!-- 可访问变量见 ObjMetaBasedValidator#transformIn -->
+            <transformIn xmlns:c="c">
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.framework.commons.StringHelper;
+
+                    const str = StringHelper.snakeCase(value);
+                    return !str || str.endsWith('_') ? str : str + '_';
+                ]]></c:script>
+            </transformIn>
+        </prop>
+    </props>
+</meta>

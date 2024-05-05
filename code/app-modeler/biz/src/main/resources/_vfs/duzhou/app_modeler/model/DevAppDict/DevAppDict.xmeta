@@ -9,5 +9,18 @@
                                  str="${value}" hyphen="true" />
             </transformIn>
         </prop>
+
+        <prop name="options">
+            <transformIn xmlns:c="c">
+                <c:script><![CDATA[
+                    import io.crazydan.duzhou.framework.commons.StringHelper;
+
+                    return value.map(opt => ({
+                        ...opt,
+                        code: StringHelper.snakeCase(opt.code),
+                    }));
+                ]]></c:script>
+            </transformIn>
+        </prop>
     </props>
 </meta>

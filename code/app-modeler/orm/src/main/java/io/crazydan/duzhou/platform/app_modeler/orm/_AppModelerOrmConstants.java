@@ -70,9 +70,14 @@ public interface _AppModelerOrmConstants {
     String ENTITY_RELATION_TAGSET_ref_pub = "ref-pub";
                         
     /**
-     * 实体关联标签: 级联删除 
+     * 实体关联标签: 对端级联删除 
      */
     String ENTITY_RELATION_TAGSET_ref_cascade_delete = "ref-cascade-delete";
+                        
+    /**
+     * 实体关联标签: 级联删除 
+     */
+    String ENTITY_RELATION_TAGSET_cascade_delete = "cascade-delete";
                         
     /**
      * 实体关联类型: 一对一关联 

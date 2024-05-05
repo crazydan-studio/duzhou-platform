@@ -13,7 +13,11 @@ options:
     value: ref-pub
     description: 
   
-  - label: 级联删除
+  - label: 对端级联删除
     value: ref-cascade-delete
+    description: 
+  
+  - label: 级联删除
+    value: cascade-delete
     description: 
   

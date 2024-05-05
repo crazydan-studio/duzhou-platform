@@ -18,4 +18,7 @@
           ioc:default="true"/>
 
     <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleBizModel" ioc:type="@bean:id" ioc:default="true"/>
+
+    <bean id="io.crazydan.duzhou.platform.app_modeler.biz.DevAppModuleConfigBizModel" ioc:type="@bean:id"
+          ioc:default="true"/>
 </beans>

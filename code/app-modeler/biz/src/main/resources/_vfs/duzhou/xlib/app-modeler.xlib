@@ -34,8 +34,13 @@
                     devAppModule.code = ormModel['ext:moduleCode2'];
                     devAppModule.displayName = ormModel['ext:moduleDisplayName'] || ormModel['ext:appName'];
                     devAppModule.description = ormModel['ext:moduleDescription'];
-                    devAppModule.webStarterType = ormModel['ext:webStarterType'];
-                    devAppModule.dbDialect = ormModel['ext:dialect'];
+
+                    const config = devAppModule.config || {};
+                    devAppModule.config = config;
+
+                    config.webStarterType = ormModel['ext:webStarterType'];
+                    config.dbDialect = ormModel['ext:dialect'];
+                    config.entityTableNamePrefix = ormModel['ext:entityTableNamePrefix'];
                 ]]></c:script>
                 <thisLib:_DoMergeOrmDicts devApp="${devApp}" ormModel="${ormModel}" />
                 <thisLib:_DoMergeOrmDomains devApp="${devApp}" ormModel="${ormModel}" />
@@ -53,17 +58,16 @@
                                          xpl:return="moduleExtAttrs"
                                          xpl:lib="/duzhou/codegen/xlib/gen.xlib" />
                 <c:script><![CDATA[
+                    import io.crazydan.duzhou.framework.commons.StringHelper;
+
                     const moduleCode2 = moduleExtAttrs['ext:moduleCode2'];
                     const registerShortName = moduleExtAttrs['ext:registerShortName'];
                     const moduleEntityPackageName = moduleExtAttrs['ext:entityPackageName'];
+                    const moduleEntityTableNamePrefix = moduleExtAttrs['ext:entityTableNamePrefix'];
                     const moduleDomainDefs = {};
 
                     function getDictName(name) {
                         return name ? moduleCode2 + '/' + name : null;
-                    }
-                    function toSnakeName(str, upper) {
-                        str = str?.replaceAll('-+', '_').replaceAll('\\s+', '_');
-                        return upper ? str?.toUpperCase() : str?.toLowerCase();
                     }
                     // Note：在 OrmEntityModelInitializer.initIdProp 中会将名字 id 作为复合主键的属性名称，
                     // 因此，在复合主键中需要将 id 属性重命名，但在单一主键中，则不需要重命名 id
@@ -72,7 +76,14 @@
                         if (code?.equalsIgnoreCase('id')) {
                             return 'id';
                         }
-                        return toSnakeName(code, false)?.$colCodeToPropName();
+                        return StringHelper.snakeCase(code)?.$colCodeToPropName();
+                    }
+                    function getTableName(name) {
+                        if (!moduleEntityTableNamePrefix
+                            || name.startsWith(moduleEntityTableNamePrefix)) {
+                            return name;
+                        }
+                        return moduleEntityTableNamePrefix + name;
                     }
                 ]]></c:script>
                 <thisLib:_DoGenOrmModel xdefPath="/nop/schema/orm/orm.xdef">
@@ -123,7 +134,7 @@
                             <c:for var="entity" items="${devAppModule.entities}">
                                 <c:script><![CDATA[
                                     const name = entity.name || entity.tableName.$camelCase(true);
-                                    const tableName = toSnakeName(entity.tableName, false);
+                                    const tableName = getTableName(StringHelper.snakeCase(entity.tableName));
                                     const className = entity.name;//entity.className || entity.name;
 
                                     const entityAttrs = {
@@ -171,7 +182,7 @@
                                     <columns>
                                         <c:for var="column" items="${entity.columns}">
                                             <c:script><![CDATA[
-                                                const code = toSnakeName(column.name, true);
+                                                const code = StringHelper.snakeCase(column.name, true);
                                                 const domain = column.domainName;
                                                 const domainDef = moduleDomainDefs[domain] || {
                                                     stdSqlType: column.stdSqlType,

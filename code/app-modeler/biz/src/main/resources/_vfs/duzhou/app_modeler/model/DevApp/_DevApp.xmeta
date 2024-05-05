@@ -76,8 +76,9 @@
               insertable="true" updatable="true">
             <schema type="java.lang.String" precision="25"/>
         </prop>
-        <prop name="config" displayName="应用配置" tagSet="pub" ext:kind="to-one" internal="true" queryable="true"
-              ext:joinLeftProp="configId" ext:joinRightProp="id" insertable="false" updatable="false" lazy="true">
+        <prop name="config" displayName="应用配置" tagSet="pub,cascade-delete" ext:kind="to-one" internal="true"
+              queryable="true" ext:joinLeftProp="configId" ext:joinRightProp="id" insertable="false" updatable="false"
+              lazy="true">
             <schema bizObjName="DevAppConfig"/>
         </prop>
         <prop name="dicts" tagSet="pub,cascade-delete" ext:kind="to-many" internal="true" ext:joinLeftProp="id"

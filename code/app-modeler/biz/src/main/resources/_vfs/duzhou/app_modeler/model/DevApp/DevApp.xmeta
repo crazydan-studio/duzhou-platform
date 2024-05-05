@@ -4,6 +4,7 @@
       x:extends="_DevApp.xmeta">
 
     <props>
+        <!-- 与 ORM 实体无映射关系的属性需设置 virtual 为 true -->
         <prop name="code" displayName="编码" virtual="true">
             <schema type="String" />
             <getter>

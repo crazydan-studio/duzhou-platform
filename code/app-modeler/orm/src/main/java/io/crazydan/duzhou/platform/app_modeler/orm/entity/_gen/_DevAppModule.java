@@ -52,20 +52,19 @@ public class _DevAppModule extends DynamicOrmEntity{
     public static final String PROP_NAME_description = "description";
     public static final int PROP_ID_description = 10;
     
-    /* Web 启动器类型: WEB_STARTER_TYPE VARCHAR */
-    public static final String PROP_NAME_webStarterType = "webStarterType";
-    public static final int PROP_ID_webStarterType = 11;
-    
-    /* 支持的数据库类型: DB_DIALECT VARCHAR */
-    public static final String PROP_NAME_dbDialect = "dbDialect";
-    public static final int PROP_ID_dbDialect = 12;
+    /* 模块配置: CONFIG_ID VARCHAR */
+    public static final String PROP_NAME_configId = "configId";
+    public static final int PROP_ID_configId = 13;
     
 
-    private static int _PROP_ID_BOUND = 13;
+    private static int _PROP_ID_BOUND = 14;
 
     
     /* relation:  */
     public static final String PROP_NAME_app = "app";
+    
+    /* relation: 模块配置 */
+    public static final String PROP_NAME_config = "config";
     
     /* relation:  */
     public static final String PROP_NAME_entities = "entities";
@@ -74,7 +73,7 @@ public class _DevAppModule extends DynamicOrmEntity{
     protected static final List<String> PK_PROP_NAMES = Arrays.asList(PROP_NAME_id);
     protected static final int[] PK_PROP_IDS = new int[]{PROP_ID_id};
 
-    private static final String[] PROP_ID_TO_NAME = new String[13];
+    private static final String[] PROP_ID_TO_NAME = new String[14];
     private static final Map<String,Integer> PROP_NAME_TO_ID = new HashMap<>();
     static{
       
@@ -102,11 +101,8 @@ public class _DevAppModule extends DynamicOrmEntity{
           PROP_ID_TO_NAME[PROP_ID_description] = PROP_NAME_description;
           PROP_NAME_TO_ID.put(PROP_NAME_description, PROP_ID_description);
       
-          PROP_ID_TO_NAME[PROP_ID_webStarterType] = PROP_NAME_webStarterType;
-          PROP_NAME_TO_ID.put(PROP_NAME_webStarterType, PROP_ID_webStarterType);
-      
-          PROP_ID_TO_NAME[PROP_ID_dbDialect] = PROP_NAME_dbDialect;
-          PROP_NAME_TO_ID.put(PROP_NAME_dbDialect, PROP_ID_dbDialect);
+          PROP_ID_TO_NAME[PROP_ID_configId] = PROP_NAME_configId;
+          PROP_NAME_TO_ID.put(PROP_NAME_configId, PROP_ID_configId);
       
     }
 
@@ -135,11 +131,8 @@ public class _DevAppModule extends DynamicOrmEntity{
     /* 说明: DESCRIPTION */
     private java.lang.String _description;
     
-    /* Web 启动器类型: WEB_STARTER_TYPE */
-    private java.lang.String _webStarterType;
-    
-    /* 支持的数据库类型: DB_DIALECT */
-    private java.lang.String _dbDialect;
+    /* 模块配置: CONFIG_ID */
+    private java.lang.String _configId;
     
 
     public _DevAppModule(){
@@ -236,11 +229,8 @@ public class _DevAppModule extends DynamicOrmEntity{
             case PROP_ID_description:
                return getDescription();
         
-            case PROP_ID_webStarterType:
-               return getWebStarterType();
-        
-            case PROP_ID_dbDialect:
-               return getDbDialect();
+            case PROP_ID_configId:
+               return getConfigId();
         
            default:
               return super.orm_propValue(propId);
@@ -333,23 +323,13 @@ public class _DevAppModule extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_webStarterType:{
+            case PROP_ID_configId:{
                java.lang.String typedValue = null;
                if(value != null){
                    typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_webStarterType));
+                       err-> newTypeConversionError(PROP_NAME_configId));
                }
-               setWebStarterType(typedValue);
-               break;
-            }
-        
-            case PROP_ID_dbDialect:{
-               java.lang.String typedValue = null;
-               if(value != null){
-                   typedValue = ConvertHelper.toString(value,
-                       err-> newTypeConversionError(PROP_NAME_dbDialect));
-               }
-               setDbDialect(typedValue);
+               setConfigId(typedValue);
                break;
             }
         
@@ -418,16 +398,9 @@ public class _DevAppModule extends DynamicOrmEntity{
                break;
             }
         
-            case PROP_ID_webStarterType:{
+            case PROP_ID_configId:{
                onInitProp(propId);
-               this._webStarterType = (java.lang.String)value;
-               
-               break;
-            }
-        
-            case PROP_ID_dbDialect:{
-               onInitProp(propId);
-               this._dbDialect = (java.lang.String)value;
+               this._configId = (java.lang.String)value;
                
                break;
             }
@@ -591,39 +564,20 @@ public class _DevAppModule extends DynamicOrmEntity{
     }
     
     /**
-     * Web 启动器类型: WEB_STARTER_TYPE
+     * 模块配置: CONFIG_ID
      */
-    public java.lang.String getWebStarterType(){
-         onPropGet(PROP_ID_webStarterType);
-         return _webStarterType;
+    public java.lang.String getConfigId(){
+         onPropGet(PROP_ID_configId);
+         return _configId;
     }
 
     /**
-     * Web 启动器类型: WEB_STARTER_TYPE
+     * 模块配置: CONFIG_ID
      */
-    public void setWebStarterType(java.lang.String value){
-        if(onPropSet(PROP_ID_webStarterType,value)){
-            this._webStarterType = value;
-            internalClearRefs(PROP_ID_webStarterType);
-            
-        }
-    }
-    
-    /**
-     * 支持的数据库类型: DB_DIALECT
-     */
-    public java.lang.String getDbDialect(){
-         onPropGet(PROP_ID_dbDialect);
-         return _dbDialect;
-    }
-
-    /**
-     * 支持的数据库类型: DB_DIALECT
-     */
-    public void setDbDialect(java.lang.String value){
-        if(onPropSet(PROP_ID_dbDialect,value)){
-            this._dbDialect = value;
-            internalClearRefs(PROP_ID_dbDialect);
+    public void setConfigId(java.lang.String value){
+        if(onPropSet(PROP_ID_configId,value)){
+            this._configId = value;
+            internalClearRefs(PROP_ID_configId);
             
         }
     }
@@ -645,6 +599,29 @@ public class _DevAppModule extends DynamicOrmEntity{
            internalSetRefEntity(PROP_NAME_app, refEntity,()->{
            
                            this.setAppId(refEntity.getId());
+                       
+           });
+           }
+       
+    }
+       
+    /**
+     * 模块配置
+     */
+    public io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModuleConfig getConfig(){
+       return (io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModuleConfig)internalGetRefEntity(PROP_NAME_config);
+    }
+
+    public void setConfig(io.crazydan.duzhou.platform.app_modeler.orm.entity.DevAppModuleConfig refEntity){
+   
+           if(refEntity == null){
+           
+                   this.setConfigId(null);
+               
+           }else{
+           internalSetRefEntity(PROP_NAME_config, refEntity,()->{
+           
+                           this.setConfigId(refEntity.getId());
                        
            });
            }

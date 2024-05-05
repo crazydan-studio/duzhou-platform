@@ -15,6 +15,9 @@
         };
         const devAppModule = {
             ...module,
+            dbDialect: module.config.dbDialect,
+            webStarterType: module.config.webStarterType,
+            entityTableNamePrefix: module.config.entityTableNamePrefix,
             app: null,
         };
     ]]></c:script>
