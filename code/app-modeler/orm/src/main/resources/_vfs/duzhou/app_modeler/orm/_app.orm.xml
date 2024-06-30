@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <orm ext:mavenArtifactId="app-modeler" ext:moduleCode2="app_modeler"
      ext:entityPackageName="io.crazydan.duzhou.platform.app_modeler.orm.entity" ext:moduleDisplayName="应用建模器"
-     ext:mavenParentRelativePath="../pom.xml" ext:webStarterType="spring" ext:moduleName="duzhou-app_modeler"
+     ext:mavenParentRelativePath="../pom.xml" ext:webStarterType="undertow" ext:moduleName="duzhou-app_modeler"
      ext:basePackageName="io.crazydan.duzhou.platform.app_modeler" ext:mavenParentGroupId="io.crazydan.duzhou.platform"
      ext:mavenParentArtifactId="parent" ext:entityTableNamePrefix="duzhou_dev_" ext:moduleId="duzhou/app_modeler"
      ext:moduleClassPrefix="DuzhouAppModeler" ext:mavenVersion="0.1.0-SNAPSHOT" ext:moduleDescription="在线设计和维护应用的数据模型"
@@ -51,8 +51,7 @@
         </dict>
         <dict label="Web 启动器类型" name="app_modeler/web-starter-type" valueType="string">
             <option code="spring" description="以 Spring Boot 作为模块的启动器" label="Spring Boot 启动器" value="spring"/>
-            <option code="quarkus" description="以 Quarkus 作为模块的启动器" label="Quarkus 启动器" value="quarkus"/>
-            <option code="light4j" description="以 Light4J 作为模块的启动器" label="Light4J 启动器" value="light4j"/>
+            <option code="undertow" description="以 Undertow 作为模块的启动器" label="Undertow 启动器" value="undertow"/>
         </dict>
     </dicts>
 

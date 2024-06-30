@@ -21,6 +21,9 @@
         <!--该模块为独立服务包，不会被其他项目所依赖，故，不发布至仓库-->
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.install.skip>true</maven.install.skip>
+
+        <!--应用启动器 class，用于为插件 maven-shade-plugin 指定 mainClass-->
+        <start-class>io.crazydan.duzhou.platform.app_modeler.AppModelerStarter</start-class>
     </properties>
 
     <dependencies>
@@ -38,15 +41,15 @@
         </dependency>
         <dependency>
             <groupId>io.crazydan.duzhou.framework</groupId>
-            <artifactId>duzhou-starter-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <artifactId>duzhou-starter-undertow</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
     </dependencies>
 
@@ -55,8 +58,10 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <!--Note：通过变量 start-class 指定 mainClass-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

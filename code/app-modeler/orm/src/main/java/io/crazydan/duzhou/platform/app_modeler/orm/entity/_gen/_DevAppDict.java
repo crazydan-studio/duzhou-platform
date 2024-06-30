@@ -140,14 +140,17 @@ public class _DevAppDict extends DynamicOrmEntity{
     }
 
     protected DevAppDict newInstance(){
-       return new DevAppDict();
+        DevAppDict entity = new DevAppDict();
+        entity.orm_attach(orm_enhancer());
+        entity.orm_entityModel(orm_entityModel());
+        return entity;
     }
 
     @Override
     public DevAppDict cloneInstance() {
         DevAppDict entity = newInstance();
         orm_forEachInitedProp((value, propId) -> {
-            entity.onInitProp(propId);
+            entity.orm_propValue(propId,value);
         });
         return entity;
     }

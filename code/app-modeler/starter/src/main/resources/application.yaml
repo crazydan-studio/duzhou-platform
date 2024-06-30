@@ -1,16 +1,22 @@
 nop:
   debug: true
+  application:
+    # io.nop.api.core.ApiConfigs.CFG_APPLICATION_NAME
+    name: duzhou-app-modeler
+    version: 0.1.0-SNAPSHOT
   orm:
     init-database-schema: true
   datasource:
+    # 在数据库所在目录中启动 H2 控制台: java -jar /path/to/h2-x.y.z.jar -webAllowOthers -tcpAllowOthers
     driver-class-name: org.h2.Driver
+    # 配置 H2 对表名和字段名的大小写无关支持
     jdbc-url: jdbc:h2:./db/duzhou-app-modeler;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     username: sa
     password:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    jdbc-url: jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-#    username: nop
-#    password: nop-test
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    # jdbc-url: jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    # username: nop
+    # password: nop-test
   file:
     # 可选值: local, oss
     store-impl: local
@@ -28,31 +34,18 @@ nop:
       # 阿里云要求 pathStyleAccess 必须设置为 false
       #path-style-access: false
 
-# 支持graphql __schema查询，
+  # 支持graphql __schema查询
   graphql:
     schema-introspection:
       enabled: true
 
-spring:
-  application:
-    name: duzhou-app-modeler
-# https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server
-server:
-  port: 8080
-  address: 127.0.0.1
-  timezone: Asia/Shanghai
-  tomcat:
-    uri-encoding: UTF-8
-    maxThreads: 2000
-    minSpareThreads: 50
-  compression:
-    # 启用压缩支持，提升页面加载速度
-    enabled: true
-    # minResponseSize: 2048
-    mime-types: text/html,text/xml,text/plain,text/javascript,text/css,application/json,application/xml,application/javascript,application/x-shockwave-flash
-logging:
-  path: "${project.build.directory}/logs"
-  level:
-    io.nop: info
-    org.hibernate: info
-    org.springframework: info
+  extension:
+    undertow:
+      server:
+        port: 8080
+        host: 127.0.0.1
+        compression:
+          # 启用压缩支持，提升页面加载速度
+          enabled: true
+          # minResponseSize: 2048
+          mime-types: text/html,text/xml,text/plain,text/javascript,text/css,application/json,application/xml,application/javascript,application/x-shockwave-flash

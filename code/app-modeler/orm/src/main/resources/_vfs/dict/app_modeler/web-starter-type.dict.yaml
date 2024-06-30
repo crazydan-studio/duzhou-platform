@@ -9,11 +9,7 @@ options:
     value: spring
     description: 以 Spring Boot 作为模块的启动器
   
-  - label: Quarkus 启动器
-    value: quarkus
-    description: 以 Quarkus 作为模块的启动器
-  
-  - label: Light4J 启动器
-    value: light4j
-    description: 以 Light4J 作为模块的启动器
+  - label: Undertow 启动器
+    value: undertow
+    description: 以 Undertow 作为模块的启动器
   

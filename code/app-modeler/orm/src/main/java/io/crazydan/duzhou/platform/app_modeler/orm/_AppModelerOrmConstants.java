@@ -110,14 +110,9 @@ public interface _AppModelerOrmConstants {
     String WEB_STARTER_TYPE_spring = "spring";
                         
     /**
-     * Web 启动器类型: Quarkus 启动器 以 Quarkus 作为模块的启动器
+     * Web 启动器类型: Undertow 启动器 以 Undertow 作为模块的启动器
      */
-    String WEB_STARTER_TYPE_quarkus = "quarkus";
-                        
-    /**
-     * Web 启动器类型: Light4J 启动器 以 Light4J 作为模块的启动器
-     */
-    String WEB_STARTER_TYPE_light4j = "light4j";
+    String WEB_STARTER_TYPE_undertow = "undertow";
                         
     
 }

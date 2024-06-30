@@ -173,14 +173,17 @@ public class _DevAppEntityRelation extends DynamicOrmEntity{
     }
 
     protected DevAppEntityRelation newInstance(){
-       return new DevAppEntityRelation();
+        DevAppEntityRelation entity = new DevAppEntityRelation();
+        entity.orm_attach(orm_enhancer());
+        entity.orm_entityModel(orm_entityModel());
+        return entity;
     }
 
     @Override
     public DevAppEntityRelation cloneInstance() {
         DevAppEntityRelation entity = newInstance();
         orm_forEachInitedProp((value, propId) -> {
-            entity.onInitProp(propId);
+            entity.orm_propValue(propId,value);
         });
         return entity;
     }

@@ -186,14 +186,17 @@ public class _DevApp extends DynamicOrmEntity{
     }
 
     protected DevApp newInstance(){
-       return new DevApp();
+        DevApp entity = new DevApp();
+        entity.orm_attach(orm_enhancer());
+        entity.orm_entityModel(orm_entityModel());
+        return entity;
     }
 
     @Override
     public DevApp cloneInstance() {
         DevApp entity = newInstance();
         orm_forEachInitedProp((value, propId) -> {
-            entity.onInitProp(propId);
+            entity.orm_propValue(propId,value);
         });
         return entity;
     }

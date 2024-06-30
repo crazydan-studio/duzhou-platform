@@ -214,14 +214,17 @@ public class _DevAppEntityColumn extends DynamicOrmEntity{
     }
 
     protected DevAppEntityColumn newInstance(){
-       return new DevAppEntityColumn();
+        DevAppEntityColumn entity = new DevAppEntityColumn();
+        entity.orm_attach(orm_enhancer());
+        entity.orm_entityModel(orm_entityModel());
+        return entity;
     }
 
     @Override
     public DevAppEntityColumn cloneInstance() {
         DevAppEntityColumn entity = newInstance();
         orm_forEachInitedProp((value, propId) -> {
-            entity.onInitProp(propId);
+            entity.orm_propValue(propId,value);
         });
         return entity;
     }
