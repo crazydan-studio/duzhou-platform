@@ -3,7 +3,7 @@
 
 以先进的软件构造理论「[可逆计算](https://zhuanlan.zhihu.com/p/64004026)」为核心思想，
 并基于及其理论实现 [Nop](https://github.com/entropy-cloud/nop-entropy)
-而搭建的自运维、自监控、可演化的**全功能型应用平台**。
+而搭建的自运维、自监控、可演化的**应用生产平台**。
 
 
 ## 许可协议
