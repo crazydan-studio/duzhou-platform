@@ -3,6 +3,10 @@
 
 <img src="https://github.com/crazydan-studio/duzhou.crazydan.io/blob/master/static/img/logo.svg?raw=true" width="172px" />
 
+以先进的软件构造理论「[可逆计算](https://zhuanlan.zhihu.com/p/64004026)」为核心思想，
+并基于及其理论实现 [Nop](https://github.com/entropy-cloud/nop-entropy)
+而搭建的自运维、自监控、可演化的**应用生产平台**。
+
 ## 许可协议
 
 [LGPL 3.0](./LICENSE)
